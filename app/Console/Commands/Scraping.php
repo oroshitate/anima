@@ -71,12 +71,11 @@ class Scraping extends Command
                 $image_url = $image_text->attr('src');
                 $image_url = strstr($image_url,'?',true);
                 $image_contents = file_get_contents($image_url);
-                // $image = urlencode($title);
                 $image_encode = base64_encode($title);
                 $image = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
                 $image_name = $image.'.jpg';
                 //画像を保存
-                Storage::put('public/images/'.$image_name, $image_contents);
+                Storage::put('public/images/items/'.$image_name, $image_contents);
                 var_dump($image);
 
                 var_dump('season');

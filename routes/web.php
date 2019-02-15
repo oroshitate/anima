@@ -18,10 +18,32 @@
 //    // Log::emergency('An informational message.');
 // });
 
-Route::get('/', 'PostsController@index')->name('top');
+// 認証
+Auth::routes();
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('login/{provider}', 'Auth\SocialAccountController@redirectToProvider');
+Route::get('login/{provider}/callback', 'Auth\SocialAccountController@handleProviderCallback');
 
-// 投稿画面
-Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update','destroy']]);
+// 検索
+Route::post('search/{keyword}', 'SearchController@index')->name('search');
 
-// コメント画面
-Route::resource('comments', 'CommentsController', ['only' => ['store']]);
+// 作品詳細
+Route::get('item/{item_id}', 'ItemController@index')->name('item');
+
+// ユーザー詳細
+Route::get('user/{nickname}', 'UserController@index')->name('user');
+
+// レビュー
+// Route::resource('review', 'ReviewController', ['only' => ['index','store']]);
+Route::post('review', 'ReviewController@store')->name('review');
+
+// コメント
+
+
+//API
+Route::namespace('Api')->group(function () {
+    Route::post('api/twitter', 'TwitterController@tweet')->name('tweet');
+});
+
+// Ajax
+Route::post('ajax', 'AjaxController@showMoreItems');
