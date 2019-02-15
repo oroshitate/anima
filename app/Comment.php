@@ -28,4 +28,19 @@ class Comment extends Model
     public function item(){
         return $this->belongsTo('App\Item');
     }
+
+    public function getComments(Review $review){
+        $comments = $review->comments()
+                           ->join('users','users.id','=','comments.user_id')
+                           ->orderBy('comments.created_at', 'desc')
+                           ->get([
+                                "comments.id as comment_id",
+                                "comments.content as comment_content",
+                                "users.id as user_id",
+                                "users.name as user_name",
+                                "users.nickname as user_nickname",
+                                "users.image as user_image",
+                           ]);
+        return $comments;
+    }
 }

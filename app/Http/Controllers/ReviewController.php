@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Item;
 use App\Review;
+use App\Comment;
 use Validator;
+use App\TwitterService;
 
 class ReviewController extends Controller
 {
@@ -20,13 +23,20 @@ class ReviewController extends Controller
     }
 
     /**
-     * Show review form
+     * Show review
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(int $id)
     {
-
+        $review = new Review;
+        $comment = new Comment;
+        $review = $review->getReview($id);
+        $comments = $comment->getComments(Review::find($id));
+        return view('review',[
+            'review' => $review,
+            'comments' => $comments,
+        ]);
     }
 
     /**
@@ -41,13 +51,13 @@ class ReviewController extends Controller
 
         // ルールを設定
         $rules = [
-            'content' => 'required|max:255',
+            'content' => 'required|max:2000',
         ];
 
         // エラーメッセージを設定
         $messages = [
             'content.required' => 'コメント入力は必須です',
-            'content.max' => 'コメントは255文字以内です',
+            'content.max' => 'コメントは2000文字以内です',
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);
@@ -57,16 +67,33 @@ class ReviewController extends Controller
         }
 
         $review = new Review;
+        $item_id = $request->input('item_id');
+        $content = $request->input('content');
+        $score = $request->input('score');
+
         $review->user_id = Auth::id();
-        $review->item_id = $request->input('item_id');
-        $review->content = $request->input('content');
-        $review->score = $request->input('score');
+        $review->item_id = $item_id;
+        $review->content = $content;
+        $review->score = $score;
 
         $review->save();
 
-        $share = $request->input('share');
+        $review_id = $review->id;
 
+        $share = $request->input('share');
+        if($share == "on"){
+            $title = Item::find($item_id)->title;
+            $url = route('review', ['review_id' => $review_id]);
+            \Log::info($title);
+            \Log::info($score);
+            \Log::info($content);
+            \Log::info($url);
+            $twitter_service = new TwitterService;
+            $twitter_service->tweet($request,$title,$score,$content,$url);
+        }
+        
         return redirect()->back();
+
     }
 
     /**

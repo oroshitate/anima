@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Laravel\Socialite\Contracts\User as ProviderUser;
 use Abraham\TwitterOAuth\TwitterOAuth;
 
-class TwitterController extends Controller
+class TwitterService
 {
-
-    public function tweet(Request $request){
+    public function tweet(Request $request, string $title, float $score, string $content, string $url){
         $token = $request->session()->get('provider_access_token');
         $token_secret = $request->session()->get('provider_access_token_secret');
 
@@ -22,9 +21,7 @@ class TwitterController extends Controller
 
         $twitter->post("statuses/update", [
                 "status" =>
-                    'aaa'
+                    $title.$score.$content.$url
         ]);
-
-        return redirect()->route('home');;
     }
 }

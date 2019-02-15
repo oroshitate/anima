@@ -37,4 +37,36 @@ class Review extends Model
     public function item(){
         return $this->belongsTo('App\Item');
     }
+
+    public function getReview(int $id){
+        $review = review::where('reviews.id', $id)->join('users','users.id','=','reviews.user_id')
+                                                  ->join('comments','comments.review_id','=','reviews.id')
+                                                  ->get([
+                                                       "reviews.id as review_id",
+                                                       "reviews.score as review_score",
+                                                       "reviews.content as review_content",
+                                                       "users.id as user_id",
+                                                       "users.name as user_name",
+                                                       "users.nickname as user_nickname",
+                                                       "users.image as user_image",
+                                                       "comments.content as comment_content",
+                                                  ]);
+        return $review;
+    }
+
+    public function getReviews(Item $item_detail){
+        $reviews = $item_detail->reviews()
+                               ->join('users','users.id','=','reviews.user_id')
+                               ->orderBy('reviews.created_at', 'desc')
+                               ->get([
+                                    "reviews.id as review_id",
+                                    "reviews.score as review_score",
+                                    "reviews.content as review_content",
+                                    "users.id as user_id",
+                                    "users.name as user_name",
+                                    "users.nickname as user_nickname",
+                                    "users.image as user_image",
+                               ]);
+        return $reviews;
+    }
 }

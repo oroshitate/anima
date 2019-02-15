@@ -34,16 +34,11 @@ Route::get('item/{item_id}', 'ItemController@index')->name('item');
 Route::get('user/{nickname}', 'UserController@index')->name('user');
 
 // レビュー
-// Route::resource('review', 'ReviewController', ['only' => ['index','store']]);
-Route::post('review', 'ReviewController@store')->name('review');
+Route::get('review/{review_id}', 'ReviewController@index')->name('review');
+Route::post('review/store', 'ReviewController@store');
 
 // コメント
-
-
-//API
-Route::namespace('Api')->group(function () {
-    Route::post('api/twitter', 'TwitterController@tweet')->name('tweet');
-});
+Route::post('comment/store', 'CommentController@store');
 
 // Ajax
 Route::post('ajax', 'AjaxController@showMoreItems');

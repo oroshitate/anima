@@ -55,4 +55,22 @@ class SocialAccountService
             }
         }
     }
+
+    public function tweet(string $title, float $score, string $content, string $url){
+        \Log::info('tweet');
+        $token = $request->session()->get('provider_access_token');
+        $token_secret = $request->session()->get('provider_access_token_secret');
+
+        $twitter = new TwitterOAuth(
+                      env('TWITTER_CLIENT_ID'),
+                      env('TWITTER_CLIENT_SECRET'),
+                      $token,
+                      $token_secret
+        );
+
+        $twitter->post("statuses/update", [
+                "status" =>
+                    $title.$score.$content.$url
+        ]);
+    }
 }

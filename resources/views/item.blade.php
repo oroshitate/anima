@@ -28,14 +28,31 @@
             <span class="mr-2">{{ $item->link }}</span><br>
         </div>
 
+        <ul id="reviews">
+        @foreach($reviews as $review)
+            <li>
+                <a href="{{ route('review', ['review_id' => $review->review_id]) }}">
+                    名前
+                    <p>{{ $review->user_name }}</p>
+                    画像
+                    <img src="/storage/images/users/{{ $review->user_image }}"><br>
+                    評価
+                    <p>{{ $review->review_score }}</p>
+                    コメント
+                    <p>{{ $review->review_content }}</p>
+                </a>
+            </li>
+        @endforeach
+        </ul>
+
         @guest
 
         @else
-            <form method="post" action="{{ route('review') }}">
+            <form method="post" action="{{ url('/review/store') }}">
                 @csrf
                 <div id="slider"></div>
                 <p id="slider-count"></p>
-                <textarea name="content" rows="10" cols="50" placeholder="コメントが入力できます。"></textarea>
+                <textarea name="content" rows="40" cols="50" placeholder="コメントが入力できます。"></textarea>
                 <br>
                 <input type="checkbox" name="share">ツイッターでシェアする
                 <br>
