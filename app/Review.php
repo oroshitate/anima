@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Review extends Model
 {
@@ -40,17 +41,19 @@ class Review extends Model
 
     public function getReview(int $id){
         $review = review::where('reviews.id', $id)->join('users','users.id','=','reviews.user_id')
-                                                  ->join('comments','comments.review_id','=','reviews.id')
                                                   ->get([
                                                        "reviews.id as review_id",
                                                        "reviews.score as review_score",
                                                        "reviews.content as review_content",
+                                                       "reviews.created_at as review_created",
                                                        "users.id as user_id",
                                                        "users.name as user_name",
                                                        "users.nickname as user_nickname",
                                                        "users.image as user_image",
-                                                       "comments.content as comment_content",
                                                   ]);
+
+        $review[0]->review_created = Carbon::createFromFormat('Y-m-d H:i:s', $review[0]->review_created)->format('Y/m/d H:i:s');
+
         return $review;
     }
 
@@ -58,15 +61,46 @@ class Review extends Model
         $reviews = $item_detail->reviews()
                                ->join('users','users.id','=','reviews.user_id')
                                ->orderBy('reviews.created_at', 'desc')
+                               ->take(20)
                                ->get([
                                     "reviews.id as review_id",
                                     "reviews.score as review_score",
                                     "reviews.content as review_content",
+                                    "reviews.created_at as review_created",
                                     "users.id as user_id",
                                     "users.name as user_name",
                                     "users.nickname as user_nickname",
                                     "users.image as user_image",
                                ]);
+
+        foreach ($reviews as $review) {
+            $review->review_created = Carbon::createFromFormat('Y-m-d H:i:s', $review->review_created)->format('Y/m/d H:i:s');
+        }
+
+        return $reviews;
+    }
+
+    public function getMoreReviews(Item $item_detail, int $count){
+        $reviews = $item_detail->reviews()
+                               ->join('users','users.id','=','reviews.user_id')
+                               ->orderBy('reviews.created_at', 'desc')
+                               ->skip($count)
+                               ->take(20)
+                               ->get([
+                                    "reviews.id as review_id",
+                                    "reviews.score as review_score",
+                                    "reviews.content as review_content",
+                                    "reviews.created_at as review_created",
+                                    "users.id as user_id",
+                                    "users.name as user_name",
+                                    "users.nickname as user_nickname",
+                                    "users.image as user_image",
+                               ]);
+
+        foreach ($reviews as $review) {
+           $review->review_created = Carbon::createFromFormat('Y-m-d H:i:s', $review->review_created)->format('Y/m/d H:i:s');
+        }
+
         return $reviews;
     }
 }

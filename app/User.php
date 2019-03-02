@@ -5,10 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +32,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * 日付へキャストする属性
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
      * ユーザーに関連するSNSアカウント取得
      */
     public function accounts(){
@@ -43,26 +53,53 @@ class User extends Authenticatable
     }
 
     /**
+     * ユーザーに関連するいいね情報取得
+     */
+    public function likes(){
+        return $this->hasMany('App\Like');
+    }
+
+    /**
+     * ユーザーに関連するコメント情報取得
+     */
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
+
+    /**
      * ユーザーに関連するフォロー情報取得
      */
-    public function follow(){
-        return $this->belongsTo('App\Follow');
+    public function follows(){
+        return $this->hasMany('App\Follow');
     }
 
     /**
      * ユーザーに関連するウォッチリスト情報取得
      */
-    public function watchlist(){
-        return $this->belongsTo('App\Watchlist');
+    public function watchlists(){
+        return $this->hasMany('App\Watchlist');
     }
 
     /**
      * ユーザー名検索ユーザー情報取得
      */
     public function getSearchByUser(string $keyword){
-        $users = User::take(20)->where('name', 'LIKE', "%{$keyword}%")
-                               ->orwhere('nickname', 'LIKE', "%{$keyword}%")
-                               ->get();
+        $users = User::where('name', 'LIKE', "%{$keyword}%")
+                       ->orwhere('nickname', 'LIKE', "%{$keyword}%")
+                       ->orWhere('content', 'LIKE', "%{$keyword}%")
+                       ->take(20)
+                       ->get();
+        return $users;
+    }
+
+    /**
+     * さらにユーザー名検索ユーザー情報取得
+     */
+    public function getMoreUsersSearchByUser(string $keyword, int $count){
+        $users = User::where('name', 'LIKE', "%{$keyword}%")->orwhere('nickname', 'LIKE', "%{$keyword}%")
+                                                            ->skip($count)
+                                                            ->take(20)
+                                                            ->get();
         return $users;
     }
 

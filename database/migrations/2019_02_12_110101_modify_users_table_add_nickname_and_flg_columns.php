@@ -15,7 +15,6 @@ class ModifyUsersTableAddNicknameAndFlgColumns extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nickname')->nullable();
-            $table->boolean('nickname_flg')->default(0);
         });
     }
 
@@ -28,7 +27,6 @@ class ModifyUsersTableAddNicknameAndFlgColumns extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('nickname');
-            $table->dropColumn('nickname_flg');
         });
     }
 }

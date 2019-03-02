@@ -13,14 +13,14 @@ class Watchlist extends Model
     /**
      * ウォッチリストに関連するユーザー情報取得
      */
-    public function users(){
-        return $this->hasMany('App\User');
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 
     /**
      * ウォッチリストに関連する作品情報取得
      */
-    public function items(){
-        return $this->hasMany('App\Item');
+    public function item(){
+        return $this->belongsTo('App\Item');
     }
 }

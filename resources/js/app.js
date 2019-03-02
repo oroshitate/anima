@@ -6,9 +6,7 @@
  */
 
 require('./bootstrap');
-require('./search');
-require('./show_more');
-require('./review');
+require('./common');
 
 window.Vue = require('vue');
 

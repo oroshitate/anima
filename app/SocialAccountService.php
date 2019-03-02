@@ -3,74 +3,53 @@
 namespace App;
 
 use Laravel\Socialite\Contracts\User as ProviderUser;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\User;
 
 class SocialAccountService
 {
-    public function findOrCreate(ProviderUser $providerUser, $provider)
+    public function find(ProviderUser $providerUser, $provider)
     {
         $account = LinkedSocialAccount::whereProviderName($provider)
                    ->whereProviderId($providerUser->id)
                    ->first();
-        if ($account) {
-            return $account->user;
-        } else {
-            //アバター画像取得
-            $avatar_url = $providerUser->avatar;
-            $image_contents = file_get_contents($avatar_url);
-            $image_encode = base64_encode($providerUser->name);
-            $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
-            $image = $image_name.'.jpg';
-            //アバター画像を保存
-            \Storage::put('public/images/users/'.$image, $image_contents);
-            if ($providerUser->email) {
-                $user = User::whereEmail($providerUser->email)->first();
-                if (! $user) {
-                    $user = User::create([
-                        'email' => $providerUser->email,
-                        'name'  => $providerUser->name,
-                        'nickname' => $providerUser->nickname,
-                        'image' => $image,
-                    ]);
-                }
-                $user->accounts()->create([
-                    'provider_id'   => $providerUser->id,
-                    'provider_name' => $provider,
-                ]);
 
-                return $user;
-            } else {
-                // emailがなかったら
-                $user = User::create([
-                    'email' => $providerUser->email,
-                    'name'  => $providerUser->name,
-                    'nickname' => $providerUser->nickname,
-                    'image' => $image,
-                ]);
-                $user->accounts()->create([
-                    'provider_id'   => $providerUser->id,
-                    'provider_name' => $provider,
-                ]);
-
-                return $user;
-            }
+        if($account == null){
+            $user = null;
+        }else{
+            $user = $account->user;
         }
+
+        return $user;
     }
 
-    public function tweet(string $title, float $score, string $content, string $url){
-        \Log::info('tweet');
-        $token = $request->session()->get('provider_access_token');
-        $token_secret = $request->session()->get('provider_access_token_secret');
+    public function linkSocialAccount(ProviderUser $providerUser, $provider){
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+        $token = null;
+        $token_secret = null;
+        if($provider == "twitter"){
+            $token = encrypt($providerUser->token);
+            $token_secret = encrypt($providerUser->tokenSecret);
+        }
 
-        $twitter = new TwitterOAuth(
-                      env('TWITTER_CLIENT_ID'),
-                      env('TWITTER_CLIENT_SECRET'),
-                      $token,
-                      $token_secret
-        );
-
-        $twitter->post("statuses/update", [
-                "status" =>
-                    $title.$score.$content.$url
+        $result = $user->accounts()->create([
+            'provider_id'   => $providerUser->id,
+            'provider_name' => $provider,
+            'token' => $token,
+            'token_secret' => $token_secret,
         ]);
+
+        return $result;
+    }
+
+    public function unLinkSocialAccount(ProviderUser $providerUser, $provider){
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        $result = $user->accounts()->where('provider_name', $provider)->delete();
+
+        return $result;
     }
 }

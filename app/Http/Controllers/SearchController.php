@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Item;
 use App\User;
+use App\Follow;
 
 class SearchController extends Controller
 {
@@ -26,26 +28,37 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
-        $filter = $request->input('filter')[0];
+        $request->flash();
 
         $item = new Item();
         $user = new User();
-        $items = '';
-        $users = '';
+        $items = array();
+        $users = array();
 
-        if($filter == 'title'){
-            $items = $item->getSearchByTitle($keyword);
-        }else if($filter == 'cast'){
-            $items = $item->getSearchByCast($keyword);
-        }else{
-            $users = $user->getSearchByUser($keyword);
+        $items = $item->getSearchByItem($keyword);
+        $users = $user->getSearchByUser($keyword);
+
+        if(count($users) > 0){
+            foreach ($users as $user) {
+                $follow = Follow::where([
+                    ['follows.user_id' ,'=', Auth::id()],
+                    ['follows.follow_id', '=', $user->id]
+                ])->get();
+
+                if(count($follow) > 0){
+                    $user->follow_id = $follow[0]->id;
+                    $user->follow_status = "active";
+                }else{
+                    $user->follow_id = "";
+                    $user->follow_status = "";
+                }
+            }
         }
 
         return view('search', [
             'items' => $items,
             'users' => $users,
             'keyword' => $keyword,
-            'filter' => $filter,
         ]);
     }
 }

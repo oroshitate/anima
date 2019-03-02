@@ -69,13 +69,17 @@ class Scraping extends Command
                 var_dump('image');
                 $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
                 $image_url = $image_text->attr('src');
-                $image_url = strstr($image_url,'?',true);
-                $image_contents = file_get_contents($image_url);
-                $image_encode = base64_encode($title);
-                $image = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
-                $image_name = $image.'.jpg';
-                //画像を保存
-                Storage::put('public/images/items/'.$image_name, $image_contents);
+                if($image_url == 'https://eiga.k-img.com/anime/images/shared/noimg/160.png?1484793255'){
+                    $image = null;
+                }else {
+                    $image_url = strstr($image_url,'?',true);
+                    $image_contents = file_get_contents($image_url);
+                    $image_encode = base64_encode($title);
+                    $image = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
+                    $image_name = $image.'.jpg';
+                    //画像を保存
+                    Storage::put('public/images/items/'.$image_name, $image_contents);
+                }
                 var_dump($image);
 
                 var_dump('season');
@@ -84,7 +88,7 @@ class Scraping extends Command
 
                 var_dump('company');
                 $companys = [];
-                $company_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl.animeDetailList :not(#detailStaff) > dd > ul > li')->each(function ($company) use(&$companys){
+                $company_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl.animeDetailList:not(#detailStaff) > dd > ul > li')->each(function ($company) use(&$companys){
                     $company_name = $company->text();
                     array_push($companys, $company_name);
                 });

@@ -15,7 +15,7 @@ class AlterUsersTableAddAndDeleteColumns extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('image')->nullable();
-            $table->string('content')->nullable();
+            $table->string('content', 300)->nullable();
             $table->softDeletes();
             $table->dropColumn('phone_number');
         });
