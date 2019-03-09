@@ -57,7 +57,6 @@ class SocialAccountController extends Controller
         $request->session()->forget('link');
         if($link){
             $user = \Socialite::with($provider)->user();
-
             if($link == 'on'){
                 $result = $accountService->linkSocialAccount($user, $provider);
                 $review_id = $request->session()->get('review_id');
@@ -79,7 +78,7 @@ class SocialAccountController extends Controller
 
             return redirect('/account/setting');
         }
-
+        
         try {
             $user = \Socialite::with($provider)->user();
         } catch (\Exception $e) {

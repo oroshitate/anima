@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Item;
 use App\User;
+use App\LinkedSocialAccount;
 use App\Review;
 use App\Comment;
 use App\Like;
@@ -29,34 +31,40 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(int $id, Request $request)
+    public function index(int $review_id, Request $request)
     {
         $review = new Review;
         $comment = new Comment;
         $user_id = Auth::id();
 
-        $item = Review::find($id)->item;
-        $reviews_count = Item::find($item->id)->reviews()->count();
-        $review = $review->getReview($id);
-        $comments = $comment->getComments(Review::find($id));
-        $comments_count = Comment::where('review_id',$id)->count();
+        $raw_review = Review::find($review_id);
+        $review_item = $raw_review->item;
 
-        $likes_review = Like::where('review_id',$id)->get();
-        $likes_review_count = count($likes_review);
-        $like_review = $like = Like::where([
-                            ['review_id', '=', $id],
-                            ['user_id', '=', $user_id],
-                        ])->get();
+        $item = Item::find($review_item->id);
 
-        if(count($like_review) == 1){
-            $like_review_status = "active";
-            $like_review_id = $like_review[0]->id;
-        }else{
+        $reviews_count = $review->getReviewsCount($item);
+        $review = $review->getReview($review_id);
+
+        $comments = $comment->getComments($raw_review);
+        $comments_count = $comment->getCommentsCount($review_id);
+
+        $like = new Like();
+        $likes_review_count = $like->getLikesCount($review_id);
+
+        if (Auth::check()) {
+            $my_like_review = $like->getMyLike($user_id, $review_id);
+
+            if(count($my_like_review) > 0){
+                $like_review_status = "active";
+                $like_review_id = $my_like_review[0]->id;
+            }else{
+                $like_review_status = "";
+                $like_review_id = "";
+            }
+        } else {
             $like_review_status = "";
             $like_review_id = "";
         }
-
-        $login_provider = $request->session()->get('provider');
 
         return view('review',[
             'item' => $item,
@@ -67,7 +75,6 @@ class ReviewController extends Controller
             'likes_review_count' => $likes_review_count,
             'like_review_id' => $like_review_id,
             'like_review_status' => $like_review_status,
-            'provider' => $login_provider,
         ]);
     }
 
@@ -78,6 +85,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        \Log::info("ReviewController : store() : Start");
         // 入力情報の取得
         $inputs = $request->all();
 
@@ -97,27 +105,40 @@ class ReviewController extends Controller
             return redirect()->back()->withErrors($validation->errors())->withInput();
         }
 
-        $review = new Review;
         $item_id = $request->input('item_id');
         $content = $request->input('content');
         $score = $request->input('score');
 
-        $review->user_id = Auth::id();
-        $review->item_id = $item_id;
-        $review->content = $content;
-        $review->score = $score;
+        DB::beginTransaction();
+        try {
+            $review = new Review;
+            $review->user_id = Auth::id();
+            $review->item_id = $item_id;
+            $review->content = $content;
+            $review->score = $score;
 
-        $review->save();
+            $review->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::emergency("ReviewController : store() : Failed Create Review! : user_id = ".Auth::id());
+            \Log::emergency("Message : ".$e->getMessage());
+            \Log::emergency("Code : ".$e->getCode());
+            return redirect()->back();
+        }
 
         $review_id = $review->id;
 
         $share = $request->input('share');
         if($share == "on"){
-            $twitter_account = User::find(Auth::id())->accounts()->where("provider_name", "twitter")->first();
+            $user = User::find(Auth::id());
+            $account = new LinkedSocialAccount();
+            $twitter_account = $account->getUserLinkedProviderExists($user, "twitter");
             if($twitter_account == null){
                 $request->session()->put('review_id', $review_id);
                 return redirect('/login/twitter');
             }
+
             $twitter_service = new TwitterService;
             $title = Item::find($item_id)->title;
             $url = route('review', ['review_id' => $review_id]);
@@ -134,6 +155,7 @@ class ReviewController extends Controller
      */
     public function edit(Request $request)
     {
+        \Log::info("ReviewController : edit() : Start");
         // 入力情報の取得
         $inputs = $request->all();
 
@@ -157,27 +179,42 @@ class ReviewController extends Controller
         $content = $request->input('content');
         $score = $request->input('score');
 
+
         $review_detail = Review::find($review_id);
         $item_id = $review_detail->item_id;
 
-        $review_detail->user_id = Auth::id();
-        $review_detail->item_id = $item_id;
-        $review_detail->content = $content;
-        $review_detail->score = $score;
+        DB::beginTransaction();
+        try {
+            $review_detail->user_id = Auth::id();
+            $review_detail->item_id = $item_id;
+            $review_detail->content = $content;
+            $review_detail->score = $score;
 
-        $review_detail->save();
+            $review_detail->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::emergency("ReviewController : edit() : Failed Edit Review! : user_id = ".Auth::id()." review_id = ".$review_id);
+            \Log::emergency("Message : ".$e->getMessage());
+            \Log::emergency("Code : ".$e->getCode());
+            return redirect()->back();
+        }
 
         $review_id = $review_detail->id;
 
         $share = $request->input('share');
         if($share == "on"){
-            $twitter_account = User::find(Auth::id())->accounts()->where("provider_name", "twitter")->first();
+            $user = User::find(Auth::id());
+            $account = new LinkedSocialAccount();
+            $twitter_account = $account->getUserLinkedProviderExists($user, "twitter");
             if($twitter_account == null){
                 $request->session()->put('review_id', $review_id);
                 return redirect('/login/twitter');
             }
+
             $twitter_service = new TwitterService;
-            $title = Item::find($item_id)->title;
+            $item = Item::find($item_id);
+            $title = $item->title;
             $url = route('review', ['review_id' => $review_id]);
             $twitter_service->tweet($twitter_account,$title,$score,$content,$url);
         }
@@ -195,12 +232,20 @@ class ReviewController extends Controller
         $review_id = $request->input('review_id');
 
         $review = Review::find($review_id);
-        $comments = Review::find($review_id)->comments()->get();
         $item_id = $review->item_id;
+
+        $comments = $review->comments()->get();
+        $likes = $review->likes()->get();
 
         if(count($comments) > 0){
             foreach ($comments as $comment) {
                 $comment->delete();
+            }
+        }
+
+        if(count($likes) > 0){
+            foreach ($likes as $like) {
+                $like->delete();
             }
         }
 

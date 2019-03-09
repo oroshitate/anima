@@ -48793,6 +48793,12 @@ if (token) {
 /***/ (function(module, exports) {
 
 $(function () {
+  // var body_height = $("div#app").height();
+  // var window_height = window.innerHeight;
+  // var footer_height = $("footer").height();
+  // if(body_height + footer_height < window_height){
+  //     $("footer").addClass("fixed-bottom");
+  // }
   var created_list = $("p.created-date");
 
   for (var i = 0; i < created_list.length; i++) {
@@ -48869,23 +48875,22 @@ $(function () {
   var url = location.href;
 
   if (url.indexOf("/search") != -1) {
-    $("li#switch-search-button").addClass("active");
+    $(".switch-search-button").addClass("active");
     $("div#search-box").css({
       "display": "block"
-    });
-    $("li#switch-search-button").empty();
-    $("li#switch-search-button").prepend("<i class='fas fa-times text-white fa-2x'></i>");
-  }
+    }); // $("div#ad-box").css({"display":"block"});
 
-  var url = location.href;
+    $(".switch-search-button").empty();
+    $(".switch-search-button").prepend("<i class='fas fa-times text-white fa-2x'></i>");
+  } // var url = location.href;
+  // if(url.indexOf("/review") != -1){
+  //     var footer_height = $("div#create-comment-footer").height();
+  //     var body_height = $("div#app").height();
+  //     $("div#app").css("height", body_height + footer_height);
+  // }
 
-  if (url.indexOf("/review") != -1) {
-    var footer_height = $("div#create-comment-footer").height();
-    var body_height = $("div#app").height();
-    $("div#app").css("height", body_height + footer_height);
-  }
 
-  $("li#switch-search-button").on("click", function () {
+  $(".switch-search-button").on("click", function () {
     var switch_search_button = $(this).attr("class");
 
     if (switch_search_button.indexOf('active') == -1) {
@@ -48919,11 +48924,15 @@ $(function () {
       'action': url
     });
     $("form[name='search']").submit();
-  }); // $('.grid-index').masonry({
-  //     itemSelector: '.grid-item',
-  //     columnWidth: '.grid-sizer',
-  //     percentPosition: true
-  // });
+  }); //13というのは、EnterキーのkeyCode
+
+  $("body").keydown(function (e) {
+    if (e.which && e.which === 13 || e.keyCode && e.keyCode === 13) {
+      return false;
+    } else {
+      return true;
+    }
+  });
 });
 
 /***/ }),

@@ -27,7 +27,7 @@ $(function(){
         var follow_button = $(this).attr('class');
         if(follow_button.indexOf('active') == -1){
             $(this).addClass("active btn-success");
-            $(this).removeClass("btn-outline-secondary");
+            $(this).removeClass("btn-outline-success");
             if($("#followers-link")){
                 var before_follows_count = $("#followers-link").text();
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)+1);
@@ -54,7 +54,7 @@ $(function(){
             });
         }else{
             $(this).removeClass("active").removeClass("btn-success");
-            $(this).addClass("btn-outline-secondary");
+            $(this).addClass("btn-outline-success");
             if($("#followers-link")){
                 var before_follows_count = $("#followers-link").text();
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)-1);

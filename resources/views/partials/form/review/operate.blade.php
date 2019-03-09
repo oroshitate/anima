@@ -4,14 +4,14 @@
         <div class="modal-content">
             <div class="modal-body">
                 <ul class="list-unstyled mb-0">
-                    <li class="py-md-4 cursor-pointer text-center bg-grey-opacity" data-toggle="modal" data-target="#edit-review-modal" data-dismiss="modal">
-                        <span id="edit-review-buton">レビューを修正する</span>
+                    <li class="py-4 cursor-pointer text-center bg-grey-opacity" data-toggle="modal" data-target="#edit-review-modal" data-dismiss="modal">
+                        <span id="edit-review-buton">{{ __('app.button.review.edit') }}</span>
                     </li>
-                    <li class="py-md-4 cursor-pointer text-center bg-grey-opacity" data-toggle="modal" data-target="#delete-review-modal" data-dismiss="modal">
-                        <span>レビューを削除する</span>
+                    <li class="py-4 cursor-pointer text-center bg-grey-opacity" data-toggle="modal" data-target="#delete-review-modal" data-dismiss="modal">
+                        <span>{{ __('app.button.review.delete') }}</span>
                     </li>
-                    <li class="py-md-4 cursor-pointer text-center bg-grey-opacity" data-dismiss="modal">
-                        <span>キャンセル</span>
+                    <li class="py-4 cursor-pointer text-center bg-grey-opacity" data-dismiss="modal">
+                        <span>{{ __('app.button.cancel') }}</span>
                     </li>
                 </ul>
             </div>

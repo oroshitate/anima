@@ -45,6 +45,17 @@ class Comment extends Model
         return $this->belongsTo('App\Item');
     }
 
+    /**
+     * レビューに関するコメント数取得
+     */
+    public function getCommentsCount(int $review_id){
+        $comments_count = Comment::where('review_id',$review_id)->count();
+        return $comments_count;
+    }
+
+    /**
+     * レビューに関するコメント情報取得
+     */
     public function getComments(Review $review){
         $review_id = $review->id;
         $comments = $review->comments()
@@ -94,6 +105,9 @@ class Comment extends Model
         return $comments;
     }
 
+    /**
+     * さらにレビューに関するコメント情報取得
+     */
     public function getMoreComments(Review $review, int $count){
         $review_id = $review->id;
         $comments = $review->comments()

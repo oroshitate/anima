@@ -10385,12 +10385,12 @@ input[type=button].btn-block {
 }
 
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.5);
-  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0);
 }
 
 .navbar-light .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .navbar-light .navbar-text {
@@ -10465,8 +10465,8 @@ input[type=button].btn-block {
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
+  /* border-radius: 0.25rem; */
 }
 
 .card > hr {
@@ -16232,8 +16232,12 @@ li.bg-grey-opacity:hover{
   size
 */
 .profile{
-  width: 95px;
-  height: 95px;
+  width: 75px;
+  height: 75px;
+}
+.profile-lg{
+  width: 150px;
+  height: 150px;
 }
 
 .social-icon{
@@ -16280,4 +16284,8 @@ li.bg-grey-opacity:hover{
   left: 0;
   overflow: hidden;
   color: #ffcc33;
+}
+
+.h7 {
+    font-size: 0.75rem;
 }

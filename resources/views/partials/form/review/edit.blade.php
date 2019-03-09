@@ -2,18 +2,18 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-black border-0">
-                <p class="text-white h4 mx-auto">レビューを修正</p>
-                <button type="button" class="close text-white ml-0" data-dismiss="modal" aria-label="閉じる">
+                <p class="text-white h4 mx-auto">{{ __('app.word.title.review.create') }}</p>
+                <button type="button" class="close text-white ml-0" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body border-0 pb-md-0">
+            <div class="modal-body border-0 pb-0">
                 <form name="edit-review" method="post" action="{{ url('/review/edit') }}">
                     @csrf
-                    <div class="form-group mb-md-3">
+                    <div class="form-group mb-3">
                         <div class="row justify-content-center">
-                            <input type="range" name="score" class="custom-range col-md-9 mx-auto" min="0" max="5" step="0.5" id="edit-review-slider" value="0">
-                            <span id="edit-slider-count" class="h5 text-warning col-md-2">0</span>
+                            <input type="range" name="score" class="custom-range col-8 col-md-9 mx-auto" min="0" max="5" step="0.5" id="edit-review-slider" value="0">
+                            <span id="edit-slider-count" class="h5 text-warning col-2 col-md-2">0</span>
                         </div>
                         @if ($errors->has('score'))
                             <span class="invalid-feedback" role="alert">
@@ -21,9 +21,9 @@
                             </span>
                         @endif
                     </div>
-                    <div class="form-group mb-md-3">
+                    <div class="form-group mb-3">
                         <div class="">
-                            <textarea id="edit-review-content" name="content" rows="10"class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}"placeholder="コメントが入力できます。" style="resize: none;"></textarea>
+                            <textarea id="edit-review-content" name="content" rows="10"class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}"placeholder="{{ __('app.label.review.placeholder') }}" style="resize: none;"></textarea>
                             @if ($errors->has('content'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('content') }}</strong>
@@ -31,8 +31,8 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group mb-md-3">
-                        <button type="button" id="share-twitter-button" class="btn btn-secondary">Twitterでシェアする</button>
+                    <div class="form-group mb-3">
+                        <button type="button" id="share-twitter-button" class="btn btn-secondary"><span class="fab fa-twitter text-white mr-2"></span> {{ __('app.button.review.share') }}</button>
                         <input type="hidden" name="share" value="">
                     </div>
                     <input type="hidden" name="review_id" id="edit-review-id" value="">
@@ -48,7 +48,7 @@
                 @endif
             </div>
             <div class="modal-footer border-0">
-                <button type="button" id="edit-review-button" class="btn btn-success w-100">レビューを修正</button>
+                <button type="button" id="edit-review-button" class="btn btn-success w-100">{{ __('app.button.edit') }}</button>
             </div>
         </div>
     </div>

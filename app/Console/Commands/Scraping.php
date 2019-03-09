@@ -40,6 +40,7 @@ class Scraping extends Command
      */
     public function handle()
     {
+        \Log::info('Scraping start');
         // シーズンリストクロール
         $season_list_crawler = GoutteFacade::request('GET', 'https://anime.eiga.com/program/');
         $season_list_crawler->filter('select#anime_term > option')->each(function ($season_list){
@@ -69,16 +70,16 @@ class Scraping extends Command
                 var_dump('image');
                 $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
                 $image_url = $image_text->attr('src');
-                if($image_url == 'https://eiga.k-img.com/anime/images/shared/noimg/160.png?1484793255'){
+                if(strpos($image_url,'https://eiga.k-img.com/anime/images/shared/noimg/') !== false){
                     $image = null;
                 }else {
                     $image_url = strstr($image_url,'?',true);
                     $image_contents = file_get_contents($image_url);
                     $image_encode = base64_encode($title);
-                    $image = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
-                    $image_name = $image.'.jpg';
+                    $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
+                    $image = $image_name.'.jpg';
                     //画像を保存
-                    Storage::put('public/images/items/'.$image_name, $image_contents);
+                    Storage::put('public/images/items/'.$image, $image_contents);
                 }
                 var_dump($image);
 
@@ -95,62 +96,65 @@ class Scraping extends Command
                 $company = implode(',', $companys);
                 var_dump($company);
 
-                var_dump('staff main');
-                $staffs = [];
-                $staff_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl#detailStaff > dd > ul > li')->each(function ($staff) use(&$staffs){
-                    $staff_name = $staff->text();
-                    array_push($staffs, $staff_name);
-                });
-                $staff = implode(',', $staffs);
-                var_dump($staff);
+                // var_dump('staff main');
+                // $staffs = [];
+                // $staff_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl#detailStaff > dd > ul > li')->each(function ($staff) use(&$staffs){
+                //     $staff_name = $staff->text();
+                //     array_push($staffs, $staff_name);
+                // });
+                // $staff = implode(',', $staffs);
+                // var_dump($staff);
 
-                var_dump('story');
-                $story_text = $anime_crawler->filter('div.animeDetailBox > dl#detailSynopsis > dd');
-                $story = null;
-                if(count($story_text) > 0){
-                    $story = $story_text->text();
-                    var_dump($story);
-                }
+                // var_dump('story');
+                // $story_text = $anime_crawler->filter('div.animeDetailBox > dl#detailSynopsis > dd');
+                // $story = null;
+                // if(count($story_text) > 0){
+                //     $story = $story_text->text();
+                //     var_dump($story);
+                // }
 
-                var_dump('music');
-                $music_text = $anime_crawler->filter('div.animeDetailBox > dl#detailMusic > dd');
-                $music = null;
-                if(count($music_text) > 0){
-                    $music = $music_text->text();
-                    var_dump($music);
-                }
+                // var_dump('music');
+                // $music_text = $anime_crawler->filter('div.animeDetailBox > dl#detailMusic > dd');
+                // $music = null;
+                // if(count($music_text) > 0){
+                //     $music = $music_text->text();
+                //     var_dump($music);
+                // }
 
-                var_dump('cast main');
-                $casts = [];
-                $cast_main = $anime_crawler->filter('div.animeDetailBox > dl#detailCast > dd > ul > li')->each(function ($cast) use(&$casts){
-                    $cast_name = $cast->text();
-                    array_push($casts, $cast_name);
-                });
-                $cast = implode(",", $casts);
-                var_dump($cast);
+                // var_dump('cast main');
+                // $casts = [];
+                // $cast_main = $anime_crawler->filter('div.animeDetailBox > dl#detailCast > dd > ul > li')->each(function ($cast) use(&$casts){
+                //     $cast_name = $cast->text();
+                //     array_push($casts, $cast_name);
+                // });
+                // $cast = implode(",", $casts);
+                // var_dump($cast);
 
-                var_dump('link');
+                var_dump('official_link');
                 $link_text = $anime_crawler->filter('div.animeDetailBox > dl#detailLink > dd > ul > li > a');
-                $link = null;
+                $official_link = null;
                 if(count($link_text) > 0){
-                    $link = $link_text->attr('href');
-                    var_dump($link);
+                    $official_link = $link_text->attr('href');
+                    var_dump($official_link);
                 }
 
-                $item = new Item;
+                $item = new Item();
 
                 $item->title = $title;
                 $item->image = $image;
                 $item->season = $season;
                 $item->company = $company;
-                $item->staff = $staff;
-                $item->story = $story;
-                $item->music = $music;
-                $item->cast = $cast;
-                $item->link = $link;
+                $item->link = $anime_url;
+                // $item->staff = $staff;
+                // $item->story = $story;
+                // $item->music = $music;
+                // $item->cast = $cast;
+                $item->official_link = $official_link;
 
                 $item->save();
             });
         });
+
+        \Log::info('Scraping end');
     }
 }

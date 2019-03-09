@@ -39,15 +39,9 @@ $(function(){
             }
 
             if(keyword_users_count_after < 20 + keyword_users_count){
-                $("<div class='text-center mb-md-5'>\
-                    <p class='h4 text-danger'>Show "+ keyword_users_count_after + " Reviews</p>\
-                </div>").appendTo("div#show-more-keyword-users");
                 end_flag=1;
             }else {
-                $("<div class='text-center mb-md-5'>\
-                    <p class='h4 text-danger'>Show "+ keyword_users_count_after + " Reviews</p>\
-                </div>\
-                <div class='text-center mb-md-5'>\
+                $("<div class='text-center mb-5'>\
                     <button type='button' id='show-more-keyword-users-button' class='btn btn-outline-secondary w-100'>さらに読み込む</button>\
                 </div>").appendTo("div#show-more-keyword-users");
             }

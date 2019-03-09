@@ -81,6 +81,52 @@ class User extends Authenticatable
     }
 
     /**
+     * ユーザー詳細情報取得(ニックネーム)
+     */
+    public function getUser(string $nickname){
+        $user = User::where('nickname', $nickname)->first();
+        return $user;
+    }
+
+    /**
+     * ユーザーフォロー情報取得
+     */
+    public function getFollowings($followings){
+        $users = User::where(function ($query) use ($followings) {
+            foreach ($followings as $following) {
+                $query->orWhere('users.id', $following->follow_id);
+            }
+        })->take(20)->get();
+
+        return $users;
+    }
+
+    /**
+     * ユーザーフォロワー情報取得
+     */
+    public function getFollowers($followers){
+        $users = User::where(function ($query) use ($followers) {
+            foreach ($followers as $follower) {
+                $query->orWhere('users.id', $follower->user_id);
+            }
+        })->take(20)->get();
+
+        return $users;
+    }
+
+    /**
+     * ユーザー名検索ユーザー情報取得
+     */
+    public function getSearchByUserCount(string $keyword){
+        $users_count = User::where('name', 'LIKE', "%{$keyword}%")
+                       ->orwhere('nickname', 'LIKE', "%{$keyword}%")
+                       ->orWhere('content', 'LIKE', "%{$keyword}%")
+                       ->count();
+
+        return $users_count;
+    }
+
+    /**
      * ユーザー名検索ユーザー情報取得
      */
     public function getSearchByUser(string $keyword){
@@ -101,13 +147,5 @@ class User extends Authenticatable
                                                             ->take(20)
                                                             ->get();
         return $users;
-    }
-
-    /**
-     * ユーザー詳細情報取得
-     */
-    public function getUser(string $nickname){
-        $user = User::where('nickname', $nickname)->first();
-        return $user;
     }
 }

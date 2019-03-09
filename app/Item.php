@@ -38,20 +38,63 @@ class Item extends Model
      */
     public function getItem(int $id){
         $item = item::where('id', $id)->first();
-        $item->reviews_count = $item->reviews->count();
+        $item->reviews_count = $item->reviews()->count();
 
         return $item;
     }
 
+    /**
+     * ユーザーレビューに関する作品情報取得
+     */
+    public function getReviewItems($reviews){
+        $items = Item::where(function ($query) use ($reviews) {
+            foreach ($reviews as $review) {
+                $query->orWhere('items.id', $review->item_id);
+            }
+        })->take(20)->get();
+
+        foreach($items as $item){
+            $review = new Review();
+            $review_score = $review->select('score')->where('item_id',$item->id)->first();
+            $item->review_score = $review_score->score;
+        }
+
+        return $items;
+    }
+
+    /**
+     * ユーザーレビューに関する作品情報取得
+     */
+    public function getMoreReviewItems($reviews, $count){
+        $items = Item::where(function ($query) use ($reviews) {
+            foreach ($reviews as $review) {
+                $query->orWhere('items.id', $review->item_id);
+            }
+        })->skip($count)->take(20)->get();
+
+        foreach($items as $item){
+            $review = new Review();
+            $review_score = $review->select('score')->where('item_id',$item->id)->first();
+            $item->review_score = $review_score->score;
+        }
+
+        return $items;
+    }
+
+    /**
+     * 話題の作品情報取得
+     * レビュー数の多い作品で評価の高い作品を取得
+     */
     public function getPopularItems(){
-        $reviews_item = review::select(DB::raw("count(item_id) as item_count, round(avg(score), 1) as item_avg, item_id"))->groupBy("item_id")->orderBy("item_count", "desc")->take(20)->get();
+        $review = new Review();
+        $reviews_avg_list = $review->getReviewsAvgs();
         $items = array();
-        foreach ($reviews_item as $review_item) {
-            $item = Item::find($review_item->item_id);
-            if($review_item->item_avg == null){
+        foreach ($reviews_avg_list as $review_avg) {
+            $item = Item::find($review_avg->item_id);
+            if($review_avg->item_avg == null){
                 $item->item_avg = 0;
             }else {
-                $item->item_avg = $review_item->item_avg;
+                $item->item_avg = $review_avg->item_avg;
             }
             array_push($items, $item);
         }
@@ -60,15 +103,23 @@ class Item extends Model
     }
 
     /**
+     * アニメ作品検索作品件数取得
+     */
+    public function getSearchByItemCount(string $keyword){
+        $items_count = item::where('title', 'LIKE', "%{$keyword}%")->count();
+
+        return $items_count;
+    }
+
+    /**
      * アニメ作品検索作品情報取得
      */
     public function getSearchByItem(string $keyword){
-        $items = item::where('title', 'LIKE', "%{$keyword}%")
-                       ->orWhere('cast', 'LIKE', "%{$keyword}%")
-                       ->take(20)->get();
+        $items = item::where('title', 'LIKE', "%{$keyword}%")->take(20)->get();
 
         foreach ($items as $item) {
-            $avg = $item->reviews()->select(DB::raw("round(avg(score), 1) as item_avg"))->first();
+            $review = new Review();
+            $avg = $review->getReviewsAvg($item);
             if($avg->item_avg == null){
                 $item->item_avg = 0;
             }else {
@@ -84,7 +135,6 @@ class Item extends Model
      */
     public function getMoreItemsSearchByItem(string $keyword, int $count){
         $items = item::where('title', 'LIKE', "%{$keyword}%")
-                       ->orWhere('cast', 'LIKE', "%{$keyword}%")
                        ->skip($count)
                        ->take(20)
                        ->get();

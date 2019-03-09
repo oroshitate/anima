@@ -1,45 +1,51 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Anima | {{ $user->name }}のプロフィール</title>
+<title>Anima | {{ __('app.title.user.index',['name' => $user->name]) }}</title>
 @endsection
 
 @section('script')
+<script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/follow.js') }}" defer></script>
-<script src="{{ asset('js/ajax/show_more_items.js') }}" defer></script>
+<script src="{{ asset('js/pinterest.js') }}" defer></script>
+<script src="{{ asset('js/ajax/show_more_review_items.js') }}" defer></script>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12 my-md-5">
-            <div id="user-detail" class="row col-md-8 mx-auto" data-nickname="{{ $user->nickname }}">
-                <div class="col-md-4 text-left">
-                    <img class="rounded-circle align-top profile-lg" src="/storage/images/users/{{ $user->image }}">
+        <div class="col-12 col-md-10 my-5">
+            <div id="user-detail" class="row col-12 mx-auto mb-4 px-0" data-nickname="{{ $user->nickname }}">
+                <div class="col-3 col-md-2 text-left px-0 mt-2">
+                    @if($user->image == null)
+                        <img class="rounded-circle align-top w-100" src="{{ asset('no-image.jpg') }}">
+                    @else
+                        <img class="rounded-circle align-top w-100" src="/storage/images/users/{{ $user->image }}">
+                    @endif
                 </div>
-                <div class="d-inline-block col-md-8">
-                    <div class="row text-center h-25">
-                        <span class="col-md-4">{{ $reviews_count }}</span>
-                        <a id="followings-link" class="follow-link col-md-4" href="">{{ $followings_count }}</a>
-                        <a id="followers-link" class="follow-link col-md-4" href="">{{ $followers_count }}</a>
+                <div class="col-9 m-md-4">
+                    <div class="row text-center mb-2">
+                        <span class="col-4">{{ $reviews_count }}</span>
+                        <a id="followings-link" class="follow-link col-4" href="">{{ $followings_count }}</a>
+                        <a id="followers-link" class="follow-link col-4" href="">{{ $followers_count }}</a>
                     </div>
-                    <div class="row text-center h-25">
-                        <span class="col-md-4">レビュー</span>
-                        <span class="col-md-4">フォロー</span>
-                        <span class="col-md-4">フォロワー</span>
+                    <div class="row text-center my-2">
+                        <span class="col-4 h7 px-0">{{ __('app.word.review') }}</span>
+                        <span class="col-4 h7 px-0">{{ __('app.word.followings') }}</span>
+                        <span class="col-4 h7 px-0">{{ __('app.word.followers') }}</span>
                     </div>
-                    <div class="text-center h-25">
+                    <div class="text-center">
                         <div class="d-inline-block w-100">
                             @guest
                                 <a href="{{ url('/login') }}">
-                                    <button type="button" class="btn btn-success w-100">フォローする</button>
+                                    <button type="button" class="btn btn-success w-100">{{ __('app.button.follow') }}</button>
                                 </a>
                             @else
                                 @if(Auth::user()->id == $user->id)
                                     <form method="post" action="{{ route('mypage') }}">
                                         @csrf
                                         <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary w-100">プロフィールを編集</button>
+                                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary w-100">{{ __('app.button.edit_profile') }}</button>
                                     </form>
                                 @else
                                     @if($follow_status === "active")
@@ -53,32 +59,53 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 text-left mx-auto my-md-2">
-                <span class="h4 ml-md-2">{{ $user->name }}</span>
+            <div class="col-12 text-left mx-auto my-2 px-0">
+                <span class="h5 ml-2">{{ $user->name }}</span>
             </div>
-            <div class="col-md-8 text-left mx-auto my-md-2">
-                <span class="h5 text-secondary ml-md-2">{{ "@".$user->nickname }}</span>
+            <div class="col-12 text-left mx-auto my-2 px-0">
+                <span class="h5 text-secondary ml-2">{{ "@".$user->nickname }}</span>
             </div>
-            <div class="col-md-8 text-left mx-auto ">
-                <pre class="ml-md-2">{{ $user->content }}</pre>
+            <div class="col-12 text-left mx-auto my-2 px-0">
+                <pre class="ml-2 h5">{{ $user->content }}</pre>
             </div>
-            <div class="col-md-12 bg-grey text-dark p-md-2 my-md-4 mx-auto">
-                <span class="h4 text-black">レビューしたアニメ</span>
+            <div class="col-12 bg-grey text-dark p-2 my-4 mx-auto">
+                <span class="h5 text-black">{{ __('app.word.title.reviewd_anime') }}</span>
             </div>
             <div class="text-center">
-                <ul id="items" class="list-inline text-center my-md-4">
-                @foreach($items as $item)
-                    <li class="list-inline-item my-md-2">
-                        <a href="{{ route('item', ['item_id' => $item->id]) }}">
-                            <img src="/storage/images/items/{{ $item->image }}.jpg">
-                        </a>
-                        <div class="bg-secondary text-white">
-                            <span class="text-white mr-md-1">タイトル</span>
-                            <span class="text-white">評価</span>
+                <div id="review-items">
+                    <div class="grid-index my-4">
+                        <div class="grid-sizer col-4"></div>
+                        @foreach($items as $item)
+                        <div class="grid-item col-4 my-1 px-1 review-item">
+                            <div class="card">
+                                <a href="{{ route('item', ['item_id' => $item->id]) }}">
+                                    @if($item->image == null)
+                                        <img src="{{ asset('anima-img.png') }}" class="w-100">
+                                    @else
+                                        <img src="/storage/images/items/{{ $item->image }}" class="w-100">
+                                    @endif
+                                </a>
+                                <div class="bg-secondary text-white text-center">
+                                    <span class="text-white name-length">{{ $item->title }}</span>
+                                    <div class="d-inline-block">
+                                        <div class="one-star-rating d-inline-block">
+                                            <div class="one-star-rating-front">★</div>
+                                        </div>
+                                        <span class="text-warning">{{ $item->review_score }}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </li>
-                @endforeach
-                </ul>
+                        @endforeach
+                    </div>
+                </div>
+                @if(count($items) == 20)
+                <div id="show-more-review-items">
+                    <div class='text-center mb-5'>
+                        <button type='button' id='show-more-review-items-button' class='btn btn-outline-secondary w-100' data-user_id="{{ $user->id }}">{{ __('app.button.show_more') }}</button>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>

@@ -9,13 +9,16 @@ $(function() {
         var comment_id = $(this).data("comment_id");
         var user_nickname = $(this).data("user_nickname");
         var reply_to = "@" + user_nickname + "";
-        $("<div id='reply-group' class='col-md-2'>\
-              <div class='row align-items-center justify-content-center h-100 bg-secondary rounded'>\
-                  <p class='mb-0 text-white'>To " + reply_to + "</p>\
+        $("<div id='reply-group' class='col-10 col-md-8 row justify-content-start my-2'>\
+              <div class='col-6 col-md-4'>\
+                  <div class='row align-items-center justify-content-center bg-secondary rounded h-100'>\
+                      <p class='mb-0 text-white'>To " + reply_to + "</p>\
+                  </div>\
               </div>\
-          </div>\
-          <div id='cancel-reply-box' class='ml-md-2 mr-md-4'>\
-              <button type='button' id='cancel-reply-button' class='btn btn-secondary'><i class='fas fa-times text-white fa-1x'></i></button></   div>").prependTo("div#footer-comment-group");
+              <div id='cancel-reply-box' class='ml-2'>\
+                  <button type='button' id='cancel-reply-button' class='btn btn-secondary'><i class='fas fa-times text-white fa-1x'></i></button>\
+              </div>\
+          <div>").prependTo("div#footer-comment-group");
 
         $("textarea#comment-content").focus();
         $("input[name='reply_id']").val(comment_id);
@@ -23,11 +26,10 @@ $(function() {
 
     $(document).on("click", "button#cancel-reply-button", function () {
         $("div#reply-group").remove();
-        $("div#cancel-reply-box").remove();
         $("input[name='reply_id']").val("");
     });
 
-    $("span#edit-comment-footer-button").on("click", function(){
+    $("li#edit-comment-footer-button").on("click", function(){
         $("div#create-comment-footer").css("display","none");
         $("div#edit-comment-footer").css("display","block");
     });

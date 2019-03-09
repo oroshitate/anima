@@ -1,27 +1,31 @@
 @foreach($users as $user)
-    <li class="py-md-4 border-bottom row justify-content-center">
-        <div class="col-md-3 text-center">
-            <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
-                <img class="m-md-3 rounded-circle align-top profile" src="/storage/images/users/{{ $user->image }}">
-            </a>
-        </div>
-        <div class="col-md-3 text-left row align-items-center">
-            <div>
-                <p class="m-0 h4">{{ $user->name }}</p>
-                <p class="m-0 h4 text-secondary">{{ "@".$user->nickname }}</p>
+    <li class="py-4 border-bottom row justify-content-center">
+        <div class="align-top col-8 col-md-6 pl-0">
+            <div class="row align-items-center">
+                <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
+                    @if($user->image == null)
+                        <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                    @else
+                        <img class="m-3 rounded-circle align-top profile" src="/storage/images/users/{{ $user->image }}">
+                    @endif
+                </a>
+                <div class="col-7 px-0 text-left">
+                    <p class="h6 m-0">{{ $user->name }}</p>
+                    <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
+                </div>
             </div>
         </div>
-        <div class="col-md-4 row align-items-center">
+        <div class="row align-items-center justify-content-end">
             @guest
                 <a href="{{ url('/login') }}">
-                    <button type="button" class="btn btn-success">フォローする</button>
+                    <button type="button" class="btn btn-success">{{ __('app.button.follow') }}</button>
                 </a>
             @else
                 @if(Auth::user()->id == $user->id)
                     <form method="post" action="{{ route('mypage') }}">
                         @csrf
                         <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary">プロフィールを編集</button>
+                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary">{{ __('app.button.edit_profile') }}</button>
                     </form>
                 @else
                     @if($user->follow_status === "active")

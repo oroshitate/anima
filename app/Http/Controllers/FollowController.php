@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Follow;
 use App\User;
 
@@ -11,57 +12,60 @@ class FollowController extends Controller
 {
     public function showFollowings(string $nickname){
         $user = new User;
-        $user = $user->getUser($nickname);
-        $user_id = $user->id;
-        $followings = User::find($user_id)->follows()->get();
+        $show_user = $user->getUser($nickname);
+        $show_user_id = $show_user->id;
+        $followings = $show_user->follows;
 
         $users = array();
         if(count($followings) > 0){
-            $users = User::where(function ($query) use ($followings) {
-                foreach ($followings as $following) {
-                    $query->orWhere('users.id', $following->follow_id);
-                }
-            })->take(20)->get();
-
+            $users = $user->getFollowings($followings);
             foreach ($users as $user) {
-                $follow = Follow::where([
-                    ['follows.user_id' ,'=', Auth::id()],
-                    ['follows.follow_id', '=', $user->id]
-                ])->get();
-                $user->follow_id = $follow[0]->id;
-                $user->follow_status = "active";
+                if (Auth::check()) {
+                    $follow = new Follow();
+                    $my_follow = $follow->getMyFollow($user->id);
+
+                    if(count($my_follow) > 0){
+                        $user->follow_id = $my_follow[0]->id;
+                        $user->follow_status = "active";
+                    }else{
+                        $user->follow_id = "";
+                        $user->follow_status = "";
+                    }
+                } else {
+                    $user->follow_id = "";
+                    $user->follow_status = "";
+                }
             }
         }
 
         return view('user.followings', [
+            'show_user' => $show_user,
             'users' => $users
         ]);
     }
 
     public function showFollowers(string $nickname){
         $user = new User;
-        $user = $user->getUser($nickname);
-        $user_id = $user->id;
+        $show_user = $user->getUser($nickname);
+        $user_id = $show_user->id;
         $followers = Follow::where('follow_id', $user_id)->get();
 
         $users = array();
         if(count($followers) > 0){
-            $users = User::where(function ($query) use ($followers) {
-                foreach ($followers as $follower) {
-                    $query->orWhere('users.id', $follower->user_id);
-                }
-            })->take(20)->get();
-
+            $users = $user->getFollowers($followers);
             foreach ($users as $user) {
-                $follow = Follow::where([
-                    ['follows.user_id' ,'=', Auth::id()],
-                    ['follows.follow_id', '=', $user->id]
-                ])->get();
+                if (Auth::check()) {
+                    $follow = new Follow();
+                    $my_follow = $follow->getMyFollow($user->id);
 
-                if(count($follow) > 0){
-                    $user->follow_id = $follow[0]->id;
-                    $user->follow_status = "active";
-                }else{
+                    if(count($my_follow) > 0){
+                        $user->follow_id = $my_follow[0]->id;
+                        $user->follow_status = "active";
+                    }else{
+                        $user->follow_id = "";
+                        $user->follow_status = "";
+                    }
+                } else {
                     $user->follow_id = "";
                     $user->follow_status = "";
                 }
@@ -69,18 +73,30 @@ class FollowController extends Controller
         }
 
         return view('user.followers', [
+            'show_user' => $show_user,
             'users' => $users,
         ]);
     }
 
     public function store(Request $request){
+        \Log::info("FollowController : store() : Start");
         $user_id = $request->input('user_id');
-        $follow = new Follow;
 
-        $follow->user_id = Auth::id();
-        $follow->follow_id = $user_id;
+        DB::beginTransaction();
+        try {
+            $follow = new Follow;
+            $follow->user_id = Auth::id();
+            $follow->follow_id = $user_id;
 
-        $follow->save();
+            $follow->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::emergency("FollowController : store() : Failed Follow User! : user_id = ".Auth::id());
+            \Log::emergency("Message : ".$e->getMessage());
+            \Log::emergency("Code : ".$e->getCode());
+            return redirect()->back();
+        }
 
         return $follow->id;
     }

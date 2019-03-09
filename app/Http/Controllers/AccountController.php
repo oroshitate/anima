@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\LinkedSocialAccount;
 
 class AccountController extends Controller
 {
@@ -27,7 +29,9 @@ class AccountController extends Controller
     public function index(Request $request)
     {
         $user_id = Auth::id();
-        $linked_providers = User::find($user_id)->accounts()->select('provider_name')->get();
+        $user = User::find($user_id);
+        $account = new LinkedSocialAccount();
+        $linked_providers = $account->getUserLinkedProvider($user);
         $linked_count = count($linked_providers);
 
         $twitter = "on";
@@ -68,8 +72,20 @@ class AccountController extends Controller
      */
     public function delete(Request $request)
     {
+        \Log::info("AccountController : delete() : Start");
         $user_id = Auth::id();
-        User::find($user_id)->delete();
+
+        DB::beginTransaction();
+        try {
+            User::find($user_id)->delete();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::emergency("AccountController : delete() : Failed Delete User! : user_id = ".Auth::id());
+            \Log::emergency("Message : ".$e->getMessage());
+            \Log::emergency("Code : ".$e->getCode());
+            abort(500);
+        }
 
         return redirect()->route('home');
     }

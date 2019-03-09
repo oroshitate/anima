@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+
     ];
 
     /**
@@ -26,6 +27,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('command:scraping')
+                 ->monthly()
+                 ->before(function () {
+                      // タスク開始時
+                      DB::table('items')->truncate();
+                 });
     }
 
     /**

@@ -18,12 +18,13 @@ class CreateItemsTable extends Migration
             $table->string('title');
             $table->string('image')->nullable();
             $table->string('season');
-            $table->string('cast',2000)->nullable();
-            $table->string('story',2000)->nullable();
+            // $table->string('cast',2000)->nullable();
+            // $table->string('story',2000)->nullable();
             $table->string('company')->nullable();
-            $table->string('staff',2000)->nullable();
-            $table->string('music',2000)->nullable();
             $table->string('link')->nullable();
+            // $table->string('staff',2000)->nullable();
+            // $table->string('music',2000)->nullable();
+            $table->string('official_link')->nullable();
             $table->timestamps();
         });
     }

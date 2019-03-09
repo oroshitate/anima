@@ -11,13 +11,6 @@
 |
 */
 
-// Route::get('/', function() {
-//    // $users = App\User::all();
-//    // return View::make('users')->with('users', $users);
-//    // ログをslackにも投稿
-//    // Log::emergency('An informational message.');
-// });
-
 // 認証
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
@@ -67,5 +60,6 @@ Route::post('ajax/keyword-items/show', 'AjaxController@showMoreKeywordItems');
 Route::post('ajax/keyword-users/show', 'AjaxController@showMoreKeywordUsers');
 Route::post('ajax/reviews/show', 'AjaxController@showMoreReviews');
 Route::post('ajax/comments/show', 'AjaxController@showMoreComments');
+Route::post('ajax/review-items/show', 'AjaxController@showMoreReviewItems');
 
 // その他

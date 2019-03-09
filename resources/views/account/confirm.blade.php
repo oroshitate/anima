@@ -1,24 +1,24 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Anima | 退会確認</title>
+<title>Anima | {{ __('app.title.account.confirm') }}</title>
 @endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="my-md-5">
-                <div class="my-md-3">
-                    <p class="h5">本当にAnimaを退会してもよろしいですか？</p>
-                    <p class="h5">これまでのレビュー記録やコメントが全て削除される可能性があります。</p>
-                    <p class="h5">また、再度ご登録される際の復元は保証いたしません。</p>
+        <div class="col-10 col-md-8">
+            <div class="my-5">
+                <div class="my-3">
+                    <p class="h5">{{ __('app.sentence.account.confirm.1') }}</p>
+                    <p class="h5">{{ __('app.sentence.account.confirm.2') }}</p>
+                    <p class="h5">{{ __('app.sentence.account.confirm.3') }}</p>
                 </div>
 
                 <form method="post" action="{{ url('/account/setting/delete') }}">
-                    <div class="form-group row my-md-4 justify-content-center">
+                    <div class="form-group row my-4 justify-content-center">
                         @csrf
-                        <button type="submit" class="btn btn-danger">退会する</button>
+                        <button type="submit" class="btn btn-danger">{{ __('app.word.resign') }}</button>
                     </div>
                 </form>
             </div>

@@ -4,6 +4,7 @@ namespace App;
 
 use Laravel\Socialite\Contracts\User as ProviderUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
 
@@ -25,6 +26,7 @@ class SocialAccountService
     }
 
     public function linkSocialAccount(ProviderUser $providerUser, $provider){
+        \Log::info("SocialAccountService : linkSocialAccount() : Start");
         $user_id = Auth::id();
         $user = User::find($user_id);
         $token = null;
@@ -34,12 +36,24 @@ class SocialAccountService
             $token_secret = encrypt($providerUser->tokenSecret);
         }
 
-        $result = $user->accounts()->create([
-            'provider_id'   => $providerUser->id,
-            'provider_name' => $provider,
-            'token' => $token,
-            'token_secret' => $token_secret,
-        ]);
+        DB::beginTransaction();
+        try {
+            $result = $user->accounts()->create([
+                'provider_id'   => $providerUser->id,
+                'provider_name' => $provider,
+                'token' => $token,
+                'token_secret' => $token_secret,
+            ]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            \Log::emergency("SocialAccountService : linkSocialAccount() : Failed Link Account! : user_id = ".$user_id.", provider = ".$provider);
+            \Log::emergency("Message : ".$e->getMessage());
+            \Log::emergency("Codee : ".$e->getCode());
+
+            return redirect()->to('/');
+        }
 
         return $result;
     }

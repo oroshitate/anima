@@ -107,7 +107,6 @@ class AjaxController extends Controller
         $items = '';
         $item = new Item;
         $items = $item->getMoreItemsSearchByItem($keyword, $count);
-        \Log::info(count($items));
 
         $html = response()->json((view('partials.ajax.keyword_item', [
             'items' => $items,
@@ -194,6 +193,23 @@ class AjaxController extends Controller
         $html = response()->json((view('partials.ajax.comment', [
             'review' => $review,
             'comments' => $comments,
+        ])->render()));
+
+        return $html;
+    }
+
+    public function showMoreReviewItems(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $count = $request->input('count');
+
+        $user = User::find($user_id);
+        $reviews = $user->reviews;
+        $item = new Item();
+        $items = $item->getMoreReviewItems($reviews, $count);
+
+        $html = response()->json((view('partials.ajax.review_item', [
+            'items' => $items,
         ])->render()));
 
         return $html;
