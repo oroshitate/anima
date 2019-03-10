@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-black border-0">
-                <p class="text-white h4 mx-auto">{{ __('app.word.title.review.create') }}</p>
+                <p class="text-white h5 mx-auto">{{ __('app.word.title.review.create') }}</p>
                 <button type="button" class="close text-white ml-0" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <div class="row justify-content-center">
-                            <input type="range" name="score" class="custom-range col-8 col-md-9 mx-auto" min="0" max="5" step="0.5" id="edit-review-slider" value="0">
+                            <input type="range" name="score" class="custom-range col-8 col-md-9 mx-auto" min="0" max="5" step="0.1" id="edit-review-slider" value="0">
                             <span id="edit-slider-count" class="h5 text-warning col-2 col-md-2">0</span>
                         </div>
                         @if ($errors->has('score'))

@@ -104,8 +104,8 @@ $(function() {
         $("form[name='search']").submit();
     });
 
-    //13というのは、EnterキーのkeyCode
-    $("body").keydown(function(e) {
+    // 13というのは、EnterキーのkeyCode
+    $("form[name='search']").keydown(function(e) {
         if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
             return false;
         } else {

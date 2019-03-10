@@ -13,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
             <div class="bg-grey text-dark p-3 my-3">
-                <span class="h4 text-black">{{ __('app.word.followers') }}</span>
+                <span class="h5 text-black">{{ __('app.word.followers') }}</span>
             </div>
             <ul id="users" class="list-unstyled text-center my-5">
                 @foreach($users as $user)
@@ -28,7 +28,7 @@
                                     @endif
                                 </a>
                                 <div class="col-7 px-0 text-left">
-                                    <p class="h6 m-0">{{ $user->name }}</p>
+                                    <p class="h5-5 m-0">{{ $user->name }}</p>
                                     <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
                                 </div>
                             </div>

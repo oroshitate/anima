@@ -9813,11 +9813,11 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fcfae8, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #fcfae8, 0 0 0 0.2rem rgba(255, 237, 74, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fcfae8, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #fcfae8, 0 0 0 0.2rem rgba(255, 237, 74, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -9843,7 +9843,7 @@ input[type=button].btn-block {
 }
 
 .custom-range::-webkit-slider-thumb:active {
-  background-color: #cce3f6;
+  background-color: #fcfae8;
 }
 
 .custom-range::-webkit-slider-runnable-track {
@@ -9859,7 +9859,7 @@ input[type=button].btn-block {
 .custom-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #3490dc;
+  background-color: #ffed4a;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -9874,7 +9874,7 @@ input[type=button].btn-block {
 }
 
 .custom-range::-moz-range-thumb:active {
-  background-color: #cce3f6;
+  background-color: #fcfae8;
 }
 
 .custom-range::-moz-range-track {
@@ -9893,7 +9893,7 @@ input[type=button].btn-block {
   margin-top: 0;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
-  background-color: #3490dc;
+  background-color: #ffed4a;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -9907,7 +9907,7 @@ input[type=button].btn-block {
 }
 
 .custom-range::-ms-thumb:active {
-  background-color: #cce3f6;
+  background-color: #fcfae8;
 }
 
 .custom-range::-ms-track {
@@ -16259,7 +16259,7 @@ li.bg-grey-opacity:hover{
   position: relative;
   width: 5em;
   height: 1em;
-  font-size: 25px;
+  font-size: 20px;
 }
 .star-rating-front {
   position: absolute;
@@ -16276,7 +16276,7 @@ li.bg-grey-opacity:hover{
   position: relative;
   width: 1em;
   height: 1em;
-  font-size: 25px;
+  font-size: 20px;
 }
 .one-star-rating-front {
   position: absolute;
@@ -16286,6 +16286,10 @@ li.bg-grey-opacity:hover{
   color: #ffcc33;
 }
 
+.h5-5{
+  font-size: 1.125rem;
+}
+
 .h7 {
-    font-size: 0.75rem;
+  font-size: 0.875rem;
 }

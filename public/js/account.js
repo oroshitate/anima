@@ -7,7 +7,7 @@ $(function() {
         $(this).prop("disabled", true);
         $("form[name='link-facebook']").submit();
     });
-    $("input#link-goole").on("click", function(){
+    $("input#link-google").on("click", function(){
         $(this).prop("disabled", true);
         $("form[name='link-google']").submit();
     });

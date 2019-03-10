@@ -108,7 +108,9 @@ class Review extends Model
      */
     public function getReviewsAvgs(){
         $reviews_avg_list = review::select(DB::raw("count(item_id) as item_count, round(avg(score), 1) as item_avg, item_id"))->groupBy("item_id")->orderBy("item_count", "desc")->take(20)->get();
-        return $reviews_avg_list;
+        $sorted = $reviews_avg_list->sortByDesc('item_avg')->values();
+
+        return $sorted;
     }
 
     /**

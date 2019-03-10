@@ -10,7 +10,7 @@
                     @endif
                 </a>
                 <div class="col-7 px-0 text-left">
-                    <p class="h6 m-0">{{ $user->name }}</p>
+                    <p class="h5-5 m-0">{{ $user->name }}</p>
                     <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
                 </div>
             </div>

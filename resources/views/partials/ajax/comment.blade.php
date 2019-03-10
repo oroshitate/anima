@@ -10,7 +10,7 @@
                             <img class="m-3 rounded-circle align-top profile" src="/storage/images/users/{{ $comment->user_image }}">
                         @endif
                     </a>
-                    <p class="h5">{{ $comment->user_name }}</p>
+                    <p class="h5-5">{{ $comment->user_name }}</p>
                 </div>
             </div>
             <div class="row col-4 justify-content-end">
@@ -34,16 +34,16 @@
             <div class="align-top reply-box d-inline-block bg-secondary text-white rounded cursor-pointer" data-reply_id="{{ $comment->comment_reply_id }}" >
                 <span class="p-2">{{ "To @".$comment->comment_reply_user_nickname}}</span>
             </div>
-            <pre id="comment-content-{{ $comment->comment_id }}" class="py-3 h5 content-length">{{ $comment->comment_content}}</pre>
+            <pre id="comment-content-{{ $comment->comment_id }}" class="py-3 h5-5 content-length">{{ $comment->comment_content}}</pre>
         @else
-            <pre id="comment-content-{{ $comment->comment_id }}" class="h5 content-length">{{ $comment->comment_content}}</pre>
+            <pre id="comment-content-{{ $comment->comment_id }}" class="h5-5 content-length">{{ $comment->comment_content}}</pre>
         @endif
         <div class="text-center">
             @guest
                 <div class="d-inline-block cursor-pointer">
                     <a href="{{ url('/login') }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span class="h5">
+                        <span class="h5-5">
                             @if($comment->comment_likes_count > 0)
                                 {{ $comment->comment_likes_count }}
                             @else
@@ -56,7 +56,7 @@
                 <div class="d-inline-block cursor-pointer">
                     <a href="{{ url('/login') }}">
                         <i class="fas fa-reply fa-3x mx-2"></i>
-                        <span class="h5">
+                        <span class="h5-5">
                             {{ $comment->reply_count }}{{ __('app.word.count') }}
                         </span>
                     </a>
@@ -65,7 +65,7 @@
                 @if($comment->comment_like_id)
                     <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5">
+                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
                             @if($comment->comment_likes_count > 0)
                                 {{ $comment->comment_likes_count }}
                             @else
@@ -77,7 +77,7 @@
                 @else
                     <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5">
+                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
                             @if($comment->comment_likes_count > 0)
                                 {{ $comment->comment_likes_count }}
                             @else
@@ -89,7 +89,7 @@
                 @endif
                 <div class="d-inline-block reply-button cursor-pointer" data-comment_id="{{ $comment->comment_id }}" data-user_nickname="{{ $comment->user_nickname }}">
                     <i class="fas fa-reply fa-3x mx-2"></i>
-                    <span class="h5">
+                    <span class="h5-5">
                         {{ $comment->reply_count }}{{ __('app.word.count') }}
                     </span>
                 </div>

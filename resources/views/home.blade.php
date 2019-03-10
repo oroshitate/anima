@@ -53,16 +53,16 @@
                                             </a>
                                         </div>
                                         <div class="col-8 pr-0">
-                                            <p class="h5">{{ $review->user_name }}</p>
+                                            <p class="h5-5">{{ $review->user_name }}</p>
                                         </div>
                                     </div>
                                     <a href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                        <p class="h5">{{ $review->item_title }}</p>
+                                        <p class="h5-5 mb-0">{{ $review->item_title }}</p>
                                         <div class="star-rating d-inline-block">
                                             <div class="star-rating-front" style="width:{{ $review->review_score*20 }}%">★★★★★</div>
                                             <div class="star-rating-back">★★★★★</div>
                                         </div>
-                                        <pre class="py-3 h5 content-length">{{ $review->review_content }}</pre>
+                                        <pre class="py-2 h5-5 content-length">{{ $review->review_content }}</pre>
                                     </a>
                                 </div>
                                 @if($review->user_id == Auth::user()->id)
@@ -88,8 +88,8 @@
                             <div class="text-center">
                                 @if($review->like_id)
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-3x mx-2"></i>
-                                        <span id="likes-review-count-{{ $review->review_id }}" class="h5">
+                                        <i class="far fa-heart fa-2x mx-2"></i>
+                                        <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
                                             @if($review->likes_count > 0)
                                                 {{ $review->likes_count }}
                                             @else
@@ -100,8 +100,8 @@
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-3x mx-2"></i>
-                                        <span id="likes-review-count-{{ $review->review_id }}" class="h5">
+                                        <i class="far fa-heart fa-2x mx-2"></i>
+                                        <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
                                             @if($review->likes_count > 0)
                                                 {{ $review->likes_count }}
                                             @else
@@ -112,8 +112,8 @@
                                     </div>
                                 @endif
                                 <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                    <i class="far fa-comment fa-3x mx-2"></i>
-                                    <span class="h5">
+                                    <i class="far fa-comment fa-2x mx-2"></i>
+                                    <span class="h5-5">
                                         @if($review->comments_count > 0)
                                             {{ $review->comments_count }}
                                         @else

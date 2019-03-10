@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
             }
             \Log::info($sql);
         });
+
+        if (\App::environment('production')) {
+            \URL::forceScheme('https');
+        }
     }
 
     /**

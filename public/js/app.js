@@ -48924,9 +48924,9 @@ $(function () {
       'action': url
     });
     $("form[name='search']").submit();
-  }); //13というのは、EnterキーのkeyCode
+  }); // 13というのは、EnterキーのkeyCode
 
-  $("body").keydown(function (e) {
+  $("form[name='search']").keydown(function (e) {
     if (e.which && e.which === 13 || e.keyCode && e.keyCode === 13) {
       return false;
     } else {
