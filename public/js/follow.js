@@ -1,5 +1,6 @@
 $(function(){
-    var base_url = "http://localhost:8080";
+    var base_url = "https://www.anima.fan";
+    // var base_url = "http://localhost:8080";
 
     var follow_buttons = $("button.follow-button");
     for(var i = 0; i < follow_buttons.length; i++){

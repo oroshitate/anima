@@ -5,7 +5,8 @@ $(function(){
             $("div#show-more-timelines").empty();
             var timelines_li =  $('ul#timelines').find('li');
             var timelines_count = timelines_li.length;
-            var base_url = 'http://localhost:8080';
+            var base_url = "https://www.anima.fan";
+            // var base_url = "http://localhost:8080";
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {
