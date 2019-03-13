@@ -24,7 +24,7 @@ class CreateItemsTable extends Migration
             $table->string('link')->nullable();
             // $table->string('staff',2000)->nullable();
             // $table->string('music',2000)->nullable();
-            $table->string('official_link')->nullable();
+            $table->string('official_link', 255)->nullable();
             $table->timestamps();
         });
     }
