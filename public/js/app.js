@@ -48793,12 +48793,6 @@ if (token) {
 /***/ (function(module, exports) {
 
 $(function () {
-  // var body_height = $("div#app").height();
-  // var window_height = window.innerHeight;
-  // var footer_height = $("footer").height();
-  // if(body_height + footer_height < window_height){
-  //     $("footer").addClass("fixed-bottom");
-  // }
   var created_list = $("p.created-date");
 
   for (var i = 0; i < created_list.length; i++) {
@@ -48882,13 +48876,7 @@ $(function () {
 
     $(".switch-search-button").empty();
     $(".switch-search-button").prepend("<i class='fas fa-times text-white fa-2x'></i>");
-  } // var url = location.href;
-  // if(url.indexOf("/review") != -1){
-  //     var footer_height = $("div#create-comment-footer").height();
-  //     var body_height = $("div#app").height();
-  //     $("div#app").css("height", body_height + footer_height);
-  // }
-
+  }
 
   $(".switch-search-button").on("click", function () {
     var switch_search_button = $(this).attr("class");
@@ -48933,6 +48921,15 @@ $(function () {
       return true;
     }
   });
+  var waiting = setTimeout(function () {
+    var body_height = $("div#app").height();
+    var window_height = window.innerHeight;
+    var footer_height = $("footer").height();
+
+    if (body_height + footer_height < window_height) {
+      $("footer").addClass("fixed-bottom");
+    }
+  }, 10);
 });
 
 /***/ }),
