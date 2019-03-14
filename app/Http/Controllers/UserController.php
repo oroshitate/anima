@@ -82,8 +82,8 @@ class UserController extends Controller
         // ルールを設定
         $rules = [
             'name' => 'required|string|max:20',
-            'image' => 'image',
-            'content' => 'string|max:300',
+            'image' => 'nullable|image',
+            'content' => 'nullable|string|max:300',
         ];
 
         // エラーメッセージを設定
@@ -115,15 +115,27 @@ class UserController extends Controller
 
                 $user_detail->save();
             }else{
+                $disk = \Storage::disk('s3');
                 if($user_detail->image != null){
-                    // 以前アバター画像を削除
-                    \Storage::delete('public/images/users/'.$user_detail->image);
+                    if(\App::environment('production')){
+                        $exists = $disk->exists('images/users/'.$user_detail->image);
+                        if($exists){
+                            $disk->delete('images/users/'.$user_detail->image);
+                        }
+                    } else {
+                        \Storage::delete('public/images/users/'.$user_detail->image);
+                    }
                 }
-                // アバター画像を保存
+
                 $image_encode = base64_encode($user_detail->nickname);
                 $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
                 $image = $image_name.'.jpg';
-                $upload_file->storeAs('/public/images/users', $image);
+                if(\App::environment('production')){
+                    $image_contents = file_get_contents($upload_file->getRealPath());
+                    $disk->put('images/users/'.$image, $image_contents, 'public');
+                } else {
+                    $upload_file->storeAs('/public/images/users', $image);
+                }
 
                 $user_detail->name = $name;
                 $user_detail->nickname = $nickname;

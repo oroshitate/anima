@@ -19,9 +19,9 @@
                         @if($user->image == null)
                             <img id="user-image" class="rounded-circle profile-lg" src="{{ asset('no-image.jpg') }}">
                         @else
-                            <img id="user-image" class="rounded-circle profile-lg" src="/storage/images/users/{{ $user->image }}">
+                            <img id="user-image" class="rounded-circle profile-lg" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                         @endif
-                        
+
                         <label class="my-2">
                             <span class="btn btn-secondary w-100">
                                 {{ __('app.button.change') }}

@@ -7,7 +7,7 @@
                         @if($comment->user_image == null)
                             <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
                         @else
-                            <img class="m-3 rounded-circle align-top profile" src="/storage/images/users/{{ $comment->user_image }}">
+                            <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
                         @endif
                     </a>
                     <p class="h5-5">{{ $comment->user_name }}</p>

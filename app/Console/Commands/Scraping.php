@@ -68,6 +68,7 @@ class Scraping extends Command
                 var_dump($title);
 
                 var_dump('image');
+
                 $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
                 $image_url = $image_text->attr('src');
                 if(strpos($image_url,'https://eiga.k-img.com/anime/images/shared/noimg/') !== false){
@@ -78,8 +79,20 @@ class Scraping extends Command
                     $image_encode = base64_encode($title);
                     $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
                     $image = $image_name.'.jpg';
-                    //画像を保存
-                    Storage::put('public/images/items/'.$image, $image_contents);
+                    /*
+                     * production : AWS_S3
+                    */
+                    if(\App::environment('production')){
+                        // AWS_S3に保存
+                        $disk = Storage::disk('s3');
+                        $exists = $disk->exists('images/items/'.$image);
+                        if(!$exists){
+                            $disk->put('images/items/'.$image, $image_contents, 'public');
+                        }
+                    }else {
+                        // ローカルストレージに保存
+                        Storage::put('public/images/items/'.$image, $image_contents);
+                    }
                 }
                 var_dump($image);
 

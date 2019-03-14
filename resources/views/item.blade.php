@@ -27,7 +27,7 @@
                     @if($item->image == null)
                         <img src="{{ asset('anima-img.png') }}" class="w-75">
                     @else
-                        <img src="/storage/images/items/{{ $item->image }}" class="w-75">
+                        <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-75">
                     @endif
                     <p class="mb-0">{{ __('app.word.item.source') }}</p>
                 </div>
@@ -81,7 +81,7 @@
                                             @if($review->user_image == null)
                                                 <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
                                             @else
-                                                <img class="rounded-circle align-top profile" src="/storage/images/users/{{ $review->user_image }}">
+                                                <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
                                             @endif
                                         </a>
                                     </div>

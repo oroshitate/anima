@@ -24,7 +24,7 @@
                                     @if($user->image == null)
                                         <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
                                     @else
-                                        <img class="m-3 rounded-circle align-top profile" src="/storage/images/users/{{ $user->image }}">
+                                        <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                                     @endif
                                 </a>
                                 <div class="col-7 px-0 text-left">

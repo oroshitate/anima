@@ -23,7 +23,7 @@
                     @if($item->image == null)
                         <img src="{{ asset('anima-img.png') }}" class="w-75">
                     @else
-                        <img src="/storage/images/items/{{ $item->image }}" class="w-75">
+                        <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-75">
                     @endif
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                             @if($review[0]->user_image == null)
                                                 <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
                                             @else
-                                                <img class="rounded-circle align-top profile" src="/storage/images/users/{{ $review[0]->user_image }}">
+                                                <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review[0]->user_image }}">
                                             @endif
                                         </a>
                                     </div>
@@ -142,7 +142,7 @@
                                   <div class="row align-items-center mb-2">
                                       <div class="col-4 col-md-2">
                                           <a href="{{ route('user', ['nickname' => $comment->user_nickname]) }}">
-                                              <img class="rounded-circle align-top profile" src="/storage/images/users/{{ $comment->user_image }}">
+                                              <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
                                           </a>
                                       </div>
                                       <div class="col-8 pr-0">

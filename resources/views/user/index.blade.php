@@ -20,7 +20,7 @@
                     @if($user->image == null)
                         <img class="rounded-circle align-top w-100" src="{{ asset('no-image.jpg') }}">
                     @else
-                        <img class="rounded-circle align-top w-100" src="/storage/images/users/{{ $user->image }}">
+                        <img class="rounded-circle align-top w-100" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                     @endif
                 </div>
                 <div class="col-9 m-md-4">
@@ -82,7 +82,7 @@
                                     @if($item->image == null)
                                         <img src="{{ asset('anima-img.png') }}" class="w-100">
                                     @else
-                                        <img src="/storage/images/items/{{ $item->image }}" class="w-100">
+                                        <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-100">
                                     @endif
                                 </a>
                                 <div class="bg-secondary text-white text-center">

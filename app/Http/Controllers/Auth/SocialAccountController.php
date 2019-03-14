@@ -78,7 +78,7 @@ class SocialAccountController extends Controller
 
             return redirect('/account/setting');
         }
-        
+
         try {
             $user = \Socialite::with($provider)->user();
         } catch (\Exception $e) {

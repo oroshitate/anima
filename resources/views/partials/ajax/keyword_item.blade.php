@@ -7,7 +7,7 @@
                 @if($item->image == null)
                     <img src="{{ asset('anima-img.png') }}" class="w-100">
                 @else
-                    <img src="/storage/images/items/{{ $item->image }}" class="w-100">
+                    <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-100">
                 @endif
             </a>
             <div class="bg-secondary text-white text-center">

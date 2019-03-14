@@ -104,23 +104,30 @@ class RegisterController extends Controller
         }
 
         $image = null;
+        $image_contents = file_get_contents($user->avatar);
+        $image_encode = base64_encode($nickname);
+        $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
         if($upload_file == null){
             if(strpos($user->avatar,'picture?type=normal') !== false || strpos($user->avatar,'default_profile_normal') !== false){
                 $image = null;
             }else {
-                $image_contents = file_get_contents($user->avatar);
-                $image_encode = base64_encode($nickname);
-                $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
                 $image = $image_name.'.jpg';
-                //アバター画像を保存
-                \Storage::put('public/images/users/'.$image, $image_contents);
+                if(\App::environment('production')){
+                    $disk = \Storage::disk('s3');
+                    $disk->put('images/users/'.$image, $image_contents, 'public');
+                }else {
+                    \Storage::put('public/images/users/'.$image, $image_contents);
+                }
+
             }
         }else{
-            // アバター画像を保存
-            $image_encode = base64_encode($nickname);
-            $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
             $image = $image_name.'.jpg';
-            $upload_file->storeAs('/public/images/users', $image);
+            if(\App::environment('production')){
+                $disk = \Storage::disk('s3');
+                $disk->put('images/users/'.$image, $image_contents, 'public');
+            }else {
+                $upload_file->storeAs('/public/images/users', $image);
+            }
         }
 
         DB::beginTransaction();

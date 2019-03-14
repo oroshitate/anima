@@ -85,6 +85,7 @@ class User extends Authenticatable
      */
     public function getUser(string $nickname){
         $user = User::where('nickname', $nickname)->first();
+
         return $user;
     }
 
