@@ -28,11 +28,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
         // $schedule->command('command:scraping')
-        //          ->monthly()
-        //          ->before(function () {
-        //               // タスク開始時
-        //               DB::table('items')->truncate();
-        //          });
+        //          ->monthly();
+                 // ->before(function () {
+                 //      // タスク開始時
+                 // });
     }
 
     /**

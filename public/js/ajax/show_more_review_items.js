@@ -62,7 +62,7 @@ $(function(){
                     end_flag=1;
                 }else {
                     $("<div class='text-center mb-5'>\
-                        <button type='button' id='show-more-review-items-button' class='btn btn-outline-secondary w-100' data-review_id='" + review_id + "'>さらに読み込む</button>\
+                        <button type='button' id='show-more-review-items-button' class='btn btn-outline-secondary w-100' data-review_id='" + review_id + "'>"+ show_more +"</button>\
                     </div>").appendTo("div#show-more-review-items");
                 }
             });

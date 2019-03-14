@@ -5,6 +5,11 @@
 @endsection
 
 @section('script')
+<script>
+    var following = "{{ __('app.button.following') }}";
+    var follow = "{{ __('app.button.follow') }}";
+    var show_more = "{{ __('app.button.show_more') }}";
+</script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/follow.js') }}" defer></script>
 <script src="{{ asset('js/pinterest.js') }}" defer></script>
@@ -49,9 +54,9 @@
                                     </form>
                                 @else
                                     @if($follow_status === "active")
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}"></button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}">{{ __('app.button.following') }}</button>
                                     @else
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-outline-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"></button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-outline-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
                                     @endif
                                 @endif
                             @endguest

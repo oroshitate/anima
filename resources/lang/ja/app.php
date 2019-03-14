@@ -69,6 +69,9 @@ return [
         'comment' => 'コメント',
         'followings' => 'フォロー',
         'followers' => 'フォロワー',
+        'minutes' => '分前',
+        'hours' => '時間前',
+        'days' => '日前',
         'title' => [
             'reviewd_anime' => 'レビューしたアニメ',
             'popular_anime' => '話題のアニメ',
@@ -124,6 +127,7 @@ return [
         'register_login' => '登録・ログイン',
         'register_login_start' => '登録・ログインしてはじめる',
         'follow' => 'フォローする',
+        'following' => 'フォロー中',
         'edit_profile' => 'プロフィールを編集',
         'create' => '投稿',
         'edit' => '修正',

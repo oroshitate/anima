@@ -47,9 +47,6 @@ class Scraping extends Command
             $anime_list_url = $season_list->attr('value');
             $anime_list_url = 'https://anime.eiga.com'.$anime_list_url;
 
-            var_dump('season list url');
-            var_dump($anime_list_url);
-
             // シーズン毎アニメリストクロール
             $anime_list_crawler = GoutteFacade::request('GET', $anime_list_url);
             $anime_list_crawler->filter('div.seasonBoxImg > p.seasonAnimeTtl > a')->each(function ($anime_list){
@@ -59,112 +56,63 @@ class Scraping extends Command
                 // アニメリスト毎アニメクロール
                 $anime_crawler = GoutteFacade::request('GET', $anime_url);
 
-                var_dump('anime url');
-                var_dump($anime_url);
-
-                var_dump('title');
                 $title = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > h2')->text();
                 $title = strstr($title,'  Check-in',true);
-                var_dump($title);
-
-                var_dump('image');
-
-                $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
-                $image_url = $image_text->attr('src');
-                if(strpos($image_url,'https://eiga.k-img.com/anime/images/shared/noimg/') !== false){
-                    $image = null;
-                }else {
-                    $image_url = strstr($image_url,'?',true);
-                    $image_contents = file_get_contents($image_url);
-                    $image_encode = base64_encode($title);
-                    $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
-                    $image = $image_name.'.jpg';
-                    /*
-                     * production : AWS_S3
-                    */
-                    if(\App::environment('production')){
-                        // AWS_S3に保存
-                        $disk = Storage::disk('s3');
-                        $exists = $disk->exists('images/items/'.$image);
-                        if(!$exists){
-                            $disk->put('images/items/'.$image, $image_contents, 'public');
-                        }
-                    }else {
-                        // ローカルストレージに保存
-                        Storage::put('public/images/items/'.$image, $image_contents);
-                    }
-                }
-                var_dump($image);
-
-                var_dump('season');
-                $season = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > p.animeSeasonTag > span.seasonText > a')->text();
-                var_dump($season);
-
-                var_dump('company');
-                $companys = [];
-                $company_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl.animeDetailList:not(#detailStaff) > dd > ul > li')->each(function ($company) use(&$companys){
-                    $company_name = $company->text();
-                    array_push($companys, $company_name);
-                });
-                $company = implode(',', $companys);
-                var_dump($company);
-
-                // var_dump('staff main');
-                // $staffs = [];
-                // $staff_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl#detailStaff > dd > ul > li')->each(function ($staff) use(&$staffs){
-                //     $staff_name = $staff->text();
-                //     array_push($staffs, $staff_name);
-                // });
-                // $staff = implode(',', $staffs);
-                // var_dump($staff);
-
-                // var_dump('story');
-                // $story_text = $anime_crawler->filter('div.animeDetailBox > dl#detailSynopsis > dd');
-                // $story = null;
-                // if(count($story_text) > 0){
-                //     $story = $story_text->text();
-                //     var_dump($story);
-                // }
-
-                // var_dump('music');
-                // $music_text = $anime_crawler->filter('div.animeDetailBox > dl#detailMusic > dd');
-                // $music = null;
-                // if(count($music_text) > 0){
-                //     $music = $music_text->text();
-                //     var_dump($music);
-                // }
-
-                // var_dump('cast main');
-                // $casts = [];
-                // $cast_main = $anime_crawler->filter('div.animeDetailBox > dl#detailCast > dd > ul > li')->each(function ($cast) use(&$casts){
-                //     $cast_name = $cast->text();
-                //     array_push($casts, $cast_name);
-                // });
-                // $cast = implode(",", $casts);
-                // var_dump($cast);
-
-                var_dump('official_link');
-                $link_text = $anime_crawler->filter('div.animeDetailBox > dl#detailLink > dd > ul > li > a');
-                $official_link = null;
-                if(count($link_text) > 0){
-                    $official_link = $link_text->attr('href');
-                    var_dump($official_link);
-                }
 
                 $item = new Item();
+                if($item->getSearchByItemCount($title) == 0){
+                    $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
+                    $image_url = $image_text->attr('src');
+                    if(strpos($image_url,'https://eiga.k-img.com/anime/images/shared/noimg/') !== false){
+                        $image = null;
+                    }else {
+                        $image_url = strstr($image_url,'?',true);
+                        $image_contents = file_get_contents($image_url);
+                        $image_encode = base64_encode($title);
+                        $image_name = str_replace(array('+','=','/'),array('_','-','.'),$image_encode);
+                        $image = $image_name.'.jpg';
+                        /*
+                         * production : AWS_S3
+                        */
+                        if(\App::environment('production')){
+                            // AWS_S3に保存
+                            $disk = Storage::disk('s3');
+                            $exists = $disk->exists('images/items/'.$image);
+                            if(!$exists){
+                                $disk->put('images/items/'.$image, $image_contents, 'public');
+                            }
+                        }else {
+                            // ローカルストレージに保存
+                            Storage::put('public/images/items/'.$image, $image_contents);
+                        }
+                    }
 
-                $item->title = $title;
-                $item->image = $image;
-                $item->season = $season;
-                $item->company = $company;
-                $item->link = $anime_url;
-                // $item->staff = $staff;
-                // $item->story = $story;
-                // $item->music = $music;
-                // $item->cast = $cast;
-                $item->official_link = $official_link;
+                    $season = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > p.animeSeasonTag > span.seasonText > a')->text();
 
-                $item->save();
+                    $companys = [];
+                    $company_main = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > dl.animeDetailList:not(#detailStaff) > dd > ul > li')->each(function ($company) use(&$companys){
+                        $company_name = $company->text();
+                        array_push($companys, $company_name);
+                    });
+                    $company = implode(',', $companys);
+
+                    $link_text = $anime_crawler->filter('div.animeDetailBox > dl#detailLink > dd > ul > li > a');
+                    $official_link = null;
+                    if(count($link_text) > 0){
+                        $official_link = $link_text->attr('href');
+                    }
+
+                    $item->title = $title;
+                    $item->image = $image;
+                    $item->season = $season;
+                    $item->company = $company;
+                    $item->link = $anime_url;
+                    $item->official_link = $official_link;
+
+                    $item->save();
+                    // // continueと同義(break : return false;)
+                    // return true;
+                }
             });
         });
 

@@ -30,7 +30,7 @@ $(function(){
                     end_flag=1;
                 }else {
                     $("<div class='text-center mb-5'>\
-                        <button type='button' id='show-more-timelines-button' class='btn btn-outline-secondary w-100'>さらに読み込む</button>\
+                        <button type='button' id='show-more-timelines-button' class='btn btn-outline-secondary w-100'>"+ show_more +"</button>\
                     </div>").appendTo("div#show-more-timelines");
                 }
 
@@ -61,14 +61,14 @@ $(function(){
                             var diff_hour = Math.floor(diff_time / (1000 * 60 * 60));
                             if(diff_hour == 0){
                                 var diff_minute = Math.floor(diff_time / (1000 * 60));
-                                created_list[i].innerHTML = String(diff_minute) + "分前";
+                                created_list[i].innerHTML = String(diff_minute) + minutes;
                                 continue;
                             }else {
-                                created_list[i].innerHTML = String(diff_hour) + "時間前";
+                                created_list[i].innerHTML = String(diff_hour) + hours;
                                 continue;
                             }
                         }else if (0 < diff_day < 8) {
-                            created_list[i].innerHTML = String(diff_day) + "日前";
+                            created_list[i].innerHTML = String(diff_day) + days;
                         }else {
                             continue;
                         }

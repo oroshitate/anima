@@ -1,17 +1,6 @@
 $(function(){
-    var base_url = "https://www.anima.fan";
-    // var base_url = "http://localhost:8080";
-
-    var follow_buttons = $("button.follow-button");
-    for(var i = 0; i < follow_buttons.length; i++){
-        var follow_id = follow_buttons[i].dataset.follow_id;
-        var user_id = follow_buttons[i].dataset.user_id;
-        if(follow_id == "" || follow_id == undefined){
-            $("button#follow-button-"+user_id).text("フォローする");
-        }else{
-            $("button#follow-button-"+user_id).text("フォロー中");
-        }
-    }
+    // var base_url = "https://www.anima.fan";
+    var base_url = "http://localhost:8080";
 
     $(document).on("click", "a.follow-link", function () {
         var nickname = $("div#user-detail").data("nickname");
@@ -34,7 +23,8 @@ $(function(){
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)+1);
             }
 
-            var after_follow = $(this).text("フォロー中");
+            var after_follow = $(this).text(following);
+
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {
@@ -61,7 +51,8 @@ $(function(){
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)-1);
             }
 
-            var after_unfollow = $(this).text("フォローする");
+            var after_unfollow = $(this).text(follow);
+
             var follow_id = $(this).attr('data-follow_id');
 
             $("button#follow-button-"+user_id).attr("data-follow_id", "");

@@ -33,9 +33,9 @@ $(function(){
                 var follow_id = follow_buttons[i].dataset.follow_id;
                 var user_id = follow_buttons[i].dataset.user_id;
                 if(follow_id == "" || follow_id == undefined){
-                    $("button#follow-button-"+user_id).text("フォローする");
+                    $("button#follow-button-"+user_id).text(follow);
                 }else{
-                    $("button#follow-button-"+user_id).text("フォロー中");
+                    $("button#follow-button-"+user_id).text(following);
                 }
             }
 
@@ -43,7 +43,7 @@ $(function(){
                 end_flag=1;
             }else {
                 $("<div class='text-center mb-5'>\
-                    <button type='button' id='show-more-keyword-users-button' class='btn btn-outline-secondary w-100'>さらに読み込む</button>\
+                    <button type='button' id='show-more-keyword-users-button' class='btn btn-outline-secondary w-100'>"+ show_more +"</button>\
                 </div>").appendTo("div#show-more-keyword-users");
             }
           });
