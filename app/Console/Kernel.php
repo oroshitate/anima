@@ -27,6 +27,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('command:scheduler')
+                 ->monthly();
         // $schedule->command('command:scraping')
         //          ->monthly();
                  // ->before(function () {
