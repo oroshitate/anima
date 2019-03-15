@@ -118,6 +118,8 @@ class Item extends Model
         $items = item::where('title', 'LIKE', "%{$keyword}%")->take(20)->get();
 
         foreach ($items as $item) {
+            $count = $item->reviews()->count();
+            $item->reviews_count = $count;
             $review = new Review();
             $avg = $review->getReviewsAvg($item);
             if($avg->item_avg == null){
@@ -140,6 +142,8 @@ class Item extends Model
                        ->get();
 
         foreach ($items as $item) {
+            $count = $item->reviews()->count();
+            $item->reviews_count = $count;
             $avg = $item->reviews()->select(DB::raw("round(avg(score), 1) as item_avg"))->first();
             if($avg->item_avg == null){
                 $item->item_avg = 0;

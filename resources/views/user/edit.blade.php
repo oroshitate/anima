@@ -39,7 +39,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="nickname" class="h5">{{ __('app.label.user.nickname') }}</label>
+                        <label for="nickname" class="h5">{{ __('app.label.auth_user.nickname') }}{{ __('app.label.20_words') }}</label>
                         <p>{{ __('app.sentence.user.cannot_edit') }}</p>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
@@ -55,7 +55,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="name" class="h5">{{ __('app.label.user.user_name') }}</label><span class="text-danger">{{ __('app.word.user.necessary') }}</span>
+                        <label for="name" class="h5">{{ __('app.label.auth_user.user_name') }}{{ __('app.label.20_words') }}</label><span class="text-danger">{{ __('app.word.user.necessary') }}</span>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $user->name }}" required>
@@ -70,7 +70,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="content" class="h5">{{ __('app.label.user.content') }}</label><span class="text-secondary">{{ __('app.word.user.any') }}</span>
+                        <label for="content" class="h5">{{ __('app.label.auth_user.content') }}{{ __('app.label.300_words') }}</label><span class="text-secondary">{{ __('app.word.user.any') }}</span>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <textarea id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" rows="10" cols="30">{{ $user->content }}</textarea>

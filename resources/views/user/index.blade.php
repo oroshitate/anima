@@ -8,7 +8,6 @@
 <script>
     var following = "{{ __('app.button.following') }}";
     var follow = "{{ __('app.button.follow') }}";
-    var show_more = "{{ __('app.button.show_more') }}";
 </script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/follow.js') }}" defer></script>

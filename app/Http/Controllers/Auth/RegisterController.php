@@ -60,17 +60,17 @@ class RegisterController extends Controller
 
         // エラーメッセージを設定
         $messages = [
-            'name.required' => 'ユーザー名は必須です',
-            'name.string' => 'ユーザー名は文字入力です',
-            'name.max' => 'ユーザー名は20文字以内です',
-            'nickname.required' => 'ユーザーIDは必須です',
-            'nickname.string' => 'ユーザーIDは文字入力です',
-            'nickname.regex' => 'ユーザーIDは半角英数字です',
-            'nickname.max' => 'ユーザーIDは20文字以内です',
-            'nickname.unique' => 'ユーザーIDは既に登録されています',
-            'image.image' => '画像(jpg、png、bmp、gif、svg)であることを確認してください',
-            'content.string' => '自己紹介文は文字入力です',
-            'content.max' => 'コメントは300文字以内です',
+            'name.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.label.auth_user.user_name')]),
+            'name.string' => \Lang::get('validation.string', ["attribute" => \Lang::get('app.label.auth_user.user_name')]),
+            'name.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.label.auth_user.user_name')]),
+            'nickname.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.label.auth_user.nickname')]),
+            'nickname.string' => \Lang::get('validation.string', ["attribute" => \Lang::get('app.label.auth_user.nickname')]),
+            'nickname.regex' => \Lang::get('validation.regex', ["attribute" => \Lang::get('app.label.auth_user.nickname')]),
+            'nickname.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.label.auth_user.nickname')]),
+            'nickname.unique' => \Lang::get('validation.unique', ["attribute" => \Lang::get('app.label.auth_user.nickname')]),
+            'image.image' => \Lang::get('validation.image', ["attribute" => \Lang::get('app.label.auth_user.profile')]),
+            'content.string' => \Lang::get('validation.content', ["attribute" => \Lang::get('app.label.auth_user.content')]),
+            'content.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.label.auth_user.content')]),
         ];
 
         $validation = Validator::make($data, $rules, $messages);

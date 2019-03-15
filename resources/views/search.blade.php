@@ -8,7 +8,6 @@
 <script>
     var following = "{{ __('app.word.following') }}";
     var follow = "{{ __('app.word.follow') }}";
-    var show_more = "{{ __('app.button.show_more') }}"
 </script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/follow.js') }}" defer></script>
@@ -51,12 +50,14 @@
                                     </a>
                                     <div class="bg-secondary text-white text-center">
                                         <span class="text-white name-length">{{ $item->title }}</span>
-                                        <div class="d-inline-block">
-                                            <div class="one-star-rating d-inline-block">
-                                                <div class="one-star-rating-front">★</div>
+                                        @if($item->reviews_count > 0)
+                                            <div class="d-inline-block">
+                                                <div class="one-star-rating d-inline-block">
+                                                    <div class="one-star-rating-front">★</div>
+                                                </div>
+                                                <span class="text-warning">{{ $item->item_avg }}</span>
                                             </div>
-                                            <span class="text-warning">{{ $item->item_avg }}</span>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

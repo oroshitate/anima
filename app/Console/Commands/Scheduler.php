@@ -42,7 +42,6 @@ class Scheduler extends Command
         \Log::info('Scheduler start');
         $now = Carbon::now();
         $day = $now->day;
-        \Log::info($day);
 
         if($day == 1){
             $this->call('command:scraping');

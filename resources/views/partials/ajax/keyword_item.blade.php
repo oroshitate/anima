@@ -12,12 +12,14 @@
             </a>
             <div class="bg-secondary text-white text-center">
                 <span class="text-white name-length">{{ $item->title }}</span>
-                <div class="d-inline-block">
-                    <div class="one-star-rating d-inline-block">
-                        <div class="one-star-rating-front">★</div>
+                @if($item->reviews_count > 0)
+                    <div class="d-inline-block">
+                        <div class="one-star-rating d-inline-block">
+                            <div class="one-star-rating-front">★</div>
+                        </div>
+                        <span class="text-warning">{{ $item->item_avg }}</span>
                     </div>
-                    <span class="text-warning">{{ $item->item_avg }}</span>
-                </div>
+                @endif
             </div>
         </div>
     </div>

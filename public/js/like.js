@@ -8,8 +8,7 @@ $(function(){
             $(like_button_id).addClass("active text-danger");
             var before_likes_count = $(likes_count_id).text();
             var after_likes_count = $(likes_count_id).text(Number(before_likes_count)+1);
-            var base_url = "https://www.anima.fan";
-            // var base_url = "http://localhost:8080";
+
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {
@@ -33,8 +32,6 @@ $(function(){
             var before_likes_count = $(likes_count_id).text();
             var after_likes_count = $(likes_count_id).text(Number(before_likes_count)-1);
             var like_id = $(like_button_id).attr('data-like_id');
-            var base_url = "https://www.anima.fan";
-            // var base_url = "http://localhost:8080";
 
             $(like_button_id).attr("data-like_id", "");
             //ajaxで読み出し
@@ -67,8 +64,7 @@ $(function(){
             $(like_button_id).addClass("active text-danger");
             var before_likes_count = $(likes_count_id).text();
             var after_likes_count = $(likes_count_id).text(Number(before_likes_count)+1);
-            var base_url = "https://www.anima.fan";
-            // var base_url = "http://localhost:8080";
+
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {
@@ -93,8 +89,6 @@ $(function(){
             var before_likes_count = $(likes_count_id).text();
             var after_likes_count = $(likes_count_id).text(Number(before_likes_count)-1);
             var like_id = $(like_button_id).attr('data-like_id');
-            var base_url = "https://www.anima.fan";
-            // var base_url = "http://localhost:8080";
 
             $(like_button_id).attr("data-like_id", "");
             //ajaxで読み出し

@@ -5,12 +5,6 @@
 @endsection
 
 @section('script')
-<script>
-    var minutes = "{{ __('app.word.minutes') }}";
-    var hours = "{{ __('app.word.hours') }}";
-    var days = "{{ __('app.word.days') }}";
-    var show_more = "{{ __('app.button.show_more') }}";
-</script>
 <!-- Twitter share button -->
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" defer></script>
 <!-- Line share button -->

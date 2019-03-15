@@ -6,8 +6,6 @@ $(function(){
             var review_id = $(this).data('review_id');
             var comments_li =  $("#comments").find("li");
             var comments_count = comments_li.length;
-            var base_url = "https://www.anima.fan";
-            // var base_url = "http://localhost:8080";
 
             //ajaxで読み出し
             $.ajaxSetup({

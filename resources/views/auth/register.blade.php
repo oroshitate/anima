@@ -39,7 +39,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="nickname" class="h5">{{ __('app.label.auth.nickname') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
+                        <label for="nickname" class="h5">{{ __('app.label.auth_user.nickname') }}{{ __('app.label.20_words') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
                         <p>{{ __('app.sentence.auth.register.cannot_edit') }}</p>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
@@ -55,7 +55,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="name" class="h5">{{ __('app.label.auth.user_name') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
+                        <label for="name" class="h5">{{ __('app.label.auth_user.user_name') }}{{ __('app.label.20_words') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
                         <p>{{ __('app.sentence.auth.register.can_edit') }}</p>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
@@ -71,7 +71,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="content" class="h5">{{ __('app.label.auth.content') }}</label><span class="text-secondary">{{ __('app.word.auth.any') }}</span>
+                        <label for="content" class="h5">{{ __('app.label.auth_user.content') }}{{ __('app.label.300_words') }}</label><span class="text-secondary">{{ __('app.word.auth.any') }}</span>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <textarea id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" rows="10" cols="30"></textarea>

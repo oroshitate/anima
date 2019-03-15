@@ -20,22 +20,36 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-MKG4R2V');</script>
-    <!-- End Google Tag Manager -->
+    @if(App::environment() == 'production')
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MKG4R2V');</script>
+        <!-- End Google Tag Manager -->
 
-    <!-- Adsense -->
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Adsense -->
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8913763404323126",
+            enable_page_level_ads: true
+          });
+        </script>
+    @endif
+
+    <!-- Script variable -->
     <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8913763404323126",
-        enable_page_level_ads: true
-      });
+        var minutes = "{{ __('app.word.minutes') }}";
+        var hours = "{{ __('app.word.hours') }}";
+        var days = "{{ __('app.word.days') }}";
+        var show_more = "{{ __('app.button.show_more') }}";
     </script>
-
+    @if(App::environment() == 'production')
+    <script>var base_url = "https://www.anima.fan";</script>
+    @else
+    <script>var base_url = "http://localhost:8080";</script>
+    @endif
     @yield('script')
     @yield('stylesheet')
 </head>

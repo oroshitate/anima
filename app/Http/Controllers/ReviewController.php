@@ -96,7 +96,7 @@ class ReviewController extends Controller
 
         // エラーメッセージを設定
         $messages = [
-            'score.required' => '評価は必須です',
+            'score.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.score')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);
@@ -166,7 +166,7 @@ class ReviewController extends Controller
 
         // エラーメッセージを設定
         $messages = [
-            'score.required' => '評価は必須です',
+            'score.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.score')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);

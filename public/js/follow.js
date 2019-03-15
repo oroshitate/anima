@@ -1,7 +1,4 @@
 $(function(){
-    // var base_url = "https://www.anima.fan";
-    var base_url = "http://localhost:8080";
-
     $(document).on("click", "a.follow-link", function () {
         var nickname = $("div#user-detail").data("nickname");
         var id = $(this).attr("id");

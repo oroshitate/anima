@@ -5,12 +5,6 @@
 @endsection
 
 @section('script')
-<script>
-    var minutes = "{{ __('app.word.minutes') }}";
-    var hours = "{{ __('app.word.hours') }}";
-    var days = "{{ __('app.word.days') }}";
-    var show_more = "{{ __('app.button.show_more') }}";
-</script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/review.js') }}" defer></script>
 <script src="{{ asset('js/like.js') }}" defer></script>

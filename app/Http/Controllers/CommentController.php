@@ -48,8 +48,8 @@ class CommentController extends Controller
 
         // エラーメッセージを設定
         $messages = [
-            'content.required' => 'コメント入力は必須です',
-            'content.max' => 'コメントは500文字以内です',
+            'content.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.comment')]),
+            'content.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.word.comment')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);
@@ -92,14 +92,13 @@ class CommentController extends Controller
 
         // ルールを設定
         $rules = [
-            'content' => 'required|string|max:500',
+            'content' => 'required|max:500',
         ];
 
         // エラーメッセージを設定
         $messages = [
-            'content.required' => 'コメント入力は必須です',
-            'content.string' => 'コメントは文字入力です',
-            'content.max' => 'コメントは500文字以内です',
+            'content.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.comment')]),
+            'content.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.word.comment')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);

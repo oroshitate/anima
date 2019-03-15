@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->integer('user_id');
             $table->integer('item_id');
             $table->float('score', 2, 1);
-            $table->string('content', 2000);
+            $table->string('content', 2000)->nullable();
             $table->timestamps();
         });
     }

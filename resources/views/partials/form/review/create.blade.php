@@ -13,7 +13,7 @@
                     <div class="form-group mb-3">
                         <div class="row justify-content-center">
                             <input type="range" name="score" class="custom-range col-8 col-md-9 mx-auto" min="0" max="5" step="0.1" id="slider" value="0">
-                            <span id="slider-count" class="h5 text-warning col-2 col-md-2">0</span>
+                            <span id="slider-count" class="h5 text-warning col-2 col-md-2 m-0">0</span>
                         </div>
                         @if ($errors->has('score'))
                             <span class="invalid-feedback" role="alert">

@@ -6,8 +6,7 @@ $(function(){
           var keyword = $("input[name='keyword']").val();
           var keyword_users_li =  $("#keyword-users").find("li");
           var keyword_users_count = keyword_users_li.length;
-          var base_url = "https://www.anima.fan";
-          // var base_url = "http://localhost:8080";
+
           //ajaxで読み出し
           $.ajaxSetup({
               headers: {

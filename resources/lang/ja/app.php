@@ -72,6 +72,7 @@ return [
         'minutes' => '分前',
         'hours' => '時間前',
         'days' => '日前',
+        'score' => '評価',
         'title' => [
             'reviewd_anime' => 'レビューしたアニメ',
             'popular_anime' => '話題のアニメ',
@@ -158,10 +159,13 @@ return [
         ],
     ],
     'label' => [
-        'auth' => [
-            'nickname' => 'Anima ID(20文字以内)',
-            'user_name' => 'ユーザー名(20文字以内)',
-            'content' => '自己紹介文(300文字以内)',
+        '20_words' => '(20文字以内)',
+        '300_words' => '(300文字以内)',
+        'auth_user' => [
+            'nickname' => 'Anima ID',
+            'user_name' => 'ユーザー名',
+            'content' => '自己紹介文',
+            'profile' => 'プロフィール画像',
         ],
         'search' => [
             'placeholder' => 'アニメ作品・ユーザーを検索',
@@ -171,11 +175,6 @@ return [
         ],
         'review' => [
             'placeholder' => 'コメントが入力できます。',
-        ],
-        'user' => [
-            'nickname' => 'Anima ID(20文字以内)',
-            'user_name' => 'ユーザー名(20文字以内)',
-            'content' => '自己紹介文(300文字以内)',
         ],
     ],
 ];
