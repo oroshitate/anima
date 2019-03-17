@@ -6,8 +6,8 @@
 
 @section('script')
 <script>
-    var following = "{{ __('app.word.following') }}";
-    var follow = "{{ __('app.word.follow') }}";
+    var following = "{{ __('app.button.following') }}";
+    var follow = "{{ __('app.button.follow') }}";
 </script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/follow.js') }}" defer></script>
