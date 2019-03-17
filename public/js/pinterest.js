@@ -11,5 +11,5 @@ $(function(){
             clearInterval(waiting);
         }
         cnt++;
-      }, 300);
+      }, 500);
 });
