@@ -10,6 +10,7 @@ use App\Item;
 use App\User;
 use App\Review;
 use App\Follow;
+use App\Watchlist;
 
 class UserController extends Controller
 {
@@ -51,6 +52,7 @@ class UserController extends Controller
             $follow_status = "active";
             $follow_id = $my_follow[0]->id;
         }
+
         return view('user.index', [
             'user' => $user_detail,
             'items' => $items,

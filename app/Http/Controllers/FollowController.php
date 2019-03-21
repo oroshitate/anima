@@ -84,11 +84,11 @@ class FollowController extends Controller
 
         DB::beginTransaction();
         try {
-            $follow = new Follow;
-            $follow->user_id = Auth::id();
-            $follow->follow_id = $user_id;
-
-            $follow->save();
+            $data = [
+              'user_id' => Auth::id(),
+              'follow_id' => $user_id
+            ];
+            $follow = Follow::create($data);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

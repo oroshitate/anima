@@ -9,7 +9,7 @@ use App\Review;
 class Item extends Model
 {
     protected $fillable = [
-
+        'title', 'image', 'season', 'company', 'anime_url', 'official_link'
     ];
 
     /**

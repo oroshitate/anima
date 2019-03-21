@@ -10,6 +10,7 @@ use App\User;
 use App\Review;
 use App\Comment;
 use App\Like;
+use App\Watchlist;
 use Carbon\Carbon;
 
 class AjaxController extends Controller
@@ -210,6 +211,35 @@ class AjaxController extends Controller
 
         $html = response()->json((view('partials.ajax.review_item', [
             'items' => $items,
+        ])->render()));
+
+        return $html;
+    }
+
+    public function showWatchlists(Request $request)
+    {
+        $user_id = $request->input('user_id');
+
+        $watchlist = new Watchlist();
+        $watchlists = $watchlist->getWatchlists($user_id);
+
+        $html = response()->json((view('partials.ajax.watchlist', [
+            'watchlists' => $watchlists,
+        ])->render()));
+
+        return $html;
+    }
+
+    public function showMoreWatchlists(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $count = $request->input('count');
+
+        $watchlist = new Watchlist();
+        $watchlists = $watchlist->getMoreWatchlists($user_id, $count);
+
+        $html = response()->json((view('partials.ajax.watchlist', [
+            'watchlists' => $watchlists,
         ])->render()));
 
         return $html;

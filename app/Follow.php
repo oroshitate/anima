@@ -13,7 +13,7 @@ class Follow extends Model
      * @var array
      */
     protected $fillable = [
-
+        'user_id', 'follow_id'
     ];
 
     /**

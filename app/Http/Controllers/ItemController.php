@@ -8,6 +8,7 @@ use App\Item;
 use App\Review;
 use App\Comment;
 use App\Like;
+use App\Watchlist;
 
 class ItemController extends Controller
 {
@@ -30,6 +31,7 @@ class ItemController extends Controller
     {
         $item = new Item();
         $review = new Review();
+        $watchlist = new Watchlist();
         $item_detail = $item->getItem($id);
         $reviews = $review->getReviews($item_detail);
 
@@ -52,9 +54,19 @@ class ItemController extends Controller
             }
         }
 
+        $my_watchlist = $watchlist->getMyWatchlist($id, Auth::id());
+        if(count($my_watchlist) == 1){
+            $watchlist->status = "active";
+            $watchlist->id = $my_watchlist[0]->id;
+        }else {
+            $watchlist->status = "";
+            $watchlist->id = "";
+        }
+
         return view('item', [
             'item' => $item_detail,
             'reviews' => $reviews,
+            'watchlist' => $watchlist,
         ]);
     }
 }

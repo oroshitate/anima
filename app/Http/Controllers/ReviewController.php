@@ -111,13 +111,13 @@ class ReviewController extends Controller
 
         DB::beginTransaction();
         try {
-            $review = new Review;
-            $review->user_id = Auth::id();
-            $review->item_id = $item_id;
-            $review->content = $content;
-            $review->score = $score;
-
-            $review->save();
+            $data = [
+              'user_id' => Auth::id(),
+              'item_id' => $item_id,
+              'content' => $content,
+              'score' => $score
+            ];
+            $review = Review::create($data);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -185,12 +185,12 @@ class ReviewController extends Controller
 
         DB::beginTransaction();
         try {
-            $review_detail->user_id = Auth::id();
-            $review_detail->item_id = $item_id;
-            $review_detail->content = $content;
-            $review_detail->score = $score;
+            $data = [
+              'content' => $content,
+              'score' => $score
+            ];
+            $review_detail->fill($data)->save();
 
-            $review_detail->save();
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

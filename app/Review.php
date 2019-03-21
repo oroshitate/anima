@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Review extends Model
 {
     protected $fillable = [
-        'content','score'
+        'user_id','item_id','content','score'
     ];
 
     /**

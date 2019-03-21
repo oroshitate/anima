@@ -6,7 +6,7 @@ $(function(){
           var keyword = $("input[name='keyword']").val();
           var keyword_items_li = $("div#keyword-items").find("div.keyword-item");
           var keyword_items_count = keyword_items_li.length;
-          
+
           //ajaxで読み出し
           $.ajaxSetup({
               headers: {
@@ -37,7 +37,7 @@ $(function(){
                       clearInterval(waiting);
                   }
                   cnt++;
-              }, 300);
+              }, 400);
 
               var $setElm_name = $('.name-length'); // 省略する文字のあるセレクタを取得
               var cutFigure_name = '14'; // 表示する文字数

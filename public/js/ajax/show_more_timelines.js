@@ -5,7 +5,7 @@ $(function(){
             $("div#show-more-timelines").empty();
             var timelines_li =  $('ul#timelines').find('li');
             var timelines_count = timelines_li.length;
-            
+
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {

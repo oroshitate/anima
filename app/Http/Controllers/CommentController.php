@@ -60,13 +60,13 @@ class CommentController extends Controller
 
         DB::beginTransaction();
         try {
-            $comment = new Comment;
-            $comment->user_id = Auth::id();
-            $comment->review_id = $request->input('review_id');
-            $comment->content = $request->input('content');
-            $comment->reply_id = $request->input('reply_id');
-
-            $comment->save();
+            $data = [
+              'user_id' => Auth::id(),
+              'review_id' => $request->input('review_id'),
+              'content' => $request->input('content'),
+              'reply_id' => $request->input('reply_id')
+            ];
+            $comment = Comment::create($data);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -112,10 +112,8 @@ class CommentController extends Controller
 
         DB::beginTransaction();
         try {
-            $comment_detail = Comment::find($comment_id);
-            $comment_detail->content = $content;
-
-            $comment_detail->save();
+            Comment::find($comment_id)->fill(['content' => $content])->save();
+            
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

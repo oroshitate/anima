@@ -6,7 +6,7 @@ $(function(){
             var item_id = $(this).data('item_id');
             var reviews_li =  $("ul#reviews").find("li");
             var reviews_count = reviews_li.length;
-            
+
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {

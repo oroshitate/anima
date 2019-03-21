@@ -1,11 +1,11 @@
 $(function(){
     var end_flag = 0;
     if(end_flag == 0){
-        $(document).on("click", "button#show-more-review-items-button", function () {
-            $("div#show-more-review-items").empty();
+        $(document).on("click", "button#show-more-watchlists-button", function () {
+            $("div#show-more-watchlists").empty();
             var user_id = $(this).data('user_id');
-            var review_items_li =  $("div#review-items").find("div.review-item");
-            var review_items_count = review_items_li.length;
+            var watchlists_li =  $("div#watchlists").find("div.watchlist");
+            var watchlists_count = watchlists_li.length;
 
             //ajaxで読み出し
             $.ajaxSetup({
@@ -15,16 +15,16 @@ $(function(){
             });
             $.ajax({
                 type : 'POST',
-                url : base_url + '/ajax/review-items/show',
+                url : base_url + '/ajax/watchlists/show',
                 dataType: 'json',
                 data : {
                     'user_id' : user_id,
-                    'count' : review_items_count,
+                    'count' : watchlists_count,
                 },
             })
             // Ajaxリクエストが成功した時発動
             .done(function(response){
-                $(response).appendTo("div#review-items");
+                $(response).appendTo("div#watchlists");
                 var cnt = 0;
                 var waiting = setInterval(function(){
                     if(cnt == 1) {
@@ -54,14 +54,14 @@ $(function(){
                     }
                 });
 
-                var review_items_li_after = $('div#review-items').find('div.review-item');
-                var review_items_count_after = review_items_li_after.length;
-                if(review_items_count_after < 20 + review_items_count){
+                var watchlists_li_after = $('div#watchlists').find('div.watchlist');
+                var watchlists_count_after = watchlists_li_after.length;
+                if(watchlists_count_after < 20 + watchlists_count){
                     end_flag=1;
                 }else {
                     $("<div class='text-center mb-5'>\
-                        <button type='button' id='show-more-review-items-button' class='btn btn-outline-secondary w-100' data-review_id='" + review_id + "'>"+ show_more +"</button>\
-                    </div>").appendTo("div#show-more-review-items");
+                        <button type='button' id='show-more-watchlists-button' class='btn btn-outline-secondary w-100' data-review_id='" + review_id + "'>"+ show_more +"</button>\
+                    </div>").appendTo("div#show-more-watchlists");
                 }
             });
         })

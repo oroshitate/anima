@@ -54,6 +54,10 @@ Route::post('comment/delete', 'CommentController@delete')->middleware('auth');
 Route::post('like/store', 'LikeController@store')->middleware('auth');
 Route::post('like/delete', 'LikeController@delete')->middleware('auth');
 
+// ウォッチリスト
+Route::post('watchlist/store', 'WatchlistController@store')->middleware('auth');
+Route::post('watchlist/delete', 'WatchlistController@delete')->middleware('auth');
+
 // Ajax
 Route::post('ajax/timelines/show', 'AjaxController@showMoreTimelines');
 Route::post('ajax/keyword-items/show', 'AjaxController@showMoreKeywordItems');
@@ -61,5 +65,7 @@ Route::post('ajax/keyword-users/show', 'AjaxController@showMoreKeywordUsers');
 Route::post('ajax/reviews/show', 'AjaxController@showMoreReviews');
 Route::post('ajax/comments/show', 'AjaxController@showMoreComments');
 Route::post('ajax/review-items/show', 'AjaxController@showMoreReviewItems');
+Route::post('ajax/one-watchlists/show', 'AjaxController@showWatchlists');
+Route::post('ajax/watchlists/show', 'AjaxController@showMoreWatchlists');
 
 // その他

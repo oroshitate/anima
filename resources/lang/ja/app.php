@@ -77,6 +77,7 @@ return [
             'reviewd_anime' => 'レビューしたアニメ',
             'popular_anime' => '話題のアニメ',
             'timeline' => 'タイムライン',
+            'watchlist' => 'ウォッチリスト',
             'item' => [
                 'link' => '作品情報',
                 'official_link' => '関連リンク'
@@ -137,6 +138,7 @@ return [
         'search' => '検索',
         'show_more' => 'さらに読み込む',
         'change' => '変更',
+        'watchlist' => 'ウォッチリスト',
         'auth' => [
             'twitter' => 'Twitterで登録・ログイン',
             'facebook' => 'Facebookで登録・ログイン',

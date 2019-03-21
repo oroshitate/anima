@@ -12,6 +12,7 @@
 
 <script src="{{ asset('js/like.js') }}" defer></script>
 <script src="{{ asset('js/review.js') }}" defer></script>
+<script src="{{ asset('js/watchlist.js') }}" defer></script>
 <script src="{{ asset('js/ajax/show_more_reviews.js') }}" defer></script>
 @endsection
 
@@ -41,9 +42,19 @@
                 <div class="col-10 my-2 text-right">
                     @guest
                         <a href="{{ url('/login') }}">
+                            <button type="button" class="btn btn-outline-secondary">
+                                <i class="far fa-bookmark"></i>
+                                {{ __('app.button.watchlist') }}
+                            </button>
+                        </a>
+                        <a href="{{ url('/login') }}">
                             <button type="button" class="btn btn-success">{{ __('app.button.review.create') }}</button>
                         </a>
                     @else
+                        <button type="button" id="watchlist-button" class="btn btn-outline-secondary {{ $watchlist->status }}" data-item_id="{{$item->id}}" data-user_id="{{ Auth::user()->id }}" data-watchlist_id="{{ $watchlist->id }}">
+                            <i class="far fa-bookmark"></i>
+                            {{ __('app.button.watchlist') }}
+                        </button>
                         <button type="button" id="create-review-modal-button" class="btn btn-success" data-toggle="modal" data-target="#create-review-modal" data-item_id="{{ $item->id }}">{{ __('app.button.review.create') }}</button>
                     @endguest
                 </div>

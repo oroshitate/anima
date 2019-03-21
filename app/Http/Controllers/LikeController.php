@@ -16,18 +16,20 @@ class LikeController extends Controller
 
         DB::beginTransaction();
         try {
-            $like = new Like;
             if($comment_id){
-                $like->user_id = Auth::id();
-                $like->review_id = $review_id;
-                $like->comment_id = $comment_id;
-                $like->save();
+                $data = [
+                  'user_id' => Auth::id(),
+                  'review_id' => $review_id,
+                  'comment_id' => $comment_id
+                ];
             }else {
-                $like->user_id = Auth::id();
-                $like->review_id = $review_id;
-
-                $like->save();
+                $data = [
+                  'user_id' => Auth::id(),
+                  'review_id' => $review_id
+                ];
             }
+
+            Like::create($data);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

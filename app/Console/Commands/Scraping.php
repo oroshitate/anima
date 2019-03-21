@@ -59,7 +59,6 @@ class Scraping extends Command
                 $title = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > h2')->text();
                 $title = strstr($title,'  Check-in',true);
 
-                $item = new Item();
                 if($item->getSearchByItemCount($title) == 0){
                     $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
                     $image_url = $image_text->attr('src');
@@ -102,14 +101,16 @@ class Scraping extends Command
                         $official_link = $link_text->attr('href');
                     }
 
-                    $item->title = $title;
-                    $item->image = $image;
-                    $item->season = $season;
-                    $item->company = $company;
-                    $item->link = $anime_url;
-                    $item->official_link = $official_link;
+                    $data = [
+                      'title' => $title,
+                      'image' => $image,
+                      'season' => $season,
+                      'company' => $company,
+                      'link' => $anime_url,
+                      'official_link' => $official_link
+                    ];
 
-                    $item->save();
+                    Item::create($data);
                     // // continueと同義(break : return false;)
                     // return true;
                 }
