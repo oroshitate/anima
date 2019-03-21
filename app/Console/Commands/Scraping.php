@@ -59,6 +59,7 @@ class Scraping extends Command
                 $title = $anime_crawler->filter('div.animeDetailBox > div.animeDetailL > h2')->text();
                 $title = strstr($title,'  Check-in',true);
 
+                $item = new Item();
                 if($item->getSearchByItemCount($title) == 0){
                     $image_text = $anime_crawler->filter('div.animeDetailBox > div.animeDetailImg > img');
                     $image_url = $image_text->attr('src');
