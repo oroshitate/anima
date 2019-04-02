@@ -54,6 +54,7 @@
         var hours = "{{ __('app.word.hours') }}";
         var days = "{{ __('app.word.days') }}";
         var show_more = "{{ __('app.button.show_more') }}";
+        var count_word = "{{ __('app.word.count') }}";
     </script>
     @if(App::environment() == 'production')
     <script>var base_url = "https://www.anima.fan";</script>

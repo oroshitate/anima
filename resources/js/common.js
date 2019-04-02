@@ -53,15 +53,6 @@ $(function() {
         }
     });
 
-    var url = location.href;
-    if(url.indexOf("/search") != -1){
-        $(".switch-search-button").addClass("active");
-        $("div#search-box").css({"display":"block"});
-        // $("div#ad-box").css({"display":"block"});
-        $(".switch-search-button").empty();
-        $(".switch-search-button").prepend("<i class='fas fa-times text-white fa-2x'></i>");
-    }
-
     $(".switch-search-button").on("click", function(){
         var switch_search_button = $(this).attr("class");
         if(switch_search_button.indexOf('active') == -1){

@@ -60,7 +60,7 @@ class Comment extends Model
         $review_id = $review->id;
         $comments = $review->comments()
                            ->join('users','users.id','=','comments.user_id')
-                           ->orderBy('comments.created_at', 'desc')
+                           ->orderBy('comments.created_at', 'asc')
                            ->take(20)
                            ->get([
                                 "comments.id as comment_id",

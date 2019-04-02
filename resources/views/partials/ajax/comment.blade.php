@@ -43,55 +43,58 @@
                 <div class="d-inline-block cursor-pointer">
                     <a href="{{ url('/login') }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span class="h5-5">
-                            @if($comment->comment_likes_count > 0)
-                                {{ $comment->comment_likes_count }}
-                            @else
-                                0
-                            @endif
-                        </span>
-                        <span>{{ __('app.word.count') }}</span>
+                        @if($comment->comment_likes_count > 0)
+                            <span class="h5-5">
+                                    {{ $comment->comment_likes_count }}
+                            </span>
+                            <span>{{ __('app.word.count') }}</span>
+                        @endif
                     </a>
                 </div>
                 <div class="d-inline-block cursor-pointer">
                     <a href="{{ url('/login') }}">
                         <i class="fas fa-reply fa-3x mx-2"></i>
-                        <span class="h5-5">
-                            {{ $comment->reply_count }}{{ __('app.word.count') }}
-                        </span>
+                        @if($comment->reply_count > 0)
+                            <span class="h5-5">
+                                {{ $comment->reply_count }}
+                            </span>
+                            <span>{{ __('app.word.count') }}</span>
+                        @endif
                     </a>
                 </div>
             @else
                 @if($comment->comment_like_id)
                     <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
-                            @if($comment->comment_likes_count > 0)
-                                {{ $comment->comment_likes_count }}
-                            @else
-                                0
-                            @endif
-                        </span>
-                        <span>{{ __('app.word.count') }}</span>
+                        @if($comment->comment_likes_count > 0)
+                            <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
+                                    {{ $comment->comment_likes_count }}
+                            </span>
+                            <span class="comment-count-word-{{$comment->comment_id}}">{{ __('app.word.count') }}</span>
+                        @endif
                     </div>
                 @else
                     <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
                         <i class="far fa-heart fa-3x mx-2"></i>
-                        <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
-                            @if($comment->comment_likes_count > 0)
+                        @if($comment->comment_likes_count > 0)
+                            <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
                                 {{ $comment->comment_likes_count }}
-                            @else
-                                0
-                            @endif
-                        </span>
-                        <span>{{ __('app.word.count') }}</span>
+                            </span>
+                            <span class="comment-count-word-{{$comment->comment_id}}">{{ __('app.word.count') }}</span>
+                        @else
+                            <span id="likes-comment-count-{{ $comment->comment_id }}" class="h5-5">
+                            </span>
+                            <span class="comment-count-word-{{$comment->comment_id}}"></span>
+                        @endif
                     </div>
                 @endif
                 <div class="d-inline-block reply-button cursor-pointer" data-comment_id="{{ $comment->comment_id }}" data-user_nickname="{{ $comment->user_nickname }}">
                     <i class="fas fa-reply fa-3x mx-2"></i>
-                    <span class="h5-5">
-                        {{ $comment->reply_count }}{{ __('app.word.count') }}
-                    </span>
+                    @if($comment->reply_count > 0)
+                        <span class="h5-5">
+                            {{ $comment->reply_count }}{{ __('app.word.count') }}
+                        </span>
+                    @endif
                 </div>
             @endguest
         </div>

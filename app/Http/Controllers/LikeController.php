@@ -29,7 +29,7 @@ class LikeController extends Controller
                 ];
             }
 
-            Like::create($data);
+            $like = Like::create($data);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
