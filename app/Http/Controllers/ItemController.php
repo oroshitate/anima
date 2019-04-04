@@ -54,13 +54,14 @@ class ItemController extends Controller
             }
         }
 
-        $my_watchlist = $watchlist->getMyWatchlist($id, Auth::id());
-        if(count($my_watchlist) == 1){
-            $watchlist->status = "active";
-            $watchlist->id = $my_watchlist[0]->id;
-        }else {
-            $watchlist->status = "";
-            $watchlist->id = "";
+        $watchlist->status = "";
+        $watchlist->id = "";
+        if (Auth::check()) {
+            $my_watchlist = $watchlist->getMyWatchlist($id, Auth::id());
+            if(count($my_watchlist) == 1){
+                $watchlist->status = "active";
+                $watchlist->id = $my_watchlist[0]->id;
+            }
         }
 
         return view('item', [
