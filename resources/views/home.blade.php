@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="bg-grey text-dark p-1 pl-2">
-        <span class="content-title text-black font-bold">{{ __('app.word.title.popular_anime') }}</span>
+        <span class="h7 content-title text-black font-bold">{{ __('app.word.title.popular_anime') }}</span>
     </div>
 </div>
 @endguest
