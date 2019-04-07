@@ -83,8 +83,8 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-12 text-center">
+                <div class="form-group text-center">
+                    <div class="col-12 col-md-10 mx-auto">
                         <button type="submit" id="edit-user-button" class="btn btn-success w-100">{{ __('app.button.user.save') }}</button>
                     </div>
                 </div>

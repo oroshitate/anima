@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-12 text-center">
+                    <div class="col-12 col-md-10 mx-auto">
                         <button type="submit" class="btn btn-success w-100">
                             {{ __('app.button.auth.register') }}
                         </button>
