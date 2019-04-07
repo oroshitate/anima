@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/partials/header.css') }}" rel="stylesheet">
 
     <!-- Google Tag Manager -->
     @if(App::environment() == 'production')
@@ -47,6 +48,11 @@
           gtag('config', 'UA-135090666-1');
         </script>
     @endif
+
+    <!-- slider -->
+  	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" />
+  	<script type="text/javascript" src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" defer></script>
+
 
     <!-- Script variable -->
     <script>

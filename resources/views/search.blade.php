@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-10">
-            <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item text-center bg-grey-opacity" style="width:50%;">
                     <a class="nav-link active" id="pills-items-tab" data-toggle="pill" href="#pills-items" role="tab" aria-controls="pills-items" aria-selected="true">{{ __('app.word.search.item') }}</a>
                 </li>
@@ -30,13 +30,13 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-items" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div class="bg-grey text-dark p-3 mb-5">
-                        <span class="h5 text-black">
+                    <div class="bg-grey text-dark p-2">
+                        <span class="h7 text-black">
                           {{ __('app.word.search.result', ['keyword' => $keyword, 'count' => $items_count ]) }}
                         </span>
                     </div>
                     <div id="keyword-items">
-                        <div class="grid-index my-4">
+                        <div class="grid-index my-2">
                             <div class="grid-sizer col-4"></div>
                             @foreach($items as $item)
                             <div class="grid-item col-4 my-1 px-1 keyword-item">
@@ -49,13 +49,13 @@
                                         @endif
                                     </a>
                                     <div class="bg-secondary text-white text-center">
-                                        <span class="text-white name-length">{{ $item->title }}</span>
+                                        <span class="text-white name-length h7">{{ $item->title }}</span>
                                         @if($item->reviews_count > 0)
                                             <div class="d-inline-block">
                                                 <div class="one-star-rating d-inline-block">
                                                     <div class="one-star-rating-front">★</div>
                                                 </div>
-                                                <span class="text-warning">{{ $item->item_avg }}</span>
+                                                <span class="text-warning h7">{{ $item->item_avg }}</span>
                                             </div>
                                         @endif
                                     </div>
@@ -73,14 +73,14 @@
                     @endif
                 </div>
                 <div class="tab-pane fade" id="pills-users" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="bg-grey text-dark p-3 mb-4">
-                        <span class="h5 text-black">
+                    <div class="bg-grey text-dark p-2">
+                        <span class="h7 text-black">
                             {{ __('app.word.search.result', ['keyword' => $keyword, 'count' => $users_count ]) }}
                         </span>
                     </div>
-                    <ul id="keyword-users" class="list-unstyled text-center mb-4">
+                    <ul id="keyword-users" class="list-unstyled text-center my-2">
                         @foreach($users as $user)
-                            <li class="py-4 border-bottom row justify-content-center">
+                            <li class="border-bottom row justify-content-center no-gutters">
                                 <div class="align-top col-8 col-md-6 pl-0">
                                     <div class="row align-items-center">
                                         <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
@@ -91,7 +91,7 @@
                                             @endif
                                         </a>
                                         <div class="col-7 px-0 text-left">
-                                            <p class="h5-5 m-0">{{ $user->name }}</p>
+                                            <p class="h7 m-0 font-bold">{{ $user->name }}</p>
                                             <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
                                         </div>
                                     </div>

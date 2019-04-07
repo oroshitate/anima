@@ -49132,7 +49132,7 @@ $(function () {
 
   var $setElm_name = $('.name-length'); // 省略する文字のあるセレクタを取得
 
-  var cutFigure_name = '14'; // 表示する文字数
+  var cutFigure_name = '12'; // 表示する文字数
 
   var afterTxt_name = ' …'; // 文字カット後に表示するテキスト
 
@@ -49185,14 +49185,14 @@ $(function () {
         "display": "block"
       });
       $(this).empty();
-      $(this).prepend("<i class='fas fa-times text-white fa-2x'></i>");
+      $(this).prepend("<i class='fas fa-times text-white header-search float-right'></i>");
     } else {
       $(this).removeClass("active");
       $("div#search-box").css({
         "display": "none"
       });
       $(this).empty();
-      $(this).prepend("<i class='fas fa-search text-white fa-2x'></i>");
+      $(this).prepend("<i class='fas fa-search text-white header-search float-right'></i>");
     }
   });
   $("button#search-button").on('click', function () {

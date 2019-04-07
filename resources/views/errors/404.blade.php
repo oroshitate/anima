@@ -9,10 +9,10 @@
     <div class="row justify-content-center my-4">
         <div class="col-10 col-md-8 text-center my-4">
             <div class="border border-dark rounded p-4">
-                <p class="h4 mb-0">{{ __('error.sentence.404.1') }}</p>
+                <p class="h5-5 mb-0">{{ __('error.sentence.404.1') }}</p>
             </div>
             <div class="text-center">
-                <img src="{{ asset('anima-logo-black.png') }}" width="680px" height="240px">
+                <img src="{{ asset('anima-logo-black.png') }}" style="width:156px; height:152px;">
             </div>
         </div>
     </div>

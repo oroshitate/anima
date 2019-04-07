@@ -1,5 +1,5 @@
 @foreach($users as $user)
-    <li class="py-4 border-bottom row justify-content-center">
+    <li class="border-bottom row justify-content-center no-gutters">
         <div class="align-top col-8 col-md-6 pl-0">
             <div class="row align-items-center">
                 <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
@@ -10,12 +10,12 @@
                     @endif
                 </a>
                 <div class="col-7 px-0 text-left">
-                    <p class="h5-5 m-0">{{ $user->name }}</p>
+                    <p class="h7 m-0 font-bold">{{ $user->name }}</p>
                     <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
                 </div>
             </div>
         </div>
-        <div class="row align-items-center justify-content-end">
+        <div class="col-4 px-0 row align-items-center justify-content-center">
             @guest
                 <a href="{{ url('/login') }}">
                     <button type="button" class="btn btn-success">{{ __('app.button.follow') }}</button>

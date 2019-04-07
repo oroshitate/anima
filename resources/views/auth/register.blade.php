@@ -14,7 +14,7 @@
         <div class="col-12 col-md-10">
             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group row my-4 justify-content-center">
+                <div class="form-group row my-3 justify-content-center">
                     <div class="col-12 col-md-10 text-center">
                         @if(strpos($image, 'picture?type=normal') !== false || strpos($image, 'default_profile_normal') !== false)
                             <img id="user-image" class="rounded-circle profile-lg" src="{{ asset('no-image.jpg') }}">
@@ -39,8 +39,8 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="nickname" class="h5">{{ __('app.label.auth_user.nickname') }}{{ __('app.label.20_words') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
-                        <p>{{ __('app.sentence.auth.register.cannot_edit') }}</p>
+                        <label for="nickname" class="h7 font-bold mb-0">{{ __('app.label.auth_user.nickname') }}{{ __('app.label.20_words') }}</label><span class="h7 text-danger">{{ __('app.word.auth.necessary') }}</span>
+                        <p class="h7 mb-0 text-secondary">{{ __('app.sentence.auth.register.cannot_edit') }}</p>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <input id="nickname" type="text" class="form-control{{ $errors->has('nickname') ? ' is-invalid' : '' }}" name="nickname" value="{{ $nickname }}" required autofocus>
@@ -55,8 +55,8 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="name" class="h5">{{ __('app.label.auth_user.user_name') }}{{ __('app.label.20_words') }}</label><span class="text-danger">{{ __('app.word.auth.necessary') }}</span>
-                        <p>{{ __('app.sentence.auth.register.can_edit') }}</p>
+                        <label for="name" class="h7 font-bold mb-0">{{ __('app.label.auth_user.user_name') }}{{ __('app.label.20_words') }}</label><span class="h7 text-danger">{{ __('app.word.auth.necessary') }}</span>
+                        <p class="h7 mb-0 text-secondary">{{ __('app.sentence.auth.register.can_edit') }}</p>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $name }}" required>
@@ -71,7 +71,7 @@
 
                 <div class="form-group text-left">
                     <div class="col-12 col-md-10 mx-auto">
-                        <label for="content" class="h5">{{ __('app.label.auth_user.content') }}{{ __('app.label.300_words') }}</label><span class="text-secondary">{{ __('app.word.auth.any') }}</span>
+                        <label for="content" class="h7 font-bold mb-0">{{ __('app.label.auth_user.content') }}{{ __('app.label.300_words') }}</label><span class="h7 text-secondary">{{ __('app.word.auth.any') }}</span>
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <textarea id="content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" name="content" rows="10" cols="30"></textarea>
@@ -85,8 +85,8 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-6 mx-auto text-center">
-                        <button type="submit" class="btn btn-success">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-success w-100">
                             {{ __('app.button.auth.register') }}
                         </button>
                     </div>

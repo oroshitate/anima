@@ -9,14 +9,10 @@ $(function() {
         var comment_id = $(this).data("comment_id");
         var user_nickname = $(this).data("user_nickname");
         var reply_to = "@" + user_nickname + "";
-        $("<div id='reply-group' class='col-10 col-md-8 row justify-content-start my-2'>\
-              <div class='col-6 col-md-4'>\
-                  <div class='row align-items-center justify-content-center bg-secondary rounded h-100'>\
-                      <p class='mb-0 text-white'>To " + reply_to + "</p>\
-                  </div>\
-              </div>\
-              <div id='cancel-reply-box' class='ml-2'>\
-                  <button type='button' id='cancel-reply-button' class='btn btn-secondary'><i class='fas fa-times text-white fa-1x'></i></button>\
+        $("<div id='reply-group' class='col-11 col-md-9 row align-items-center mb-2'>\
+              <p class='mb-0 text-white'>To " + reply_to + "</p>\
+              <div id='cancel-reply-box'>\
+                  <button type='button' id='cancel-reply-button' style='background:none; border:none;'><i class='fas fa-times text-white fa-1x'></i></button>\
               </div>\
           <div>").prependTo("div#footer-comment-group");
 

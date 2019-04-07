@@ -1,11 +1,11 @@
 @auth
-<div id="edit-comment-footer" class="fixed-bottom bg-black" style="display:none;">
+<div id="edit-comment-footer" class="fixed-bottom bg-black" style="display:none; z-index:1031;">
     <div class="py-2">
         <form name="edit-comment" method="post" action="{{ url('comment/edit') }}">
             @csrf
             <div id="footer-comment-group" class="row justify-content-center">
-                <div class="form-group col-7 col-md-6 mb-0">
-                    <textarea name="content" rows="1" id="edit-comment-content" class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}"placeholder="{{ __('app.label.comment.placeholder') }}" style="resize: none;"></textarea>
+                <div class="form-group col-7 col-md-6 mb-0 pr-0">
+                    <textarea name="content" rows="1" id="edit-comment-content" class="border-0 form-control{{ $errors->has('content') ? ' is-invalid' : '' }}"placeholder="{{ __('app.label.comment.placeholder') }}" style="resize: none;"></textarea>
                     @if ($errors->has('content'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('content') }}</strong>

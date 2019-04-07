@@ -19,12 +19,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10 my-5">
+        <div class="col-12 col-md-10 my-3">
             <div class="row justify-content-center no-gutters">
-                <div class="col-12 text-center mb-2">
-                    <p class="h5">{{ $item->title }}</p>
+                <div class="col-12 text-left mb-2">
+                    <p class="h5 font-bold">{{ $item->title }}</p>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-6 text-left">
                     @if($item->image == null)
                         <img src="{{ asset('anima-img.png') }}" class="w-75">
                     @else
@@ -32,23 +32,28 @@
                     @endif
                     <p class="mb-0">{{ __('app.word.item.source') }}</p>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <div class="row text-left">
-                        <span class="w-100">{{ __('app.word.item.season', ['season' => $item->season]) }}</span>
-                        <span class="w-100">{{ __('app.word.item.company', ['company' => $item->company]) }}</span>
-                        <span class="w-100">{{ __('app.word.item.reviews_count', ['count' => $item->reviews_count]) }}</span>
+                        <span class="w-100 h7">{{ __('app.word.item.company', ['company' => $item->company]) }}</span>
+                        <span class="w-100 h7">{{ __('app.word.item.season', ['season' => $item->season]) }}</span>
+                        <span class="w-100 h7">{{ __('app.word.item.reviews_count', ['count' => $item->reviews_count]) }}</span>
+                        <div class="star-rating d-inline-block">
+                            <div class="star-rating-front" style="width:{{ $item->item_avg*20 }}%">★★★★★</div>
+                            <div class="star-rating-back">★★★★★</div>
+                        </div>
+                        <span class="text-warning h7 mx-1">{{ $item->item_avg }}</span>
                     </div>
                 </div>
-                <div class="col-10 my-2 text-right">
+                <div class="col-12 mt-3 text-right">
                     @guest
                         <a href="{{ url('/login') }}">
-                            <button type="button" class="btn btn-outline-secondary">
+                            <button type="button" class="btn btn-outline-secondary h7">
                                 <i class="far fa-bookmark"></i>
                                 {{ __('app.button.watchlist') }}
                             </button>
                         </a>
                         <a href="{{ url('/login') }}">
-                            <button type="button" class="btn btn-success">{{ __('app.button.review.create') }}</button>
+                            <button type="button" class="btn btn-success h7">{{ __('app.button.review.create') }}</button>
                         </a>
                     @else
                         <button type="button" id="watchlist-button" class="btn btn-outline-secondary {{ $watchlist->status }}" data-item_id="{{$item->id}}" data-user_id="{{ Auth::user()->id }}" data-watchlist_id="{{ $watchlist->id }}">
@@ -58,36 +63,36 @@
                         <button type="button" id="create-review-modal-button" class="btn btn-success" data-toggle="modal" data-target="#create-review-modal" data-item_id="{{ $item->id }}">{{ __('app.button.review.create') }}</button>
                     @endguest
                 </div>
-                <div class="col-12 mt-4 row justify-content-center">
+                <div class="col-12 my-3 row justify-content-center">
                     <div class="col-8 text-center">
                         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" data-url="{{ url()->current() }}" data-text="" data-lang="ja"></a>
                         <div class="line-it-button" data-lang="ja" data-type="share-a" data-ver="2" data-url="{{ url()->current() }}" style="display: none;"></div>
                     </div>
                 </div>
             </div>
-            <div class="my-4">
-                <div class="bg-grey text-dark p-2">
-                    <span class="h5 text-black">{{ __('app.word.title.item.link') }}</span>
+            <div class="my-1">
+                <div class="bg-grey text-dark">
+                    <span class="h7 text-black font-bold p-1">{{ __('app.word.title.item.link') }}</span>
                 </div>
-                <p class="p-2">{{ __('app.word.item.link') }}<a class="border-bottom border-dark"href="{{ $item->link }}">{{ __('app.word.item.here') }}</a></p>
+                <p class="p-2 mb-0">{{ __('app.word.item.link') }}<a class="border-bottom border-dark"href="{{ $item->link }}">{{ __('app.word.item.here') }}</a></p>
             </div>
-            <div class="my-4">
-                <div class="bg-grey text-dark p-2">
-                    <span class="h5 text-black">{{ __('app.word.title.item.official_link') }}</span>
+            <div class="my-1">
+                <div class="bg-grey text-dark">
+                    <span class="h7 text-black font-bold p-1">{{ __('app.word.title.item.official_link') }}</span>
                 </div>
-                <p class="p-2">{{ __('app.word.item.official_link') }}<a class="border-bottom border-dark"href="{{ $item->official_link }}">{{ $item->official_link }}</a></p>
+                <p class="p-2 mb-0">{{ __('app.word.item.official_link') }}<a class="border-bottom border-dark"href="{{ $item->official_link }}">{{ $item->official_link }}</a></p>
             </div>
-            <div class="my-4">
-                <div class="bg-grey text-dark p-2">
-                    <span class="h5 text-black">{{ __('app.word.review') }}</span>
+            <div class="my-1">
+                <div class="bg-grey text-dark">
+                    <span class="h7 text-black font-bold p-1">{{ __('app.word.review') }}</span>
                 </div>
                 <ul id="reviews" class="list-unstyled mb-5">
                 @foreach($reviews as $review)
-                    <li class="py-4 border-bottom">
+                    <li class="py-2 border-bottom">
                         <div class="row">
                             <div class="align-top col-8">
                                 <div class="row align-items-center mb-2">
-                                    <div class="col-4 col-md-2">
+                                    <div class="col-2 col-md-1">
                                         <a href="{{ route('user', ['nickname' => $review->user_nickname]) }}">
                                             @if($review->user_image == null)
                                                 <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
@@ -97,24 +102,24 @@
                                         </a>
                                     </div>
                                     <div class="col-8 pr-0">
-                                        <p class="h5-5">{{ $review->user_name }}</p>
+                                        <p class="h7 font-bold mb-0 light-black">{{ $review->user_name }}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row col-4 justify-content-end">
                                 @auth
                                     @if($review->user_id == Auth::user()->id)
-                                        <div class="d-inline-block mt-3 mx-md-3 cursor-pointer text-right">
+                                        <div class="d-inline-block mx-md-3 cursor-pointer text-right">
                                             <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                                <i class="fas fa-angle-down fa-2x"></i>
+                                                <i class="fas fa-angle-down fa-15x"></i>
                                             </button>
                                         </div>
                                     @else
                                         <div class="d-inline-block"></div>
                                     @endif
                                 @endauth
-                                <div class="d-inline-block text-right align-top mt-3">
-                                    <p class="created-date" >{{ $review->review_created }}</p>
+                                <div class="d-inline-block text-right align-top">
+                                    <p class="created-date h7">{{ $review->review_created }}</p>
                                 </div>
                             </div>
                         </div>
@@ -123,55 +128,55 @@
                                 <div class="star-rating-front" style="width:{{ $review->review_score*20 }}%">★★★★★</div>
                                 <div class="star-rating-back">★★★★★</div>
                             </div>
-                            <pre class="py-3 h5-5 content-length">{{ $review->review_content }}</pre>
+                            <pre class="py-1 h7 content-length light-black">{{ $review->review_content }}</pre>
                         </a>
                         <div class="text-center">
                             @guest
                                 <div class="d-inline-block cursor-pointer">
                                     <a href="{{ url('/login') }}">
-                                        <i class="far fa-heart fa-2x mx-2"></i>
+                                        <i class="far fa-heart fa-15x"></i>
                                         @if($review->likes_count > 0)
-                                            <span class="h5-5">
+                                            <span class="h7 light-black">
                                                 {{ $review->likes_count }}
                                             </span>
-                                            <span>{{ __('app.word.count') }}</span>
+                                            <span class="h7 light-black">{{ __('app.word.count') }}</span>
                                         @endif
                                     </a>
                                 </div>
                             @else
                                 @if($review->like_id)
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-2x mx-2"></i>
+                                        <i class="far fa-heart fa-15x"></i>
                                         @if($review->likes_count > 0)
-                                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
                                             </span>
-                                            <span class="count-word-{{$review->review_id}}">{{ __('app.word.count') }}</span>
+                                            <span class="count-word-{{$review->review_id}} h7">{{ __('app.word.count') }}</span>
                                         @endif
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-2x mx-2"></i>
+                                        <i class="far fa-heart fa-15x"></i>
                                         @if($review->likes_count > 0)
-                                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
                                             </span>
-                                            <span class="count-word-{{$review->review_id}}">{{ __('app.word.count') }}</span>
+                                            <span class="count-word-{{$review->review_id}} h7">{{ __('app.word.count') }}</span>
                                         @else
-                                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                             </span>
-                                            <span class="count-word-{{$review->review_id}}"></span>
+                                            <span class="count-word-{{$review->review_id}} h7"></span>
                                         @endif
                                     </div>
                                 @endif
                             @endguest
                             <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                <i class="far fa-comment fa-2x mx-2"></i>
+                                <i class="far fa-comment fa-15x"></i>
                                 @if($review->comments_count > 0)
-                                    <span class="h5-5">
+                                    <span class="h7">
                                         {{ $review->comments_count }}
                                     </span>
-                                    <span>{{ __('app.word.count') }}</span>
+                                    <span class="h7">{{ __('app.word.count') }}</span>
                                 @endif
                             </a>
                         </div>

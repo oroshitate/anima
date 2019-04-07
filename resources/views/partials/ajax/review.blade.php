@@ -1,32 +1,36 @@
 @foreach($reviews as $review)
-    <li class="py-4 border-bottom">
+    <li class="py-2 border-bottom">
         <div class="row">
             <div class="align-top col-8">
                 <div class="row align-items-center mb-2">
-                    <a href="{{ route('user', ['nickname' => $review->user_nickname]) }}">
-                        @if($review->user_image == null)
-                            <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
-                        @else
-                            <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
-                        @endif
-                    </a>
-                    <p class="h5-5">{{ $review->user_name }}</p>
+                    <div class="col-2 col-md-1">
+                        <a href="{{ route('user', ['nickname' => $review->user_nickname]) }}">
+                            @if($review->user_image == null)
+                                <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                            @else
+                                <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
+                            @endif
+                        </a>
+                    </div>
+                    <div class="col-8 pr-0">
+                        <p class="h7 font-bold mb-0 light-black">{{ $review->user_name }}</p>
+                    </div>
                 </div>
             </div>
             <div class="row col-4 justify-content-end">
                 @auth
                     @if($review->user_id == Auth::user()->id)
-                        <div class="d-inline-block mt-3 mx-md-3 cursor-pointer text-right">
+                        <div class="d-inline-block mx-md-3 cursor-pointer text-right">
                             <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                <i class="fas fa-angle-down fa-2x"></i>
+                                <i class="fas fa-angle-down fa-15x"></i>
                             </button>
                         </div>
                     @else
                         <div class="d-inline-block"></div>
                     @endif
                 @endauth
-                <div class="d-inline-block text-right align-top mt-3">
-                    <p class="created-date" >{{ $review->review_created }}</p>
+                <div class="d-inline-block text-right align-top">
+                    <p class="created-date h7">{{ $review->review_created }}</p>
                 </div>
             </div>
         </div>
@@ -35,55 +39,55 @@
                 <div class="star-rating-front" style="width:{{ $review->review_score*20 }}%">★★★★★</div>
                 <div class="star-rating-back">★★★★★</div>
             </div>
-            <pre class="py-3 h5-5 content-length">{{ $review->review_content }}</pre>
+            <pre class="py-1 h7 content-length light-black">{{ $review->review_content }}</pre>
         </a>
         <div class="text-center">
             @guest
                 <div class="d-inline-block cursor-pointer">
                     <a href="{{ url('/login') }}">
-                        <i class="far fa-heart fa-3x mx-2"></i>
+                        <i class="far fa-heart fa-15x"></i>
                         @if($review->likes_count > 0)
-                            <span class="h5-5">
+                            <span class="h7 light-black">
                                 {{ $review->likes_count }}
                             </span>
-                            <span>{{ __('app.word.count') }}</span>
+                            <span class="h7 light-black">{{ __('app.word.count') }}</span>
                         @endif
                     </a>
                 </div>
             @else
                 @if($review->like_id)
                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                        <i class="far fa-heart fa-3x mx-2"></i>
+                        <i class="far fa-heart fa-15x"></i>
                         @if($review->likes_count > 0)
-                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                 {{ $review->likes_count }}
                             </span>
-                            <span class="count-word-{{$review->review_id}}">{{ __('app.word.count') }}</span>
+                            <span class="count-word-{{$review->review_id}} h7">{{ __('app.word.count') }}</span>
                         @endif
                     </div>
                 @else
                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                        <i class="far fa-heart fa-3x mx-2"></i>
+                        <i class="far fa-heart fa-15x"></i>
                         @if($review->likes_count > 0)
-                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                 {{ $review->likes_count }}
                             </span>
-                            <span class="count-word-{{$review->review_id}}">{{ __('app.word.count') }}</span>
+                            <span class="count-word-{{$review->review_id}} h7">{{ __('app.word.count') }}</span>
                         @else
-                            <span id="likes-review-count-{{ $review->review_id }}" class="h5-5">
+                            <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                             </span>
-                            <span class="count-word-{{$review->review_id}}"></span>
+                            <span class="count-word-{{$review->review_id}} h7"></span>
                         @endif
                     </div>
                 @endif
             @endguest
             <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                <i class="far fa-comment fa-3x mx-2"></i>
+                <i class="far fa-comment fa-15x"></i>
                 @if($review->comments_count > 0)
-                    <span class="h5-5">
+                    <span class="h7">
                         {{ $review->comments_count }}
                     </span>
-                    <span>{{ __('app.word.count') }}</span>
+                    <span class="h7">{{ __('app.word.count') }}</span>
                 @endif
             </a>
         </div>

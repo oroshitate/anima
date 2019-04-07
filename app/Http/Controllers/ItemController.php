@@ -33,6 +33,8 @@ class ItemController extends Controller
         $review = new Review();
         $watchlist = new Watchlist();
         $item_detail = $item->getItem($id);
+        $item_avg = $review->getReviewsAvg($item_detail);
+        $item_detail->item_avg = $item_avg->item_avg;
         $reviews = $review->getReviews($item_detail);
 
         $user_id = Auth::id();

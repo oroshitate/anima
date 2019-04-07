@@ -4,6 +4,10 @@
 <title>Anima | {{ __('app.title.user.index',['name' => $user->name]) }}</title>
 @endsection
 
+@section('stylesheet')
+<link href="{{ asset('css/user/index.css') }}" rel="stylesheet">
+@endsection
+
 @section('script')
 <script>
     var following = "{{ __('app.button.following') }}";
@@ -20,44 +24,44 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-10 my-5">
+        <div class="col-12 col-md-10 my-3">
             <div id="user-detail" class="row col-12 mx-auto mb-4 px-0" data-nickname="{{ $user->nickname }}">
-                <div class="col-3 col-md-2 text-left px-0 mt-2">
+                <div class="col-3 col-md-2 text-left px-0">
                     @if($user->image == null)
-                        <img class="rounded-circle align-top w-100" src="{{ asset('no-image.jpg') }}">
+                        <img class="rounded-circle align-top profile-lg" src="{{ asset('no-image.jpg') }}">
                     @else
-                        <img class="rounded-circle align-top w-100" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
+                        <img class="rounded-circle align-top profile-lg" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                     @endif
                 </div>
                 <div class="col-9 m-md-4">
-                    <div class="row text-center mb-2">
-                        <span class="col-4">{{ $reviews_count }}</span>
-                        <a id="followings-link" class="follow-link col-4" href="">{{ $followings_count }}</a>
-                        <a id="followers-link" class="follow-link col-4" href="">{{ $followers_count }}</a>
+                    <div class="row text-center">
+                        <span class="col-4 font-bold dark-grey">{{ $reviews_count }}</span>
+                        <a id="followings-link" class="follow-link col-4 font-bold dark-grey" href="">{{ $followings_count }}</a>
+                        <a id="followers-link" class="follow-link col-4 font-bold dark-grey" href="">{{ $followers_count }}</a>
                     </div>
-                    <div class="row text-center my-2">
-                        <span class="col-4 h7 px-0">{{ __('app.word.review') }}</span>
-                        <span class="col-4 h7 px-0">{{ __('app.word.followings') }}</span>
-                        <span class="col-4 h7 px-0">{{ __('app.word.followers') }}</span>
+                    <div class="row text-center mb-2">
+                        <span class="col-4 h7 px-0 brown-grey">{{ __('app.word.review') }}</span>
+                        <span class="col-4 h7 px-0 brown-grey">{{ __('app.word.followings') }}</span>
+                        <span class="col-4 h7 px-0 brown-grey">{{ __('app.word.followers') }}</span>
                     </div>
                     <div class="text-center">
                         <div class="d-inline-block w-100">
                             @guest
                                 <a href="{{ url('/login') }}">
-                                    <button type="button" class="btn btn-success w-100">{{ __('app.button.follow') }}</button>
+                                    <button type="button" class="follow-button btn btn-success w-100 font-bold h7 p-0">{{ __('app.button.follow') }}</button>
                                 </a>
                             @else
                                 @if(Auth::user()->id == $user->id)
                                     <form method="post" action="{{ route('mypage') }}">
                                         @csrf
                                         <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary w-100">{{ __('app.button.edit_profile') }}</button>
+                                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary w-100 font-bold h7 p-0 dark-grey">{{ __('app.button.edit_profile') }}</button>
                                     </form>
                                 @else
                                     @if($follow_status === "active")
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}">{{ __('app.button.following') }}</button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}">{{ __('app.button.following') }}</button>
                                     @else
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-outline-success w-100" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-outline-success w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
                                     @endif
                                 @endif
                             @endguest
@@ -65,16 +69,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 text-left mx-auto my-2 px-0">
-                <span class="h5 ml-2">{{ $user->name }}</span>
+            <div class="col-12 text-left mx-auto px-0">
+                <span class="h5 ml-2 font-bold dark-grey">{{ $user->name }}</span>
+            </div>
+            <div class="col-12 text-left mx-auto px-0">
+                <span class="h7 text-secondary ml-2">{{ "@".$user->nickname }}</span>
             </div>
             <div class="col-12 text-left mx-auto my-2 px-0">
-                <span class="h5 text-secondary ml-2">{{ "@".$user->nickname }}</span>
+                <pre class="ml-2 h7">{{ $user->content }}</pre>
             </div>
-            <div class="col-12 text-left mx-auto my-2 px-0">
-                <pre class="ml-2 h5">{{ $user->content }}</pre>
-            </div>
-            <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills my-2" id="pills-tab" role="tablist">
                 <li class="nav-item text-center bg-grey-opacity" style="width:50%;">
                     <a class="nav-link active" id="pills-review-items-tab" data-toggle="pill" href="#pills-review-items" role="tab" aria-controls="pills-review-items" aria-selected="true">{{ __('app.word.title.reviewd_anime') }}</a>
                 </li>
@@ -86,7 +90,7 @@
                 <div class="tab-pane fade show active" id="pills-review-items" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="text-center">
                         <div id="review-items">
-                            <div class="grid-index my-4">
+                            <div class="grid-index my-2">
                                 <div class="grid-sizer col-4"></div>
                                 @foreach($items as $item)
                                 <div class="grid-item col-4 my-1 px-1 review-item">
@@ -99,12 +103,12 @@
                                             @endif
                                         </a>
                                         <div class="bg-secondary text-white text-center">
-                                            <span class="text-white name-length">{{ $item->title }}</span>
+                                            <span class="text-white name-length h7">{{ $item->title }}</span>
                                             <div class="d-inline-block">
                                                 <div class="one-star-rating d-inline-block">
                                                     <div class="one-star-rating-front">★</div>
                                                 </div>
-                                                <span class="text-warning">{{ $item->review_score }}</span>
+                                                <span class="text-warning h7">{{ $item->review_score }}</span>
                                             </div>
                                         </div>
                                     </div>

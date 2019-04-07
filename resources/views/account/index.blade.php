@@ -12,13 +12,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-10 col-md-8">
-            <ul class="list-unstyled my-5">
+            <ul class="list-unstyled my-3">
                 <li class="py-2 border-bottom">
                     <form name="link-twitter" action="{{ url('login/twitter') }}" method="get">
                         @csrf
                         <div class="form-group row my-4 justify-content-center">
                             <img class="rounded social-icon" src="{{ asset('twitter_icon.png') }}">
-                            <span class="h5 ml-2 mr-4">{{ __('app.word.twitter') }}</span>
+                            <span class="h5-5 ml-2 mr-4">{{ __('app.word.twitter') }}</span>
                             <input type="hidden" name="case[]" value="link">
                             <input type="hidden" name="link[]" value="{{ $twitter }}">
                             <div class="custom-control custom-switch">
@@ -45,7 +45,7 @@
                       @csrf
                         <div class="form-group row my-4 justify-content-center">
                             <img class="rounded social-icon"src="{{ asset('facebook_icon.jpg') }}">
-                            <span class="h5 ml-2 mr-4">{{ __('app.word.facebook') }}</span>
+                            <span class="h5-5 ml-2 mr-4">{{ __('app.word.facebook') }}</span>
                             <input type="hidden" name="case[]" value="link">
                             <input type="hidden" name="link[]" value="{{ $facebook }}">
                             <div class="custom-control custom-switch">
@@ -72,7 +72,7 @@
                         @csrf
                         <div class="form-group row my-4 justify-content-center">
                             <img class="rounded social-icon"src="{{ asset('google_icon.jpg') }}">
-                            <span class="h5 ml-2 mr-4">{{ __('app.word.google') }}</span>
+                            <span class="h5-5 ml-2 mr-4">{{ __('app.word.google') }}</span>
                             <input type="hidden" name="case[]" value="link">
                             <input type="hidden" name="link[]" value="{{ $google }}">
                             <div class="custom-control custom-switch">
@@ -98,7 +98,7 @@
                     <form action="{{ route('logout') }}" method="post">
                         <div class="form-group row my-4 justify-content-center cursor-pointer">
                             @csrf
-                            <label class="h5">{{ __('app.word.logout') }}</label>
+                            <label class="h5-5">{{ __('app.word.logout') }}</label>
                         </div>
                     </form>
                 </li>
@@ -106,7 +106,7 @@
                 <li class="py-2 border-bottom cursor-pointer">
                     <div class="form-group row my-4 justify-content-center cursor-pointer">
                         <a href="{{ url('/account/setting/confirm') }}" >
-                            <label class="h5">{{ __('app.word.resign') }}</label>
+                            <label class="h5-5">{{ __('app.word.resign') }}</label>
                         </a>
                     </div>
                 </li>

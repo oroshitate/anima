@@ -1,4 +1,4 @@
-<div class="grid-index my-4">
+<div class="grid-index my-2">
     <div class="grid-sizer col-4"></div>
     @foreach($items as $item)
     <div class="grid-item col-4 my-1 px-1 keyword-item">
@@ -11,13 +11,13 @@
                 @endif
             </a>
             <div class="bg-secondary text-white text-center">
-                <span class="text-white name-length">{{ $item->title }}</span>
+                <span class="text-white name-length h7">{{ $item->title }}</span>
                 @if($item->reviews_count > 0)
                     <div class="d-inline-block">
                         <div class="one-star-rating d-inline-block">
                             <div class="one-star-rating-front">★</div>
                         </div>
-                        <span class="text-warning">{{ $item->item_avg }}</span>
+                        <span class="text-warning h7">{{ $item->item_avg }}</span>
                     </div>
                 @endif
             </div>

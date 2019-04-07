@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-10 col-md-8 my-5">
             <div class="mb-4 text-center">
-                <p>{{ __('app.sentence.auth.login') }}</p>
+                <p>{!! nl2br(e(__("app.sentence.auth.login"))) !!}</p>
             </div>
             <div class="box-social-twitter my-3 col-12 rounded mx-auto p-0">
                 <a class="btn d-block"  href="login/twitter">

@@ -1,4 +1,41 @@
 $(function() {
+    $('div#slider').slider({
+        range: "min", // 左側を塗りつぶす （max なら右側）
+        max : 5,
+        min : 0,
+        value : 0,
+        step : 0.1,
+        create: function( event, ui ) {
+            $("#slider-count").html($(this).slider("value"));
+        },
+        slide: function( event, ui ) {
+            $("#slider-count").html(ui.value);
+        },
+        change: function( event, ui ) {
+            var score = ui.value;
+            $("#slider-count").html(score);
+            $("input[name='score']").val(score);
+        }
+    });
+
+    $('div#edit-slider').slider({
+        range: "min", // 左側を塗りつぶす （max なら右側）
+        max : 5,
+        min : 0,
+        step : 0.1,
+        create: function( event, ui ) {
+            $("#edit-slider-count").html($(this).slider("value"));
+        },
+        slide: function( event, ui ) {
+            $("#edit-slider-count").html(ui.value);
+        },
+        change: function( event, ui ) {
+            var score = ui.value;
+            $("#edit-slider-count").html(score);
+            $("input[name='score']").val(score);
+        }
+    });
+
     $("button#share-twitter-button").on("click", function(){
         var share_twitter_class = $(this).attr("class");
         if(share_twitter_class.indexOf("active") !== -1){
@@ -10,16 +47,6 @@ $(function() {
             $(this).removeClass("btn-secondary");
             $("input[name='share']").val("on");
         }
-    });
-
-    $("input#slider").on("change",function(){
-        var score = $(this).val();
-        $("span#slider-count").text(score);
-    });
-
-    $("input#edit-review-slider").on("change",function(){
-        var score = $(this).val();
-        $("span#edit-slider-count").text(score);
     });
 
     $("button#create-review-modal-button").on("click", function(){
@@ -46,7 +73,7 @@ $(function() {
         var review_id = $(this).data("review_id");
         var score= $(this).data("score");
         var content = $(this).data("content");
-        $("input#edit-review-slider").val(score);
+        $("div#edit-slider").slider("value", score);
         $("span#edit-slider-count").text(score);
         $("input#edit-review-id").val(review_id);
         $("textarea#edit-review-content").val(content);

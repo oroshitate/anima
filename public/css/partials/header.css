@@ -1,0 +1,28 @@
+.header-search{
+    font-size: 1.5rem;
+}
+.header-register-login{
+    width: 107px;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 0.72rem;
+}
+form[name="search"]{
+    position: relative;
+    height: 38px;
+}
+input[name="keyword"]{
+    width: 95%;
+    height: 100%;
+}
+#search-button{
+    cursor: pointer;
+    position: absolute;
+    background: none;
+    border: none;
+    right: 3%;
+    top: 13%;
+}
+#search-button > i{
+    color: rgba(142, 142, 147, 0.5);
+}
