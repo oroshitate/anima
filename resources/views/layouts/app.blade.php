@@ -50,9 +50,8 @@
     @endif
 
     <!-- slider -->
-  	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" />
-  	<script type="text/javascript" src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" defer></script>
-
+  	<link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" />
+  	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" defer></script>
 
     <!-- Script variable -->
     <script>
