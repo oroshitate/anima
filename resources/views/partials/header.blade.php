@@ -6,7 +6,7 @@
         @guest
             <div class="row align-items-center col-6 m-0 pr-0">
                 <div class="mr-3 d-sm-none">
-                    <a class="header-register-login text-white btn btn-success font-bold" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
+                    <a class="header-register-login text-white btn btn-success font-bold px-0" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
                 </div>
                 <div class="d-sm-none switch-search-button">
                     <i class="fas fa-search text-white header-search float-right"></i>
