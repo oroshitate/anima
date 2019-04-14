@@ -14,7 +14,7 @@
                         <p class="mb-1 h7">{{ __('app.sentence.review.score') }}</p>
                         <div class="row justify-content-center align-items-center">
                             <div id="edit-slider" class="col-9 col-md-9 mx-auto"></div>
-                            <span id="edit-slider-count" class="h5-5 text-warning col-2 col-md-2 m-0"></span>
+                            <span id="edit-slider-count" class="h5-5 text-warning col-2 col-md-2 m-0 pl-0"></span>
                         </div>
                         @if ($errors->has('score'))
                             <span class="invalid-feedback" role="alert">
