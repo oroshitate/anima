@@ -1,6 +1,6 @@
 $(function() {
-    $('div#slider').draggable();
-    $('div#edit-slider').draggable();
+    $('div#slider > span').draggable();
+    $('div#edit-slider > span').draggable();
     $('div#slider').slider({
         range: "min", // 左側を塗りつぶす （max なら右側）
         max : 5,
