@@ -26,6 +26,7 @@ $(function() {
         max : 5,
         min : 0,
         step : 0.1,
+        animate: true,
         create: function( event, ui ) {
             $("#edit-slider-count").html($(this).slider("value"));
         },
