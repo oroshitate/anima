@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-black border-0">
-                <p class="text-white h5-5 mx-auto mb-0">{{ __('app.word.title.review.create') }}</p>
+                <p class="text-white h5-5 mx-auto mb-0 font-bold">{{ __('app.word.title.review.create') }}</p>
                 <button type="button" class="close text-white ml-0 pl-0" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
                         <p class="mb-1 h7">{{ __('app.sentence.review.score') }}</p>
                         <div class="row justify-content-center align-items-center">
                             <div id="edit-slider" class="col-9 col-md-9 mx-auto"></div>
-                            <span id="edit-slider-count" class="h5-5 text-warning col-2 col-md-2 m-0 pl-0"></span>
+                            <span id="edit-slider-count" class="h5-5 text-warning col-2 col-md-2 m-0 font-bold"></span>
                         </div>
                         @if ($errors->has('score'))
                             <span class="invalid-feedback" role="alert">
@@ -50,7 +50,7 @@
                 @endif
             </div>
             <div class="modal-footer border-0 pt-0">
-                <button type="button" id="edit-review-button" class="btn btn-success w-100">{{ __('app.button.edit') }}</button>
+                <button type="button" id="edit-review-button" class="btn btn-success w-100 font-bold">{{ __('app.button.edit') }}</button>
             </div>
         </div>
     </div>
