@@ -23,19 +23,19 @@
                 @foreach($users as $user)
                     <li class="py-4 border-bottom row justify-content-center no-gutters">
                         <div class="align-top col-8 col-md-6 pl-0">
-                            <div class="row align-items-center">
-                                <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
+                            <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
+                                <div class="row align-items-center">
                                     @if($user->image == null)
                                         <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
                                     @else
                                         <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                                     @endif
-                                </a>
-                                <div class="col-7 px-0 text-left">
-                                    <p class="h7 font-bold m-0">{{ $user->name }}</p>
-                                    <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
+                                    <div class="col-7 px-0 text-left">
+                                        <p class="h7 font-bold m-0">{{ $user->name }}</p>
+                                        <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="col-4 px-0 row align-items-center justify-content-end">
                             @guest

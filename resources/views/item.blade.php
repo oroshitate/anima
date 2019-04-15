@@ -91,20 +91,20 @@
                     <li class="py-2 border-bottom">
                         <div class="row">
                             <div class="align-top col-8">
-                                <div class="row align-items-center mb-2">
-                                    <div class="col-2 col-md-1">
-                                        <a href="{{ route('user', ['nickname' => $review->user_nickname]) }}">
-                                            @if($review->user_image == null)
-                                                <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
-                                            @else
-                                                <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
-                                            @endif
-                                        </a>
+                                <a href="{{ route('user', ['nickname' => $review->user_nickname]) }}">
+                                    <div class="row align-items-center mb-2">
+                                        <div class="col-2 col-md-1">
+                                                @if($review->user_image == null)
+                                                    <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                                @else
+                                                    <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
+                                                @endif
+                                        </div>
+                                        <div class="col-8 pr-0">
+                                            <p class="h7 font-bold mb-0 light-black">{{ $review->user_name }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-8 pr-0">
-                                        <p class="h7 font-bold mb-0 light-black">{{ $review->user_name }}</p>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="row col-4 justify-content-end">
                                 @auth
@@ -128,9 +128,10 @@
                                 <div class="star-rating-front" style="width:{{ $review->review_score*20 }}%">★★★★★</div>
                                 <div class="star-rating-back">★★★★★</div>
                             </div>
+                            <span class="text-warning h7">{{ $review->review_score }}</span>
                             <pre class="py-1 h7 content-length light-black">{{ $review->review_content }}</pre>
                         </a>
-                        <div class="text-center">
+                        <div class="text-left">
                             @guest
                                 <div class="d-inline-block cursor-pointer">
                                     <a href="{{ url('/login') }}">

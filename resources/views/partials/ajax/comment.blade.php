@@ -2,16 +2,16 @@
     <li class="py-2 border-bottom" id="comment-li-{{ $comment->comment_id }}">
         <div class="row">
             <div class="align-top col-8">
-              <div class="row align-items-center mb-2">
-                  <div class="col-2 col-md-1">
-                      <a href="{{ route('user', ['nickname' => $comment->user_nickname]) }}">
-                          <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
-                      </a>
+              <a href="{{ route('user', ['nickname' => $comment->user_nickname]) }}">
+                  <div class="row align-items-center mb-2">
+                      <div class="col-2 col-md-1">
+                              <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
+                      </div>
+                      <div class="col-8 pr-0">
+                          <p class="h7 font-bold mb-0">{{ $comment->user_name }}</p>
+                      </div>
                   </div>
-                  <div class="col-8 pr-0">
-                      <p class="h7 font-bold mb-0">{{ $comment->user_name }}</p>
-                  </div>
-              </div>
+              </a>
             </div>
             <div class="row col-4 justify-content-end">
                 @auth

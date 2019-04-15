@@ -35,20 +35,20 @@
                     <li class="py-2">
                         <div class="row">
                             <div class="align-top col-8">
-                                <div class="row align-items-center mb-2">
-                                    <div class="col-2 col-md-1">
-                                        <a href="{{ route('user', ['nickname' => $review[0]->user_nickname]) }}">
-                                            @if($review[0]->user_image == null)
-                                                <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
-                                            @else
-                                                <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review[0]->user_image }}">
-                                            @endif
-                                        </a>
+                                <a href="{{ route('user', ['nickname' => $review[0]->user_nickname]) }}">
+                                    <div class="row align-items-center mb-2">
+                                        <div class="col-2 col-md-1">
+                                                @if($review[0]->user_image == null)
+                                                    <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                                @else
+                                                    <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review[0]->user_image }}">
+                                                @endif
+                                        </div>
+                                        <div class="col-8 pr-0">
+                                            <p class="h7 font-bold mb-0">{{ $review[0]->user_name }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-8 pr-0">
-                                        <p class="h7 font-bold mb-0">{{ $review[0]->user_name }}</p>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="row col-4 justify-content-end">
                                 @auth
@@ -73,7 +73,7 @@
                         </div>
                         <span class="text-warning h7">{{ $review[0]->review_score }}</span>
                         <pre class="py-1 h7 content-length">{{ $review[0]->review_content }}</pre>
-                        <div class="text-center">
+                        <div class="text-left">
                             @guest
                                 <div class="d-inline-block cursor-pointer">
                                     <a href="{{ url('/login') }}">
@@ -136,16 +136,16 @@
                         <li class="py-2 border-bottom" id="comment-li-{{ $comment->comment_id }}">
                             <div class="row">
                                 <div class="align-top col-8">
-                                  <div class="row align-items-center mb-2">
-                                      <div class="col-2 col-md-1">
-                                          <a href="{{ route('user', ['nickname' => $comment->user_nickname]) }}">
-                                              <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
-                                          </a>
+                                  <a href="{{ route('user', ['nickname' => $comment->user_nickname]) }}">
+                                      <div class="row align-items-center mb-2">
+                                          <div class="col-2 col-md-1">
+                                                  <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $comment->user_image }}">
+                                          </div>
+                                          <div class="col-8 pr-0">
+                                              <p class="h7 font-bold mb-0">{{ $comment->user_name }}</p>
+                                          </div>
                                       </div>
-                                      <div class="col-8 pr-0">
-                                          <p class="h7 font-bold mb-0">{{ $comment->user_name }}</p>
-                                      </div>
-                                  </div>
+                                  </a>
                                 </div>
                                 <div class="row col-4 justify-content-end">
                                     @auth
@@ -172,7 +172,7 @@
                             @else
                                 <pre id="comment-content-{{ $comment->comment_id }}" class="py-1 h7 content-length">{{ $comment->comment_content}}</pre>
                             @endif
-                            <div class="text-center">
+                            <div class="text-left">
                                 @guest
                                     <div class="d-inline-block cursor-pointer">
                                         <a href="{{ url('/login') }}">
