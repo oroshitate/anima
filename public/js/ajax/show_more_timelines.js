@@ -61,15 +61,11 @@ $(function(){
                             if(diff_hour == 0){
                                 var diff_minute = Math.floor(diff_time / (1000 * 60));
                                 created_list[i].innerHTML = String(diff_minute) + minutes;
-                                continue;
                             }else {
                                 created_list[i].innerHTML = String(diff_hour) + hours;
-                                continue;
                             }
-                        }else if (0 < diff_day < 8) {
+                        }else if (0 < diff_day && diff_day <= 7) {
                             created_list[i].innerHTML = String(diff_day) + days;
-                        }else {
-                            continue;
                         }
                     }
                 },100);
