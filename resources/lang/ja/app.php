@@ -24,9 +24,9 @@ return [
             'followings' => ':nameのフォロー',
             'followers' => ':nameのフォロワー',
         ],
-        'home' => 'ホーム',
+        'home' => 'アニメ情報・感想・レビュー評価ならAnima(アニマ)',
         'item' => ':title',
-        'review' => ':nameさんのレビュー',
+        'review' => '『:title』の:nameさんの感想レビュー',
         'search' => '検索：:keyword',
     ],
     'word' => [

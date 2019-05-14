@@ -2,6 +2,7 @@
 
 @section('title')
 <title>Anima | {{ __('app.title.account.index') }}</title>
+<meta property="og:title" content="Anima | {{ __('app.title.account.index') }}">
 @endsection
 
 @section('script')

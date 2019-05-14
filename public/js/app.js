@@ -49123,6 +49123,11 @@ $(function () {
       }
     } else if (0 < diff_day && diff_day <= 7) {
       created_list[i].innerHTML = String(diff_day) + days;
+    } else {
+      var year = past.getFullYear();
+      var month = past.getMonth() + 1;
+      var day = past.getDate();
+      created_list[i].innerHTML = String(year) + "/" + String(month) + "/" + String(day);
     }
   }
 

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title')
-<title>Anima | {{ __('app.title.review', ['name' => $review[0]->user_name]) }}</title>
+<title>Anima | {{ __('app.title.review', ['title' => $item->title, 'name' => $review[0]->user_name]) }}</title>
+<meta property="og:title" content="Anima | {{ __('app.title.review', ['title' => $item->title, 'name' => $review[0]->user_name]) }}">
 @endsection
 
 @section('script')

@@ -2,6 +2,7 @@
 
 @section('title')
 <title>Anima | {{ __('app.title.account.confirm') }}</title>
+<meta property="og:title" content="Anima | {{ __('app.title.account.confirm') }}">
 @endsection
 
 @section('content')

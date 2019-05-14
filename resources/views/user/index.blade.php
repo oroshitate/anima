@@ -2,6 +2,7 @@
 
 @section('title')
 <title>Anima | {{ __('app.title.user.index',['name' => $user->name]) }}</title>
+<meta property="og:title" content="Anima | {{ __('app.title.user.index',['name' => $user->name]) }}">
 @endsection
 
 @section('stylesheet')
@@ -48,20 +49,20 @@
                         <div class="d-inline-block w-100">
                             @guest
                                 <a href="{{ url('/login') }}">
-                                    <button type="button" class="follow-button btn btn-success w-100 font-bold h7 p-0">{{ __('app.button.follow') }}</button>
+                                    <button type="button" class="btn btn-success w-100 font-bold h7 p-0">{{ __('app.button.follow') }}</button>
                                 </a>
                             @else
                                 @if(Auth::user()->id == $user->id)
                                     <form method="post" action="{{ route('mypage') }}">
                                         @csrf
                                         <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                                        <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary w-100 font-bold h7 p-0 dark-grey">{{ __('app.button.edit_profile') }}</button>
+                                        <button type="submit" id="profile-edit-button" class="btn border w-100 font-bold h7 p-0 dark-grey">{{ __('app.button.edit_profile') }}</button>
                                     </form>
                                 @else
                                     @if($follow_status === "active")
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}">{{ __('app.button.following') }}</button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn border w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}"><i class="fa fa-check mr-2"></i><span class="dark-grey">{{ __('app.button.following') }}</span></button>
                                     @else
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-outline-success w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn btn-success w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><span class="">{{ __('app.button.follow') }}</span></button>
                                     @endif
                                 @endif
                             @endguest

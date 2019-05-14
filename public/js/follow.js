@@ -13,14 +13,16 @@ $(function(){
         var user_id = $(this).data('user_id');
         var follow_button = $(this).attr('class');
         if(follow_button.indexOf('active') == -1){
-            $(this).addClass("active btn-success");
-            $(this).removeClass("btn-outline-success");
+            $(this).addClass("active border");
+            $(this).find("span").addClass("dark-grey");
+            $("<i class='fa fa-check mr-2'></i>").prependTo(this);
+            $(this).removeClass("btn-success");
             if($("#followers-link")){
                 var before_follows_count = $("#followers-link").text();
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)+1);
             }
 
-            var after_follow = $(this).text(following);
+            var after_follow = $(this).find("span").text(following);
 
             //ajaxで読み出し
             $.ajaxSetup({
@@ -41,14 +43,16 @@ $(function(){
                 $("button#follow-button-"+user_id).attr("data-follow_id", response);
             });
         }else{
-            $(this).removeClass("active").removeClass("btn-success");
-            $(this).addClass("btn-outline-success");
+            $(this).removeClass("active").removeClass("border");
+            $(this).find("span").removeClass("dark-grey");
+            $(this).find("i").remove();
+            $(this).addClass("btn-success");
             if($("#followers-link")){
                 var before_follows_count = $("#followers-link").text();
                 var after_follows_count = $("#followers-link").text(Number(before_follows_count)-1);
             }
 
-            var after_unfollow = $(this).text(follow);
+            var after_unfollow = $(this).find("span").text(follow);
 
             var follow_id = $(this).attr('data-follow_id');
 

@@ -9,6 +9,43 @@
 
     @yield('title')
 
+    <!-- OGP -->
+        <meta property="og:site_name" content="Anima">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ request()->fullUrl() }}">
+        @if(str_contains(request()->fullUrl(), 'item'))
+            <meta name="description" content="{{ __('app.sentence.home.guest.2') }}">
+            <meta property="og:description" content="{{ __('app.sentence.home.guest.2') }}">
+            @if($item->image == null)
+                <meta property="og:image" content="{{ asset('anima-img.png') }}">
+            @else
+                <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
+            @endif
+        @elseif(str_contains(request()->fullUrl(), 'review'))
+            <meta name="description" content="{{ $review[0]->review_content }}">
+            <meta property="og:description" content="{{ $review[0]->review_content }}">
+            @if($item->image == null)
+                <meta property="og:image" content="{{ asset('anima-img.png') }}">
+            @else
+                <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
+            @endif
+        @elseif(str_contains(request()->fullUrl(), 'user') && !str_contains(request()->fullUrl(), 'follow'))
+            <meta name="description" content="{{ $user->content }}">
+            <meta property="og:description" content="{{ $user->content }}">
+            @if($user->image == null)
+                <meta property="og:image" content="{{ asset('no-image.jpg') }}">
+            @else
+                <meta property="og:image" content="{{ config('app.image_path') }}/users/{{ $user->image }}">
+            @endif
+        @else
+            <meta name="description" content="{{ __('app.sentence.home.guest.2') }}">
+            <meta property="og:description" content="{{ __('app.sentence.home.guest.2') }}">
+            <meta property="og:image" content="{{ asset('anima-img.png') }}">
+        @endif
+        <meta property="og:locale" content="ja_JP">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@Anima65551958">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

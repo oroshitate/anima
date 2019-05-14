@@ -2,6 +2,7 @@
 
 @section('title')
 <title>Anima | {{ __('app.title.search', ['keyword' => $keyword]) }}</title>
+<meta property="og:title" content="Anima | {{ __('app.title.search', ['keyword' => $keyword]) }}">
 @endsection
 
 @section('script')
@@ -106,13 +107,13 @@
                                             <form method="post" action="{{ route('mypage') }}">
                                                 @csrf
                                                 <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                                                <button type="submit" id="profile-edit-button" class="btn btn-outline-secondary">{{ __('app.button.edit_profile') }}</button>
+                                                <button type="submit" id="profile-edit-button" class="btn border dark-grey">{{ __('app.button.edit_profile') }}</button>
                                             </form>
                                         @else
                                             @if($user->follow_status === "active")
-                                                <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn btn-success" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.following') }}</button>
+                                                <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn border" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.following') }}</button>
                                             @else
-                                                <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn btn-outline-success" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
+                                                <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn btn-success" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}">{{ __('app.button.follow') }}</button>
                                             @endif
                                         @endif
                                     @endguest

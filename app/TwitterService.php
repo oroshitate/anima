@@ -20,9 +20,10 @@ class TwitterService
                       $decrypted_token_secret
         );
 
+        $star = str_repeat("★", $score);
         $twitter->post("statuses/update", [
                 "status" =>
-                    $title.$score.$content.$url
+                    $star.$score."点『".$title."』をレビューしました。\n".$content."\n#anima #".$title."\n".$url
         ]);
     }
 }
