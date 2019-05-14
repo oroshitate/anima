@@ -21,6 +21,7 @@
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
             @endif
+            <meta name="twitter:card" content="summary">
         @elseif(str_contains(request()->fullUrl(), 'review'))
             <meta name="description" content="{{ $review[0]->review_content }}">
             <meta property="og:description" content="{{ $review[0]->review_content }}">
@@ -29,6 +30,7 @@
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
             @endif
+            <meta name="twitter:card" content="summary">
         @elseif(str_contains(request()->fullUrl(), 'user') && !str_contains(request()->fullUrl(), 'follow'))
             <meta name="description" content="{{ $user->content }}">
             <meta property="og:description" content="{{ $user->content }}">
@@ -37,13 +39,14 @@
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/users/{{ $user->image }}">
             @endif
+            <meta name="twitter:card" content="summary">
         @else
             <meta name="description" content="{{ __('app.sentence.home.guest.2') }}">
             <meta property="og:description" content="{{ __('app.sentence.home.guest.2') }}">
             <meta property="og:image" content="{{ asset('ogp_image.png') }}">
+            <meta name="twitter:card" content="summary_large_image">
         @endif
         <meta property="og:locale" content="ja_JP">
-        <meta name="twitter:card" content="summary">
         <meta name="twitter:site" content="@Anima65551958">
 
     <!-- Scripts -->
