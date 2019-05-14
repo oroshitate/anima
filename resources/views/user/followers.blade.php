@@ -52,7 +52,7 @@
                                     </form>
                                 @else
                                     @if($user->follow_status === "active")
-                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn border" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><span class="dark-grey">{{ __('app.button.following') }}</span></button>
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn border" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><i class="fa fa-check mr-2"></i><span class="dark-grey">{{ __('app.button.following') }}</span></button>
                                     @else
                                         <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn btn-success" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><span class="">{{ __('app.button.follow') }}</button>
                                     @endif
