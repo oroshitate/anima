@@ -40,7 +40,7 @@
         @else
             <meta name="description" content="{{ __('app.sentence.home.guest.2') }}">
             <meta property="og:description" content="{{ __('app.sentence.home.guest.2') }}">
-            <meta property="og:image" content="{{ asset('anima-img.png') }}">
+            <meta property="og:image" content="{{ asset('ogp_image.png') }}">
         @endif
         <meta property="og:locale" content="ja_JP">
         <meta name="twitter:card" content="summary">
