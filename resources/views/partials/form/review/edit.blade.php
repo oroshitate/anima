@@ -32,10 +32,6 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group m-3">
-                        <button type="button" id="share-twitter-button" class="btn btn-secondary"><span class="fab fa-twitter text-white mr-2"></span> {{ __('app.button.review.share') }}</button>
-                        <input type="hidden" name="share" value="">
-                    </div>
                     <input type="hidden" name="score" value="">
                     <input type="hidden" name="review_id" id="edit-review-id" value="">
                 </form>

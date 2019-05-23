@@ -200,25 +200,6 @@ class ReviewController extends Controller
             return redirect()->back();
         }
 
-        $review_id = $review_detail->id;
-
-        $share = $request->input('share');
-        if($share == "on"){
-            $user = User::find(Auth::id());
-            $account = new LinkedSocialAccount();
-            $twitter_account = $account->getUserLinkedProviderExists($user, "twitter");
-            if($twitter_account == null){
-                $request->session()->put('review_id', $review_id);
-                return redirect('/login/twitter');
-            }
-
-            $twitter_service = new TwitterService;
-            $item = Item::find($item_id);
-            $title = $item->title;
-            $url = route('review', ['review_id' => $review_id]);
-            $twitter_service->tweet($twitter_account,$title,$score,$content,$url);
-        }
-
         return redirect()->back();
     }
 
