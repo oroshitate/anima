@@ -49154,29 +49154,34 @@ $(function () {
       }); // そのまま表示
     }
   });
-  var $setElm_content = $('pre.content-length'); // 省略する文字のあるセレクタを取得
+  var url_now = location.href;
 
-  var cutFigure_content = '140'; // 表示する文字数
+  if (url_now.indexOf("review") === -1) {
+    var $setElm_content = $('pre.content-length'); // 省略する文字のあるセレクタを取得
 
-  var afterTxt_content = ' …'; // 文字カット後に表示するテキスト
+    var cutFigure_content = '140'; // 表示する文字数
 
-  $setElm_content.each(function () {
-    var textLength = $(this).text().length; // 文字数を取得
+    var afterTxt_content = ' …'; // 文字カット後に表示するテキスト
 
-    var textTrim = $(this).text().substr(0, cutFigure_content); // 表示する数以上の文字をトリムする
+    $setElm_content.each(function () {
+      var textLength = $(this).text().length; // 文字数を取得
 
-    if (cutFigure_content < textLength) {
-      // 文字数が表示数より多い場合
-      $(this).html(textTrim + afterTxt_content).css({
-        visibility: 'visible'
-      }); // カット後の文字数に…を追加
-    } else if (cutFigure_content >= textLength) {
-      // 文字数が表示数以下の場合
-      $(this).css({
-        visibility: 'visible'
-      }); // そのまま表示
-    }
-  });
+      var textTrim = $(this).text().substr(0, cutFigure_content); // 表示する数以上の文字をトリムする
+
+      if (cutFigure_content < textLength) {
+        // 文字数が表示数より多い場合
+        $(this).html(textTrim + afterTxt_content).css({
+          visibility: 'visible'
+        }); // カット後の文字数に…を追加
+      } else if (cutFigure_content >= textLength) {
+        // 文字数が表示数以下の場合
+        $(this).css({
+          visibility: 'visible'
+        }); // そのまま表示
+      }
+    });
+  }
+
   $(".switch-search-button").on("click", function () {
     var switch_search_button = $(this).attr("class");
 

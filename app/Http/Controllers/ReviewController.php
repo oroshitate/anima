@@ -141,6 +141,11 @@ class ReviewController extends Controller
 
             $twitter_service = new TwitterService;
             $title = Item::find($item_id)->title;
+            if(mb_strlen($content) >= 80){
+                $shorten_content = mb_substr($content, 0, 80);
+                $content = $shorten_content." …";
+            }
+
             $url = route('review', ['review_id' => $review_id]);
             $twitter_service->tweet($twitter_account,$title,$score,$content,$url);
         }
