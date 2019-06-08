@@ -186,4 +186,13 @@ class Review extends Model
 
         return $reviews;
     }
+
+    /**
+     * レビュー件数の多いユーザー取得
+     */
+    public function getManyReviewUsers(){
+        $users = review::select(DB::raw("count(user_id) as user_count, user_id"))->groupBy("user_id")->orderBy("user_count", "desc")->take(20)->get();
+
+        return $users;
+    }
 }

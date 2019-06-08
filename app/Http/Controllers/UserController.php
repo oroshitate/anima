@@ -64,12 +64,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(Request $request){
-        $user = new User();
-        $nickname = $request->input('nickname');
-        $user_detail = $user->getUser($nickname);
+    public function edit(){
+        $user_id = Auth::id();
+        $user = User::find($user_id);
         return view('user.edit',[
-            'user' => $user_detail,
+            'user' => $user,
         ]);
     }
 

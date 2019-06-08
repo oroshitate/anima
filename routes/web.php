@@ -22,7 +22,7 @@ Route::post('search/{keyword}', 'SearchController@index')->name('search');
 
 // ユーザー
 Route::get('user/{nickname}', 'UserController@index')->name('user');
-Route::post('mypage/edit', 'UserController@edit')->middleware('auth')->name('mypage');
+Route::get('mypage/edit', 'UserController@edit')->middleware('auth')->name('mypage');
 Route::post('mypage/store', 'UserController@store')->middleware('auth');
 
 // アカウント

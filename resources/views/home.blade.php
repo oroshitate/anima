@@ -6,10 +6,15 @@
 @endsection
 
 @section('script')
+<script>
+    var following = "{{ __('app.button.following') }}";
+    var follow = "{{ __('app.button.follow') }}";
+</script>
 <script src="{{ asset('js/template/masonry.pkgd.min.js') }}" defer></script>
 <script src="{{ asset('js/review.js') }}" defer></script>
 <script src="{{ asset('js/like.js') }}" defer></script>
 <script src="{{ asset('js/pinterest.js') }}" defer></script>
+<script src="{{ asset('js/follow.js') }}" defer></script>
 <script src="{{ asset('js/ajax/show_more_timelines.js') }}" defer></script>
 @endsection
 
@@ -142,6 +147,37 @@
                             <img src="{{ asset('anima-img.png') }}" style="width:156px; height:152px;">
                         </div>
                     </div>
+                    <div class="bg-grey text-dark p-1">
+                        <span class="h5 text-black">{{ __('app.word.title.recommend_user') }}</span>
+                    </div>
+                    <ul id="users" class="list-unstyled text-center my-2">
+                        @foreach($users as $user)
+                            <li class="py-4 border-bottom row justify-content-center no-gutters">
+                                <div class="align-top col-8 col-md-6 pl-0">
+                                    <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
+                                        <div class="row align-items-center">
+                                            @if($user->image == null)
+                                                <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                            @else
+                                                <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
+                                            @endif
+                                            <div class="col-7 px-0 text-left">
+                                                <p class="h7 font-bold m-0">{{ $user->name }}</p>
+                                                <p class="m-0 h7 text-secondary">{{ "@".$user->nickname }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-4 px-0 row align-items-center justify-content-center">
+                                    @if($user->follow_status === "active")
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn border" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><i class="fa fa-check mr-2"></i><span class="dark-grey">{{ __('app.button.following') }}</span></button>
+                                    @else
+                                        <button type="button" id="follow-button-{{ $user->id }}" class="{{ $user->follow_status }} follow-button btn btn-success" data-user_id="{{ $user->id }}" data-follow_id="{{ $user->follow_id }}"><span class="">{{ __('app.button.follow') }}</button>
+                                    @endif
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 @endif
                 <div class="bg-grey text-dark p-1">
                     <span class="h5 text-black">{{ __('app.word.title.popular_anime') }}</span>

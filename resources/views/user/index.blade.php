@@ -53,11 +53,9 @@
                                 </a>
                             @else
                                 @if(Auth::user()->id == $user->id)
-                                    <form method="post" action="{{ route('mypage') }}">
-                                        @csrf
-                                        <input type="hidden" name="nickname" value="{{ $user->nickname }}">
-                                        <button type="submit" id="profile-edit-button" class="btn border w-100 font-bold h7 p-0 dark-grey">{{ __('app.button.edit_profile') }}</button>
-                                    </form>
+                                    <a href="{{ route('mypage') }}">
+                                        <button type="button" id="profile-edit-button" class="btn border w-100 font-bold h7 p-0 dark-grey">{{ __('app.button.edit_profile') }}</button>
+                                    </a>
                                 @else
                                     @if($follow_status === "active")
                                         <button type="button" id="follow-button-{{ $user->id }}" class="{{ $follow_status }} follow-button btn border w-100 font-bold h7 p-0" data-user_id="{{ $user->id }}" data-follow_id="{{ $follow_id }}"><i class="fa fa-check mr-2"></i><span class="dark-grey">{{ __('app.button.following') }}</span></button>

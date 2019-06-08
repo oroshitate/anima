@@ -35,15 +35,6 @@
                     <input type="hidden" name="score" value="">
                     <input type="hidden" name="review_id" id="edit-review-id" value="">
                 </form>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
             </div>
             <div class="modal-footer border-0 pt-0">
                 <button type="button" id="edit-review-button" class="btn btn-success w-100 font-bold">{{ __('app.button.edit') }}</button>

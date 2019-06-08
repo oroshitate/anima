@@ -113,7 +113,7 @@ class CommentController extends Controller
         DB::beginTransaction();
         try {
             Comment::find($comment_id)->fill(['content' => $content])->save();
-            
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

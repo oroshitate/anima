@@ -149,4 +149,22 @@ class User extends Authenticatable
                                                             ->get();
         return $users;
     }
+
+    /**
+     * おすすめユーザー取得
+     */
+    public function getRecommendUsers($many_review_users, $auth_id){
+        $users = array();
+        foreach ($many_review_users as $many_review_user) {
+            $user_id = $many_review_user->user_id;
+            if($user_id == $auth_id){
+                continue;
+            }
+            
+            $user = User::find($user_id);
+            array_push($users,$user);
+        }
+
+        return $users;
+    }
 }

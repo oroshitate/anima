@@ -31,6 +31,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $item = new Item();
+        $items = $item->getPopularItems();
         if (Auth::check()) {
             $user_id = Auth::id();
             $user = User::find($user_id);
@@ -42,24 +44,27 @@ class HomeController extends Controller
             }
             array_push($follow_ids, $user_id);
 
-            if(count($follow_ids) > 0){
-                $review = new Review();
+            $review = new Review();
+            $reviews = array();
+            if(count($follow_ids) > 1){
                 $reviews = $review->getTimelines($user_id,$follow_ids);
+                return view('home', [
+                    'reviews' => $reviews,
+                    'items' => $items,
+                ]);
             }else{
-                $reviews = array();
+                $many_review_users = $review->getManyReviewUsers();
+                $user = new User();
+                $users = $user->getRecommendUsers($many_review_users, $user_id);
+                return view('home', [
+                    'reviews' => $reviews,
+                    'items' => $items,
+                    'users' => $users,
+                ]);
             }
 
-            $item = new Item();
-            $items = $item->getPopularItems();
-
-            return view('home', [
-                'reviews' => $reviews,
-                'items' => $items,
-            ]);
         }
 
-        $item = new Item();
-        $items = $item->getPopularItems();
         return view('home', [
             'items' => $items,
         ]);

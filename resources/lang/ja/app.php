@@ -75,7 +75,8 @@ return [
         'score' => '評価',
         'title' => [
             'reviewd_anime' => 'レビューしたアニメ',
-            'popular_anime' => '話題のアニメ',
+            'popular_anime' => '話題アニメ',
+            'recommend_user' => 'おすすめユーザー',
             'timeline' => 'タイムライン',
             'watchlist' => 'ウォッチリスト',
             'item' => [

@@ -45,12 +45,6 @@
                     </div>
                     <div class="col-12 col-md-10 mx-auto">
                         <input id="nickname" type="text" class="form-control{{ $errors->has('nickname') ? ' is-invalid' : '' }}" name="nickname" value="{{ $user->nickname }}" readonly>
-
-                        @if ($errors->has('nickname'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('nickname') }}</strong>
-                            </span>
-                        @endif
                     </div>
                 </div>
 

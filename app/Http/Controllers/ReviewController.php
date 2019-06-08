@@ -92,11 +92,13 @@ class ReviewController extends Controller
         // ルールを設定
         $rules = [
             'score' => 'required',
+            'content' => 'nullable|max:2000',
         ];
 
         // エラーメッセージを設定
         $messages = [
             'score.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.score')]),
+            'content.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.word.review')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);
@@ -167,11 +169,13 @@ class ReviewController extends Controller
         // ルールを設定
         $rules = [
             'score' => 'required',
+            'content' => 'nullable|max:2000',
         ];
 
         // エラーメッセージを設定
         $messages = [
             'score.required' => \Lang::get('validation.required', ["attribute" => \Lang::get('app.word.score')]),
+            'content.max' => \Lang::get('validation.max.string', ["attribute" => \Lang::get('app.word.review')]),
         ];
 
         $validation = Validator::make($inputs, $rules, $messages);
