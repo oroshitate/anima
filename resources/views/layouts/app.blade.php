@@ -110,6 +110,7 @@
     <script>
         var base_url = "http://localhost:8080";
     </script>
+    @endif
     @auth
     <script>
         var nickname = "{{ Auth::user()->nickname }}";
@@ -121,7 +122,7 @@
         });
     </script>
     @endauth
-    @endif
+
     @yield('script')
     @yield('stylesheet')
 </head>
