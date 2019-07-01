@@ -12,12 +12,10 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        // Type::insert([
-        //     [ 'name' => 'like'],
-        //     [ 'name' => 'comment'],
-        //     [ 'name' => 'follow'],
-        // ]);
         Type::insert([
+            [ 'name' => 'like'],
+            [ 'name' => 'comment'],
+            [ 'name' => 'follow'],
             [ 'name' => 'like-comment'],
         ]);
     }
