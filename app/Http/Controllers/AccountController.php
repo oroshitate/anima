@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Notification;
 use App\LinkedSocialAccount;
+use App\Notification;
 
 class AccountController extends Controller
 {
@@ -18,7 +20,12 @@ class AccountController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware(function ($request, $next) {
+            $notification = new Notification();
+            $notifications_count = $notification->checkUserNotifications(Auth::id());
+            $request->session()->put('notifications_count', $notifications_count);
+            return $next($request);
+        });
     }
 
     /**

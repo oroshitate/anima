@@ -9,6 +9,7 @@ use App\TwitterService;
 use App\User;
 use App\Item;
 use App\Review;
+use App\Notification;
 
 class SocialAccountController extends Controller
 {

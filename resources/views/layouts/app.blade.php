@@ -31,7 +31,7 @@
                 <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
             @endif
             <meta name="twitter:card" content="summary">
-        @elseif(str_contains(request()->fullUrl(), 'user') && !str_contains(request()->fullUrl(), 'follow'))
+        @elseif(str_contains(request()->fullUrl(), 'user') && !str_contains(request()->fullUrl(), 'follow') && !str_contains(request()->fullUrl(), 'notifications'))
             <meta name="description" content="{{ $user->content }}">
             <meta property="og:description" content="{{ $user->content }}">
             @if($user->image == null)
@@ -103,9 +103,24 @@
         var count_word = "{{ __('app.word.count') }}";
     </script>
     @if(App::environment() == 'production')
-    <script>var base_url = "https://www.anima.fan";</script>
+    <script>
+        var base_url = "https://www.anima.fan";
+    </script>
     @else
-    <script>var base_url = "http://localhost:8080";</script>
+    <script>
+        var base_url = "http://localhost:8080";
+    </script>
+    @auth
+    <script>
+        var nickname = "{{ Auth::user()->nickname }}";
+        var notifications_link = document.getElementsByClassName("notifications-link");
+        document.addEventListener("DOMContentLoaded", function(e) {
+            for (var i = 0; i < notifications_link.length; i++) {
+                notifications_link[i].href = base_url + "/user/" + nickname + "/notifications";
+            }
+        });
+    </script>
+    @endauth
     @endif
     @yield('script')
     @yield('stylesheet')

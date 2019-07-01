@@ -63,12 +63,12 @@ $(function() {
             $(this).addClass("active");
             $("div#search-box").css({"display":"block"});
             $(this).empty();
-            $(this).prepend("<i class='fas fa-times text-white header-search float-right'></i>");
+            $(this).prepend("<img src='"+ base_url + "/xbutton.png' class='header-icon'>");
         }else{
             $(this).removeClass("active");
             $("div#search-box").css({"display":"none"});
             $(this).empty();
-            $(this).prepend("<i class='fas fa-search text-white header-search float-right'></i>");
+            $(this).prepend("<img src='"+ base_url + "/search.png' class='header-icon'>");
         }
     })
 

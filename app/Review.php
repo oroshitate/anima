@@ -27,6 +27,13 @@ class Review extends Model
     }
 
     /**
+     * レビューに関連する通知情報取得
+     */
+    public function notifications(){
+        return $this->hasMany('App\Notification');
+    }
+
+    /**
      * レビューに関連するユーザー情報取得
      */
     public function user(){

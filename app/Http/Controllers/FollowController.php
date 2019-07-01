@@ -7,9 +7,27 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Follow;
 use App\User;
+use App\Notification;
 
 class FollowController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
+    }
+
     public function showFollowings(string $nickname){
         $user = new User;
         $show_user = $user->getUser($nickname);
@@ -89,6 +107,20 @@ class FollowController extends Controller
               'follow_id' => $user_id
             ];
             $follow = Follow::create($data);
+
+            // 通知格納
+            $receive_id = $user_id;
+            if($receive_id != Auth::id()){
+                $data = [
+                  'type_id' => 3,
+                  'receive_id' => $receive_id,
+                  'send_id' => Auth::id(),
+                  'review_id' => null,
+                ];
+
+                Notification::create($data);
+            }
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

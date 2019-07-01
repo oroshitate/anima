@@ -25,6 +25,9 @@ Route::get('user/{nickname}', 'UserController@index')->name('user');
 Route::get('mypage/edit', 'UserController@edit')->middleware('auth')->name('mypage');
 Route::post('mypage/store', 'UserController@store')->middleware('auth');
 
+// 通知
+Route::get('user/{nickname}/notifications', 'NotificationController@showNotifications')->middleware('auth')->name('user.notification');
+
 // アカウント
 Route::get('account/setting', 'AccountController@index')->middleware('auth')->name('account');
 Route::get('account/setting/confirm', 'AccountController@confirm')->middleware('auth');
@@ -67,5 +70,3 @@ Route::post('ajax/comments/show', 'AjaxController@showMoreComments');
 Route::post('ajax/review-items/show', 'AjaxController@showMoreReviewItems');
 Route::post('ajax/one-watchlists/show', 'AjaxController@showWatchlists');
 Route::post('ajax/watchlists/show', 'AjaxController@showMoreWatchlists');
-
-// その他

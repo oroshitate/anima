@@ -9,6 +9,7 @@ use App\Review;
 use App\Comment;
 use App\Like;
 use App\Watchlist;
+use App\Notification;
 
 class ItemController extends Controller
 {
@@ -19,7 +20,14 @@ class ItemController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
     }
 
     /**

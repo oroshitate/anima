@@ -96,7 +96,7 @@
                             <div class="text-left">
                                 @if($review->like_id)
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-15x"></i>
+                                        <img src="{{ asset('like_on.png') }}" class="header-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -106,7 +106,7 @@
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <i class="far fa-heart fa-15x"></i>
+                                        <img src="{{ asset('like.png') }}" class="header-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -120,7 +120,7 @@
                                     </div>
                                 @endif
                                 <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                    <i class="far fa-comment fa-15x mx-1"></i>
+                                    <img src="{{ asset('comment.png') }}" class="header-icon">
                                     @if($review->comments_count > 0)
                                         <span class="h7">
                                             {{ $review->comments_count }}

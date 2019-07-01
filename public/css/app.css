@@ -16257,12 +16257,14 @@ li.bg-grey-opacity:hover{
   width: 80px;
   height: 80px;
 }
-
 .social-icon{
   width: 30px;
   height: 30px;
 }
-
+.header-icon {
+  width: 32px;
+  height: 32px;
+}
 /*
   cursor
 */
@@ -16350,3 +16352,7 @@ li.bg-grey-opacity:hover{
 {
     background: #f8e71c;
 }
+
+/*
+  svg
+*/

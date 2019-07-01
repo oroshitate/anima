@@ -10,6 +10,7 @@ use App\Review;
 use App\Comment;
 use App\Like;
 use Carbon\Carbon;
+use App\Notification;
 
 class HomeController extends Controller
 {
@@ -20,8 +21,14 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // 認証済みユーザーのみ
-        // $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -36,6 +43,10 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user_id = Auth::id();
             $user = User::find($user_id);
+
+            $notification = new Notification();
+            $notifications_count = $notification->checkUserNotifications($user_id);
+
             $follows = $user->follows;
             $follow_ids = array();
             foreach ($follows as $follow) {
@@ -51,6 +62,7 @@ class HomeController extends Controller
                 return view('home', [
                     'reviews' => $reviews,
                     'items' => $items,
+                    'notifications_count' => $notifications_count
                 ]);
             }else{
                 $many_review_users = $review->getManyReviewUsers();
@@ -60,6 +72,7 @@ class HomeController extends Controller
                     'reviews' => $reviews,
                     'items' => $items,
                     'users' => $users,
+                    'notifications_count' => $notifications_count
                 ]);
             }
 

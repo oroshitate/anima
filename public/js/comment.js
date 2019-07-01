@@ -10,9 +10,11 @@ $(function() {
         var user_nickname = $(this).data("user_nickname");
         var reply_to = "@" + user_nickname + "";
         $("<div id='reply-group' class='col-11 col-md-9 row align-items-center mb-2'>\
-              <p class='mb-0 text-white'>To " + reply_to + "</p>\
+              <p class='mb-0 text-white border'>To " + reply_to + "</p>\
               <div id='cancel-reply-box'>\
-                  <button type='button' id='cancel-reply-button' style='background:none; border:none;'><i class='fas fa-times text-white fa-1x'></i></button>\
+                  <button type='button' id='cancel-reply-button' style='background:none; border:none;'>\
+                      <img src='"+ base_url + "/xbutton.png' class='header-icon'>\
+                  </button>\
               </div>\
           <div>").prependTo("div#footer-comment-group");
 

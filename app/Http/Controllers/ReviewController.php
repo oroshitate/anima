@@ -13,6 +13,7 @@ use App\Review;
 use App\Comment;
 use App\Like;
 use App\TwitterService;
+use App\Notification;
 
 class ReviewController extends Controller
 {
@@ -23,7 +24,14 @@ class ReviewController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
     }
 
     /**

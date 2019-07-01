@@ -9,12 +9,20 @@
                     <a class="header-register-login text-white btn btn-success font-bold px-0" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
                 </div>
                 <div class="d-sm-none switch-search-button">
-                    <i class="fas fa-search text-white header-search float-right"></i>
+                    <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
                 </div>
             </div>
         @else
-            <div class="d-sm-none switch-search-button" style="width:49%;">
-                <i class="fas fa-search text-white header-search float-right"></i>
+            <div class="d-sm-none switch-search-button" style="width:35%">
+                <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
+            </div>
+            <div class="d-sm-none text-center" style="width:10%; position:relative;">
+                <a class="notifications-link">
+                    <img src="{{ asset('noti.png') }}" class="header-icon">
+                </a>
+                @if(Session::get('notifications_count') != 0)
+                    <span class="text-white bg-success rounded text-center" style="position: absolute;top: 0;right: 0;width: 17px;font-size: 0.75rem;height: 17px;">{{ Session::get('notifications_count') }}</span>
+                @endif
             </div>
             <button class="navbar-toggler d-sm-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -29,10 +37,18 @@
                         <a class="header-register-login text-white btn btn-success font-bold" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
                     </li>
                 @endguest
-                <li class="nav-item btn py-0 px-3 d-none d-md-block switch-search-button">
-                    <i class="fas fa-search text-white header-search"></i>
+                <li class="nav-item btn py-0 px-2 d-none d-md-block switch-search-button">
+                    <img src="{{ asset('search.png') }}" class="header-icon header-search">
                 </li>
                 @auth
+                    <li class="nav-item btn py-0 px-2 d-none d-md-block" style="position: relative;">
+                        <a class="notifications-link">
+                            <img src="{{ asset('noti.png') }}" class="header-icon">
+                        </a>
+                        @if(Session::get('notifications_count') != 0)
+                            <span class="text-white bg-success rounded" style="position: absolute;top: 0;right: 0;width: 17px;font-size: 0.75rem;height: 17px;">{{ Session::get('notifications_count') }}</span>
+                        @endif
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('user', ['nickname' => Auth::user()->nickname ]) }}">
                             {{ __('app.word.mypage') }}

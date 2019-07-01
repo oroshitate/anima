@@ -7,6 +7,8 @@ $(function(){
         var like_button = $(like_button_id).attr('class');
         if(like_button.indexOf('active') == -1){
             $(like_button_id).addClass("active text-danger");
+            $(like_button_id).find("img").remove();
+            $(like_button_id).prepend("<img src='"+ base_url + "/like_on.png' class='header-icon'>");
             var before_likes_count = $(likes_count_id).text();
             if(before_likes_count == ""){
                 before_likes_count = 0;
@@ -35,6 +37,8 @@ $(function(){
             });
         }else{
             $(like_button_id).removeClass("active").removeClass("text-danger");
+            $(like_button_id).find("img").remove();
+            $(like_button_id).prepend("<img src='"+ base_url + "/like.png' class='header-icon'>");
             var before_likes_count = $(likes_count_id).text();
             if(Number(before_likes_count)-1 == 0){
                 before_likes_count = $(likes_count_id).text("");
@@ -75,6 +79,8 @@ $(function(){
         var like_button = $(like_button_id).attr('class');
         if(like_button.indexOf('active') == -1){
             $(like_button_id).addClass("active text-danger");
+            $(like_button_id).find("img").remove();
+            $(like_button_id).prepend("<img src='"+ base_url + "/like_on.png' class='header-icon'>");
             var before_likes_count = $(likes_count_id).text();
             if(before_likes_count == ""){
                 before_likes_count = 0;
@@ -104,6 +110,8 @@ $(function(){
             });
         }else{
             $(like_button_id).removeClass("active").removeClass("text-danger");
+            $(like_button_id).find("img").remove();
+            $(like_button_id).prepend("<img src='"+ base_url + "/like.png' class='header-icon'>");
             var before_likes_count = $(likes_count_id).text();
             if(Number(before_likes_count)-1 == 0){
                 before_likes_count = $(likes_count_id).text("");

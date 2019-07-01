@@ -20,7 +20,7 @@
                 <div class="col-12 row">
                     <div class="text-left d-inline-block">
                         @if($item->image == null)
-                            <img src="{{ asset('anima-img.png') }}" style="width: 60px; height: 99px;">
+                            <img src="{{ asset('anima-img.png') }}" style="width: 60px; height: 60px;">
                         @else
                             <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" style="width: 60px;">
                         @endif
@@ -78,7 +78,7 @@
                             @guest
                                 <div class="d-inline-block cursor-pointer">
                                     <a href="{{ url('/login') }}">
-                                        <i class="far fa-heart fa-15x"></i>
+                                        <img src="{{ asset('like.png') }}" class="header-icon">
                                         @if($likes_review_count > 0)
                                             <span class="h7">
                                                 {{ $likes_review_count }}
@@ -90,7 +90,7 @@
                             @else
                                 @if($like_review_id)
                                     <div id="like-review-button-{{ $review[0]->review_id }}" class="{{ $like_review_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review[0]->review_id }}" data-like_id="{{ $like_review_id }}">
-                                        <i class="far fa-heart fa-15x"></i>
+                                        <img src="{{ asset('like_on.png') }}" class="header-icon">
                                         @if($likes_review_count > 0)
                                             <span id="likes-review-count-{{ $review[0]->review_id }}" class="h7">
                                                     {{ $likes_review_count }}
@@ -100,7 +100,7 @@
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review[0]->review_id }}" class="{{ $like_review_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review[0]->review_id }}" data-like_id="{{ $like_review_id }}">
-                                        <i class="far fa-heart fa-15x"></i>
+                                        <img src="{{ asset('like.png') }}" class="header-icon">
                                         @if($likes_review_count > 0)
                                             <span id="likes-review-count-{{ $review[0]->review_id }}" class="h7">
                                                 {{ $likes_review_count }}
@@ -115,7 +115,7 @@
                                 @endif
                             @endguest
                             <a href="{{ route('review', ['review_id' => $review[0]->review_id]) }}">
-                                <i class="far fa-comment fa-15x"></i>
+                                <img src="{{ asset('comment.png') }}" class="header-icon">
                                 @if($comments_count > 0)
                                     <span class="h7">
                                         {{ $comments_count }}
@@ -177,7 +177,7 @@
                                 @guest
                                     <div class="d-inline-block cursor-pointer">
                                         <a href="{{ url('/login') }}">
-                                            <i class="far fa-heart fa-15x"></i>
+                                            <img src="{{ asset('like.png') }}" class="header-icon">
                                             @if($comment->comment_likes_count > 0)
                                                 <span class="h7">
                                                     {{ $comment->comment_likes_count }}
@@ -200,7 +200,7 @@
                                 @else
                                     @if($comment->comment_like_id)
                                         <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
-                                            <i class="far fa-heart fa-15x"></i>
+                                            <img src="{{ asset('like_on.png') }}" class="header-icon">
                                             @if($comment->comment_likes_count > 0)
                                                 <span id="likes-comment-count-{{ $comment->comment_id }}" class="h7">
                                                     {{ $comment->comment_likes_count }}
@@ -210,7 +210,7 @@
                                         </div>
                                     @else
                                         <div id="like-comment-button-{{ $comment->comment_id }}" class="{{ $comment->comment_like_status }} like-comment-button d-inline-block cursor-pointer" data-review_id="{{ $review[0]->review_id }}" data-comment_id="{{ $comment->comment_id }}" data-like_id="{{ $comment->comment_like_id }}">
-                                            <i class="far fa-heart fa-15x"></i>
+                                            <img src="{{ asset('like.png') }}" class="header-icon">
                                             @if($comment->comment_likes_count > 0)
                                                 <span id="likes-comment-count-{{ $comment->comment_id }}" class="h7">
                                                     {{ $comment->comment_likes_count }}

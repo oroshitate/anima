@@ -23,6 +23,7 @@ return [
             'edit' => 'プロフィール編集',
             'followings' => ':nameのフォロー',
             'followers' => ':nameのフォロワー',
+            'notifications' => '通知'
         ],
         'home' => 'アニメ情報・感想・レビュー評価ならAnima(アニマ)',
         'item' => ':title',
@@ -114,6 +115,13 @@ return [
         'user' => [
             'cannot_edit' => '※登録後の変更はできません。',
             'can_edit' => '※登録後も設定から変更できます。',
+            'notification' => [
+                'like' => ':userさんがあなたのレビューをイイネしました。',
+                'comment' => ':userさんがあなたのレビューにコメントしました。',
+                'follow' => ':userさんにフォローされました。',
+                'like-comment' => ':userさんがあなたのコメントをイイネしました。',
+                'none' => '通知はありません。'
+            ]
         ],
         'home' => [
             'guest' => [

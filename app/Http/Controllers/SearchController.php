@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Item;
 use App\User;
 use App\Follow;
+use App\Notification;
 
 class SearchController extends Controller
 {
@@ -17,7 +18,14 @@ class SearchController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
     }
 
     /**

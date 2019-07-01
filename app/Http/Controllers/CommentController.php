@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Comment;
+use App\Review;
+use App\Notification;
 use Validator;
 
 class CommentController extends Controller
@@ -67,6 +69,22 @@ class CommentController extends Controller
               'reply_id' => $request->input('reply_id')
             ];
             $comment = Comment::create($data);
+
+            // 通知格納
+            $user = Review::find($request->input('review_id'))->user;
+
+            $receive_id = $user->id;
+            if($receive_id != Auth::id()){
+                $data = [
+                  'type_id' => 2,
+                  'receive_id' => $receive_id,
+                  'send_id' => Auth::id(),
+                  'review_id' => $request->input('review_id'),
+                ];
+
+                Notification::create($data);
+            }
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

@@ -11,6 +11,7 @@ use App\User;
 use App\Review;
 use App\Follow;
 use App\Watchlist;
+use App\Notification;
 
 class UserController extends Controller
 {
@@ -21,7 +22,14 @@ class UserController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware(function ($request, $next) {
+            if (Auth::check()) {
+                $notification = new Notification();
+                $notifications_count = $notification->checkUserNotifications(Auth::id());
+                $request->session()->put('notifications_count', $notifications_count);
+            }
+            return $next($request);
+        });
     }
 
     /**
