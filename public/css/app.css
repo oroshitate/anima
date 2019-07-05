@@ -16354,5 +16354,16 @@ li.bg-grey-opacity:hover{
 }
 
 /*
+  tag
+*/
+input {
+  outline: none;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/*
   svg
 */
