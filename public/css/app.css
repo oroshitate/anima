@@ -16261,10 +16261,20 @@ li.bg-grey-opacity:hover{
   width: 30px;
   height: 30px;
 }
-.header-icon {
+.zwicon-icon {
   width: 32px;
   height: 32px;
 }
+
+/*
+  size
+*/
+.btn-watchlist,
+.btn-review {
+  width: 149px;
+  height: 30px;
+}
+
 /*
   cursor
 */
@@ -16363,7 +16373,3 @@ input {
   outline: none;
   box-shadow: none;
 }
-
-/*
-  svg
-*/

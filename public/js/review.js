@@ -53,7 +53,7 @@ $(function() {
         }
     });
 
-    $("button#create-review-modal-button").on("click", function(){
+    $("div#create-review-modal-button").on("click", function(){
         var item_id = $(this).data("item_id");
         $("input[name='item_id']").val(item_id);
     });

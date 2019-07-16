@@ -59,13 +59,14 @@ $(function(){
         });
     });
 
-    $(document).on("click", "button#watchlist-button", function () {
+    $(document).on("click", "div#watchlist-button", function () {
         var user_id = $(this).data('user_id');
         var item_id = $(this).data('item_id');
         var watchlist_button = $(this).attr('class');
         if(watchlist_button.indexOf('active') == -1){
-            $(this).addClass("active btn-secondary");
-            $(this).removeClass("btn-outline-secondary");
+            $(this).addClass("active");
+            var img_src = base_url + "/add_to_watchlist_b.png";
+            $(this).find("img").attr('src', img_src);
 
             //ajaxで読み出し
             $.ajaxSetup({
@@ -84,14 +85,15 @@ $(function(){
             })
             // Ajaxリクエストが成功した時発動
             .done(function(response){
-                $("button#watchlist-button").attr("data-watchlist_id", response);
+                $("div#watchlist-button").attr("data-watchlist_id", response);
             });
         }else{
-            $(this).removeClass("active").removeClass("btn-secondary");
-            $(this).addClass("btn-outline-secondary");
+            $(this).removeClass("active");
+            var img_src = base_url + "/add_to_watchlist_a.png";
+            $(this).find("img").attr('src', img_src);
 
             var watchlist_id = $(this).attr('data-watchlist_id');
-            $("button#watchlist-button").attr("data-watchlist_id", "");
+            $("div#watchlist-button").attr("data-watchlist_id", "");
             //ajaxで読み出し
             $.ajaxSetup({
                 headers: {

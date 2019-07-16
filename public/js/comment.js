@@ -13,7 +13,7 @@ $(function() {
               <p class='mb-0 text-white border'>To " + reply_to + "</p>\
               <div id='cancel-reply-box'>\
                   <button type='button' id='cancel-reply-button' style='background:none; border:none;'>\
-                      <img src='"+ base_url + "/xbutton.png' class='header-icon'>\
+                      <img src='"+ base_url + "/xbutton.png' class='zwicon-icon'>\
                   </button>\
               </div>\
           <div>").prependTo("div#footer-comment-group");

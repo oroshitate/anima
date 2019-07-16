@@ -48,20 +48,26 @@
                 <div class="col-12 mt-3 text-right">
                     @guest
                         <a href="{{ url('/login') }}">
-                            <button type="button" class="btn btn-outline-secondary h7">
-                                <i class="far fa-bookmark"></i>
-                                {{ __('app.button.watchlist') }}
-                            </button>
+                            <img src="{{ asset('add_to_watchlist_a.png') }}" class="btn-watchlist">
                         </a>
                         <a href="{{ url('/login') }}">
-                            <button type="button" class="btn btn-success h7">{{ __('app.button.review.create') }}</button>
+                            <img src="{{ asset('post_review_a.png') }}" class="btn-watchlist">
                         </a>
                     @else
-                        <button type="button" id="watchlist-button" class="btn btn-outline-secondary {{ $watchlist->status }}" data-item_id="{{$item->id}}" data-user_id="{{ Auth::user()->id }}" data-watchlist_id="{{ $watchlist->id }}">
-                            <i class="far fa-bookmark"></i>
-                            {{ __('app.button.watchlist') }}
-                        </button>
-                        <button type="button" id="create-review-modal-button" class="btn btn-success" data-toggle="modal" data-target="#create-review-modal" data-item_id="{{ $item->id }}">{{ __('app.button.review.create') }}</button>
+                        <div id="watchlist-button" class="d-inline-block cursor-pointer {{ $watchlist->status }}" data-item_id="{{$item->id}}" data-user_id="{{ Auth::user()->id }}" data-watchlist_id="{{ $watchlist->id }}">
+                            @if($watchlist->status != "active")
+                                <img src="{{ asset('add_to_watchlist_a.png') }}" class="btn-watchlist">
+                            @else
+                                <img src="{{ asset('add_to_watchlist_b.png') }}" class="btn-watchlist">
+                            @endif
+                        </div>
+                        <div id="create-review-modal-button" class="d-inline-block cursor-pointer" data-toggle="modal" data-target="#create-review-modal" data-item_id="{{ $item->id }}">
+                            @if($review_status != "active")
+                                <img src="{{ asset('post_review_a.png') }}" class="btn-review">
+                            @else
+                                <img src="{{ asset('post_review_b.png') }}" class="btn-review">
+                            @endif
+                        </div>
                     @endguest
                 </div>
                 <div class="col-12 my-3 row justify-content-center">
@@ -112,7 +118,7 @@
                                     @if($review->user_id == Auth::user()->id)
                                         <div class="d-inline-block mx-md-3 cursor-pointer text-right p-0">
                                             <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                                <img src="{{ asset('edit.png') }}" class="header-icon">
+                                                <img src="{{ asset('edit.png') }}" class="zwicon-icon">
                                             </button>
                                         </div>
                                     @else
@@ -136,7 +142,7 @@
                             @guest
                                 <div class="d-inline-block cursor-pointer">
                                     <a href="{{ url('/login') }}">
-                                        <img src="{{ asset('like.png') }}" class="header-icon">
+                                        <img src="{{ asset('like.png') }}" class="zwicon-icon">
                                         @if($review->likes_count > 0)
                                             <span class="h7 light-black">
                                                 {{ $review->likes_count }}
@@ -148,7 +154,7 @@
                             @else
                                 @if($review->like_id)
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <img src="{{ asset('like_on.png') }}" class="header-icon">
+                                        <img src="{{ asset('like_on.png') }}" class="zwicon-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -158,7 +164,7 @@
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <img src="{{ asset('like.png') }}" class="header-icon">
+                                        <img src="{{ asset('like.png') }}" class="zwicon-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -173,7 +179,7 @@
                                 @endif
                             @endguest
                             <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                <img src="{{ asset('comment.png') }}" class="header-icon">
+                                <img src="{{ asset('comment.png') }}" class="zwicon-icon">
                                 @if($review->comments_count > 0)
                                     <span class="h7">
                                         {{ $review->comments_count }}

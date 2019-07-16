@@ -76,7 +76,7 @@
                                 @if($review->user_id == Auth::user()->id)
                                     <div class="col-1 cursor-pointer d-inline-block text-right p-0">
                                         <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                            <img src="{{ asset('edit.png') }}" class="header-icon">
+                                            <img src="{{ asset('edit.png') }}" class="zwicon-icon">
                                         </button>
                                     </div>
                                 @else
@@ -96,7 +96,7 @@
                             <div class="text-left">
                                 @if($review->like_id)
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer text-danger" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <img src="{{ asset('like_on.png') }}" class="header-icon">
+                                        <img src="{{ asset('like_on.png') }}" class="zwicon-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -106,7 +106,7 @@
                                     </div>
                                 @else
                                     <div id="like-review-button-{{ $review->review_id }}" class="{{ $review->like_status }} like-review-button d-inline-block cursor-pointer" data-review_id="{{ $review->review_id }}" data-like_id="{{ $review->like_id }}">
-                                        <img src="{{ asset('like.png') }}" class="header-icon">
+                                        <img src="{{ asset('like.png') }}" class="zwicon-icon">
                                         @if($review->likes_count > 0)
                                             <span id="likes-review-count-{{ $review->review_id }}" class="h7">
                                                 {{ $review->likes_count }}
@@ -120,7 +120,7 @@
                                     </div>
                                 @endif
                                 <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                                    <img src="{{ asset('comment.png') }}" class="header-icon">
+                                    <img src="{{ asset('comment.png') }}" class="zwicon-icon">
                                     @if($review->comments_count > 0)
                                         <span class="h7">
                                             {{ $review->comments_count }}

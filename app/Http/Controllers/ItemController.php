@@ -64,6 +64,15 @@ class ItemController extends Controller
             }
         }
 
+        $review_status = "";
+        foreach ($reviews as $review) {
+            if($review->user_id == $user_id){
+                $review_status = "active";
+                break;
+            }
+        }
+
+
         $watchlist->status = "";
         $watchlist->id = "";
         if (Auth::check()) {
@@ -77,6 +86,7 @@ class ItemController extends Controller
         return view('item', [
             'item' => $item_detail,
             'reviews' => $reviews,
+            'review_status' => $review_status,
             'watchlist' => $watchlist,
         ]);
     }

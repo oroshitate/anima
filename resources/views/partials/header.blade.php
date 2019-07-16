@@ -9,16 +9,16 @@
                     <a class="header-register-login text-white btn btn-success font-bold px-0" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
                 </div>
                 <div class="d-sm-none switch-search-button">
-                    <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
+                    <img src="{{ asset('search.png') }}" class="zwicon-icon header-search float-right">
                 </div>
             </div>
         @else
             <div class="d-sm-none switch-search-button " style="width:35%">
-                <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
+                <img src="{{ asset('search.png') }}" class="zwicon-icon header-search float-right">
             </div>
             <div class="d-sm-none text-center" style="width:10%; position:relative;">
                 <a class="notifications-link">
-                    <img src="{{ asset('noti.png') }}" class="header-icon">
+                    <img src="{{ asset('noti.png') }}" class="zwicon-icon">
                 </a>
                 @if(Session::get('notifications_count') != 0)
                     <span class="text-white bg-success rounded text-center" style="position: absolute;top: 0;right: 0;width: 17px;font-size: 0.75rem;height: 17px;">{{ Session::get('notifications_count') }}</span>
@@ -38,12 +38,12 @@
                     </li>
                 @endguest
                 <li class="nav-item btn py-0 px-2 d-none d-md-block switch-search-button">
-                    <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
+                    <img src="{{ asset('search.png') }}" class="zwicon-icon header-search float-right">
                 </li>
                 @auth
                     <li class="nav-item btn py-0 px-2 d-none d-md-block" style="position: relative;">
                         <a class="notifications-link">
-                            <img src="{{ asset('noti.png') }}" class="header-icon">
+                            <img src="{{ asset('noti.png') }}" class="zwicon-icon">
                         </a>
                         @if(Session::get('notifications_count') != 0)
                             <span class="text-white bg-success rounded" style="position: absolute;top: 0;right: 0;width: 17px;font-size: 0.75rem;height: 17px;">{{ Session::get('notifications_count') }}</span>
