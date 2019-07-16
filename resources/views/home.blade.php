@@ -53,7 +53,7 @@
                                         <div class="row align-items-center mb-2">
                                             <div class="col-2 col-md-1">
                                                     @if($review->user_image == null)
-                                                        <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                                        <img class="rounded-circle align-top profile" src="{{ asset('user_image.jpg') }}">
                                                     @else
                                                         <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
                                                     @endif
@@ -74,9 +74,9 @@
                                     </a>
                                 </div>
                                 @if($review->user_id == Auth::user()->id)
-                                    <div class="col-1 cursor-pointer d-inline-block text-right">
+                                    <div class="col-1 cursor-pointer d-inline-block text-right p-0">
                                         <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                            <i class="fas fa-angle-down fa-15x"></i>
+                                            <img src="{{ asset('edit.png') }}" class="header-icon">
                                         </button>
                                     </div>
                                 @else
@@ -86,7 +86,7 @@
                                     <p class="created-date h7">{{ $review->review_created }}</p>
                                     <a href="{{ route('item', ['item_id' => $review->item_id]) }}">
                                         @if($review->item_image == null)
-                                            <img src="{{ asset('anima-img.png') }}" class="w-100">
+                                            <img src="{{ asset('anima_image.png') }}" class="w-100">
                                         @else
                                             <img class="w-100" src="{{ config('app.image_path') }}/items/{{ $review->item_image }}">
                                         @endif
@@ -144,7 +144,7 @@
                         <p class="h7">{!! nl2br(e(__('app.sentence.home.auth.1'))) !!}</p>
                         <p class="h7">{!! nl2br(e(__('app.sentence.home.auth.1'))) !!}</p>
                         <div class="text-center">
-                            <img src="{{ asset('anima-img.png') }}" style="width:156px; height:152px;">
+                            <img src="{{ asset('anima_image.png') }}" style="width:156px; height:152px;">
                         </div>
                     </div>
                     <div class="bg-grey text-dark p-1">
@@ -157,7 +157,7 @@
                                     <a href="{{ route('user', ['nickname' => $user->nickname]) }}">
                                         <div class="row align-items-center">
                                             @if($user->image == null)
-                                                <img class="m-3 rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                                <img class="m-3 rounded-circle align-top profile" src="{{ asset('user_image.jpg') }}">
                                             @else
                                                 <img class="m-3 rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                                             @endif
@@ -190,7 +190,7 @@
                     <div class="card">
                         <a href="{{ route('item', ['item_id' => $item->id]) }}">
                             @if($item->image == null)
-                                <img src="{{ asset('anima-img.png') }}" class="w-100">
+                                <img src="{{ asset('anima_image.png') }}" class="w-100">
                             @else
                                 <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-100">
                             @endif

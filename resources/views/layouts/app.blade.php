@@ -17,7 +17,7 @@
             <meta name="description" content="{{ __('app.sentence.home.guest.2') }}">
             <meta property="og:description" content="{{ __('app.sentence.home.guest.2') }}">
             @if($item->image == null)
-                <meta property="og:image" content="{{ asset('anima-img.png') }}">
+                <meta property="og:image" content="{{ asset('anima_image.png') }}">
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
             @endif
@@ -26,7 +26,7 @@
             <meta name="description" content="{{ $review[0]->review_content }}">
             <meta property="og:description" content="{{ $review[0]->review_content }}">
             @if($item->image == null)
-                <meta property="og:image" content="{{ asset('anima-img.png') }}">
+                <meta property="og:image" content="{{ asset('anima_image.png') }}">
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/items/{{ $item->image }}">
             @endif
@@ -35,7 +35,7 @@
             <meta name="description" content="{{ $user->content }}">
             <meta property="og:description" content="{{ $user->content }}">
             @if($user->image == null)
-                <meta property="og:image" content="{{ asset('no-image.jpg') }}">
+                <meta property="og:image" content="{{ asset('user_image.jpg') }}">
             @else
                 <meta property="og:image" content="{{ config('app.image_path') }}/users/{{ $user->image }}">
             @endif

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\User;
-use App\Notification;
 use App\LinkedSocialAccount;
 use App\Notification;
 

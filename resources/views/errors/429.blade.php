@@ -13,7 +13,7 @@
                 <p class="h5-5 mb-0">{{ __('error.sentence.429.2') }}</p>
             </div>
             <div class="text-center">
-                <img src="{{ asset('anima-logo-black.png') }}" style="width:156px; height:152px;">
+                <img src="{{ asset('anima_logo_black.png') }}" style="width:156px; height:152px;">
             </div>
         </div>
     </div>

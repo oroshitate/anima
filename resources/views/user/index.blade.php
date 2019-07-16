@@ -29,7 +29,7 @@
             <div id="user-detail" class="row col-12 mx-auto mb-4 px-0" data-nickname="{{ $user->nickname }}">
                 <div class="col-3 col-md-2 text-left px-0">
                     @if($user->image == null)
-                        <img class="rounded-circle align-top profile-lg" src="{{ asset('no-image.jpg') }}">
+                        <img class="rounded-circle align-top profile-lg" src="{{ asset('user_image.jpg') }}">
                     @else
                         <img class="rounded-circle align-top profile-lg" src="{{ config('app.image_path') }}/users/{{ $user->image }}">
                     @endif
@@ -96,7 +96,7 @@
                                     <div class="card">
                                         <a href="{{ route('item', ['item_id' => $item->id]) }}">
                                             @if($item->image == null)
-                                                <img src="{{ asset('anima-img.png') }}" class="w-100">
+                                                <img src="{{ asset('anima_image.png') }}" class="w-100">
                                             @else
                                                 <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-100">
                                             @endif

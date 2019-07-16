@@ -6,7 +6,7 @@
                     <div class="row align-items-center mb-2">
                         <div class="col-2 col-md-1">
                                 @if($review->user_image == null)
-                                    <img class="rounded-circle align-top profile" src="{{ asset('no-image.jpg') }}">
+                                    <img class="rounded-circle align-top profile" src="{{ asset('user_image.jpg') }}">
                                 @else
                                     <img class="rounded-circle align-top profile" src="{{ config('app.image_path') }}/users/{{ $review->user_image }}">
                                 @endif
@@ -20,9 +20,9 @@
             <div class="row col-4 justify-content-end">
                 @auth
                     @if($review->user_id == Auth::user()->id)
-                        <div class="d-inline-block mx-md-3 cursor-pointer text-right">
+                        <div class="d-inline-block mx-md-3 cursor-pointer text-right p-0">
                             <button type="button" class="bg-white border border-0 review-modal-button" data-toggle="modal" data-target="#operate-review-modal" data-review_id="{{ $review->review_id }}" data-score="{{ $review->review_score }}" data-content="{{ $review->review_content }}">
-                                <i class="fas fa-angle-down fa-15x"></i>
+                                <img src="{{ asset('edit.png') }}" class="header-icon">
                             </button>
                         </div>
                     @else

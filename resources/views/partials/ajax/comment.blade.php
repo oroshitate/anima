@@ -16,9 +16,9 @@
             <div class="row col-4 justify-content-end">
                 @auth
                     @if(Auth::user()->id == $comment->user_id)
-                        <div class="d-inline-block mx-md-3 cursor-pointer text-right">
+                        <div class="d-inline-block mx-md-3 cursor-pointer text-right p-0">
                             <button type="button" class="bg-white border border-0 comment-modal-button" data-toggle="modal" data-target="#operate-comment-modal" data-comment_id="{{ $comment->comment_id }}" data-content="{{ $comment->comment_content }}">
-                                <i class="fas fa-angle-down fa-15x"></i>
+                                <img src="{{ asset('edit.png') }}" class="header-icon">
                             </button>
                         </div>
                     @else

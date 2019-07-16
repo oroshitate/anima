@@ -63,12 +63,12 @@ $(function() {
             $(this).addClass("active");
             $("div#search-box").css({"display":"block"});
             $(this).empty();
-            $(this).prepend("<img src='"+ base_url + "/xbutton.png' class='header-icon'>");
+            $(this).prepend("<img src='"+ base_url + "/xbutton.png' class='header-icon header-search float-right'>");
         }else{
             $(this).removeClass("active");
             $("div#search-box").css({"display":"none"});
             $(this).empty();
-            $(this).prepend("<img src='"+ base_url + "/search.png' class='header-icon'>");
+            $(this).prepend("<img src='"+ base_url + "/search.png' class='header-icon header-search float-right'>");
         }
     })
 

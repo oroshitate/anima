@@ -26,7 +26,7 @@
                                             </div>
                                             <div class="col-2 text-center">
                                                 @if($notification->user->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="rounded-circle profile">
+                                                    <img src="{{ asset('anima_image.png') }}" class="rounded-circle profile">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/users/{{ $notification->user->image }}" class="rounded-circle profile">
                                                 @endif
@@ -36,7 +36,7 @@
                                             </div>
                                             <div class="col-12 text-right">
                                                 @if($notification->item->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="w-25">
+                                                    <img src="{{ asset('anima_image.png') }}" class="w-25">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/items/{{ $notification->item->image }}" class="w-25">
                                                 @endif
@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-2 text-center">
                                                 @if($notification->user->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="rounded-circle profile">
+                                                    <img src="{{ asset('anima_image.png') }}" class="rounded-circle profile">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/users/{{ $notification->user->image }}" class="rounded-circle profile">
                                                 @endif
@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="col-12 text-right">
                                                 @if($notification->item->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="w-25">
+                                                    <img src="{{ asset('anima_image.png') }}" class="w-25">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/items/{{ $notification->item->image }}" class="w-25">
                                                 @endif
@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="col-2 text-center">
                                                 @if($notification->user->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="rounded-circle profile">
+                                                    <img src="{{ asset('anima_image.png') }}" class="rounded-circle profile">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/users/{{ $notification->user->image }}" class="rounded-circle profile">
                                                 @endif
@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="col-12 text-right">
                                                 @if($notification->item->image == null)
-                                                    <img src="{{ asset('anima-img.png') }}" class="w-25">
+                                                    <img src="{{ asset('anima_image.png') }}" class="w-25">
                                                 @else
                                                     <img src="{{ config('app.image_path') }}/items/{{ $notification->item->image }}" class="w-25">
                                                 @endif
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="col-2 text-center">
                                             @if($notification->user->image == null)
-                                                <img src="{{ asset('anima-img.png') }}" class="rounded-circle profile">
+                                                <img src="{{ asset('anima_image.png') }}" class="rounded-circle profile">
                                             @else
                                                 <img src="{{ config('app.image_path') }}/users/{{ $notification->user->image }}" class="rounded-circle profile">
                                             @endif

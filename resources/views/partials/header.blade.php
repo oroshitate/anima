@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-black border border-0 p-0">
     <div class="container py-2">
         <a class="navbar-brand text-white p-0" href="{{ url('/') }}">
-            <img src="{{ asset('anima-logo.png') }}" width="115px" height="32px">
+            <img src="{{ asset('anima_logo_white.png') }}" width="115px" height="32px">
         </a>
         @guest
             <div class="row align-items-center col-6 m-0 pr-0">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         @else
-            <div class="d-sm-none switch-search-button" style="width:35%">
+            <div class="d-sm-none switch-search-button " style="width:35%">
                 <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
             </div>
             <div class="d-sm-none text-center" style="width:10%; position:relative;">
@@ -38,7 +38,7 @@
                     </li>
                 @endguest
                 <li class="nav-item btn py-0 px-2 d-none d-md-block switch-search-button">
-                    <img src="{{ asset('search.png') }}" class="header-icon header-search">
+                    <img src="{{ asset('search.png') }}" class="header-icon header-search float-right">
                 </li>
                 @auth
                     <li class="nav-item btn py-0 px-2 d-none d-md-block" style="position: relative;">

@@ -5,7 +5,7 @@
         <div class="card">
             <a href="{{ route('item', ['item_id' => $watchlist->item_id]) }}">
                 @if($watchlist->item_image == null)
-                    <img src="{{ asset('anima-img.png') }}" class="w-100">
+                    <img src="{{ asset('anima_image.png') }}" class="w-100">
                 @else
                     <img src="{{ config('app.image_path') }}/items/{{ $watchlist->item_image }}" class="w-100">
                 @endif

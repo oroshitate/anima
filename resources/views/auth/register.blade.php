@@ -18,7 +18,7 @@
                 <div class="form-group row my-3 justify-content-center">
                     <div class="col-12 col-md-10 text-center">
                         @if(strpos($image, 'picture?type=normal') !== false || strpos($image, 'default_profile_normal') !== false)
-                            <img id="user-image" class="rounded-circle profile-lg" src="{{ asset('no-image.jpg') }}">
+                            <img id="user-image" class="rounded-circle profile-lg" src="{{ asset('user_image.jpg') }}">
                         @else
                             <img id="user-image" class="rounded-circle profile-lg" src="{{ $image }}">
                         @endif

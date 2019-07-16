@@ -5,7 +5,7 @@
         <div class="card">
             <a href="{{ route('item', ['item_id' => $item->id]) }}">
                 @if($item->image == null)
-                    <img src="{{ asset('anima-img.png') }}" class="w-100">
+                    <img src="{{ asset('anima_image.png') }}" class="w-100">
                 @else
                     <img src="{{ config('app.image_path') }}/items/{{ $item->image }}" class="w-100">
                 @endif
