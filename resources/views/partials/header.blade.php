@@ -5,15 +5,15 @@
         </a>
         @guest
             <div class="row align-items-center col-6 m-0 pr-0">
-                <div class="mx-3 d-sm-none">
+                <div class="mx-2 d-sm-none">
                     <a class="header-register-login text-white btn btn-success font-bold px-0" href="{{ route('login') }}">{{ __('app.button.register_login') }}</a>
                 </div>
-                <div class="d-sm-none switch-search-button">
+                <div class="d-sm-none switch-search-button ml-1">
                     <img src="{{ asset('search.png') }}" class="zwicon-icon header-search float-right">
                 </div>
             </div>
         @else
-            <div class="d-sm-none switch-search-button " style="width:35%">
+            <div class="d-sm-none switch-search-button " style="width:38%">
                 <img src="{{ asset('search.png') }}" class="zwicon-icon header-search float-right">
             </div>
             <div class="d-sm-none text-center" style="width:10%; position:relative;">
@@ -79,9 +79,9 @@
         <form name="search" method="post" action="{{ route('search', ['keyword' => '']) }}">
             @csrf
             <input type="text" name="keyword" class="d-inline border border-0 rounded" value="{{ old('keyword') }}" placeholder="{{ __('app.label.search.placeholder') }}">
-            <button type="button" id="search-button">
-                <i class="fas fa-search text-grey header-search"></i>
-            </button>
+            <div id="search-button">
+                <img src="{{ asset('search_grey.png') }}" class="zwicon-icon float-right">
+            </div>
         </form>
     </div>
 </div>

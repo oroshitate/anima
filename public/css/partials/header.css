@@ -21,7 +21,7 @@ input[name="keyword"]{
     background: none;
     border: none;
     right: 3%;
-    top: 13%;
+    top: 10%;
 }
 #search-button > i{
     color: rgba(142, 142, 147, 0.5);
