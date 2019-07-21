@@ -73,7 +73,7 @@
                 </div>
             @endif
             <a class="cursor-pointer" href="{{ route('review', ['review_id' => $review->review_id]) }}">
-                <i class="far fa-comment fa-15x mx-1"></i>
+                <img src="{{ asset('comment.png') }}" class="zwicon-icon">
                 @if($review->comments_count > 0)
                     <span class="h7">
                         {{ $review->comments_count }}

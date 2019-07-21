@@ -16366,10 +16366,9 @@ li.bg-grey-opacity:hover{
 /*
   tag
 */
-input {
-  outline: none;
-}
+input:focus,
+textarea:focus,
 .btn:focus {
-  outline: none;
-  box-shadow: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
