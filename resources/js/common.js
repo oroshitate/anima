@@ -72,7 +72,7 @@ $(function() {
         }
     })
 
-    $("button#search-button").on('click', function(){
+    $("div#search-button").on('click', function(){
         $(this).prop("disabled", true);
         var keyword = $("input[name='keyword']").val();
         if(keyword == "" || keyword == undefined){

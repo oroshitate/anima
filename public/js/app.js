@@ -49201,7 +49201,7 @@ $(function () {
       $(this).prepend("<img src='" + base_url + "/search.png' class='zwicon-icon header-search float-right'>");
     }
   });
-  $("button#search-button").on('click', function () {
+  $("div#search-button").on('click', function () {
     $(this).prop("disabled", true);
     var keyword = $("input[name='keyword']").val();
 
